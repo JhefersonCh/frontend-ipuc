@@ -1,4 +1,4 @@
-@use "variables" as *;
+@import "variables";
 
 .nav {
   display: flex !important;
@@ -19,4 +19,8 @@
 
 .main {
   color: black;
+}
+
+.color-nav {
+  background-color: $header-background;
 }
