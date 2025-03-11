@@ -21,6 +21,12 @@
   color: black;
 }
 
+.brand-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .color-nav {
   background-color: $header-background;
 }
