@@ -1,14 +1,15 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+
 @use "@angular/material" as mat;
-@import "tailwindcss";
 @use "ngx-toastr/toastr";
 @use "variables";
 @use "breakpoints";
-@use "global";
 @use "mat-theming";
 @use "mat-config-theme";
 @use "animations";
+@use "tailwindcss";
+@use "./assets/styles/global";
 
 html,
 body {
