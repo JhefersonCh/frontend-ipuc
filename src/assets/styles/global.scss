@@ -1,4 +1,6 @@
 @import "variables";
+// Supports weights 100-900
+@import "@fontsource-variable/noto-serif";
 
 .nav {
   position: fixed;
@@ -11,14 +13,14 @@
 }
 
 .color-nav {
-  background-color: $header-background;
+  background-color: color-mix(in oklab, $header-background 60%, transparent);
 }
 
 .app-container {
+  margin-top: 15px;
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
-  padding-top: calc($heigth-nav-bar + 15px);
+  padding-top: calc($heigth-nav-bar);
   color: white;
 }
 
@@ -30,4 +32,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.font-noto-serif {
+  font-family: "Noto Serif Variable", serif;
 }

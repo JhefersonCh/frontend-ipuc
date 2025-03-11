@@ -10,6 +10,7 @@
 @import "mat-theming";
 @import "mat-config-theme";
 @import "animations";
+@import "@fontsource-variable/inter";
 
 html,
 body {
@@ -17,5 +18,5 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Inter Variable", sans-serif;
 }
