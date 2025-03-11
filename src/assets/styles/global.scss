@@ -1,19 +1,24 @@
 @import "variables";
 
 .nav {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: $heigth-nav-bar;
   padding-top: 15px;
   width: 100%;
   z-index: 1000;
 }
 
+.color-nav {
+  background-color: $header-background;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-top: calc($heigth-nav-bar + 15px);
   color: white;
 }
 
@@ -21,12 +26,8 @@
   color: black;
 }
 
-.brand-center-content {
+.brand-content-center {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.color-nav {
-  background-color: $header-background;
 }
