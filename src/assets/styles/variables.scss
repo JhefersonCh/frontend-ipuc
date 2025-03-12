@@ -33,12 +33,14 @@ $error-color: #b00020;
 $gray-color: #797979;
 
 $heigth-nav-bar: 80px;
+$heigth-footer: 70px;
 
 // Medidas globales
 $brand-height-router-outlet-container: calc(100vh - ($heigth-nav-bar));
 
 // Layout
 $header-background: $light-blue-900;
+$footer-background: $light-blue-900;
 $header-menu-background: $gray-color;
 
 // UI Components
