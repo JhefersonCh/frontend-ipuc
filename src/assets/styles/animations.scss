@@ -1,3 +1,4 @@
+@import "variables";
 .hover-underline-animation {
   position: relative;
 }
@@ -9,7 +10,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #1da0e2;
+  background-color: $primary-color;
   transition: transform 0.25s ease-out;
 }
 .hover-underline-animation:hover::after {
