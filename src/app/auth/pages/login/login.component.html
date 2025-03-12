@@ -1,1 +1,67 @@
-<article class="brand-content-center"><p>asdsad</p></article>
+<article class="brand-content-center py-[10%]">
+  <section
+    class="flex flex-col w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
+  >
+    <div class="flex flex-col">
+      <span class="font-extrabold text-2xl">Iniciar Sesión</span
+      ><span class="font-normal text-base"
+        >Ingresa tus datos para iniciar sesión</span
+      >
+    </div>
+    <form [formGroup]="form" class="flex flex-col w-full items-center mt-2.5">
+      <mat-form-field appearance="outline" class="w-[80%]">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput placeholder="Email" formControlName="email" />
+        <mat-icon matPrefix>email</mat-icon>
+        <mat-error *ngIf="form.get('email')?.hasError('required')"
+          >Email requerido</mat-error
+        >
+        <mat-error *ngIf="form.get('email')?.hasError('email')"
+          >Email inválido</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-[80%]">
+        <mat-label>Contraseña</mat-label>
+        <input
+          [type]="!showPassword ? 'password' : 'text'"
+          matInput
+          formControlName="password"
+        />
+        <mat-icon matPrefix>lock</mat-icon>
+        <button
+          matSuffix
+          mat-icon-button
+          (click)="showPassword = !showPassword"
+          class="mr-1"
+        >
+          <fa-icon [icon]="showPassword ? eyeOpen : eyeClose"></fa-icon>
+        </button>
+        <mat-error *ngIf="form.get('password')?.hasError('required')"
+          >Contraseña requerida</mat-error
+        >
+      </mat-form-field>
+      <span
+        >¿Olvidaste tu contraseña?
+        <a
+          routerLink="/auth/recovery-password"
+          class="cursor-pointer text-blue-400 hover:text-blue-800"
+          >Presiona aquí</a
+        ></span
+      >
+      <div
+        class="flex w-[80%] content-between items-center justify-end gap-1 mt-2.5"
+      >
+        <button mat-fab extended="true">
+          <span class="text-md">Iniciar Sesión</span>
+        </button>
+        <button
+          type="button"
+          class="flex flex-row items-center hover-underline-animation gap-1 cursor-pointer px-8"
+        >
+          <span class="text-md" routerLink="/auth/register">Registrarse</span>
+        </button>
+      </div>
+    </form>
+  </section>
+</article>

@@ -16,6 +16,10 @@
   background-color: color-mix(in oklab, $header-background 60%, transparent);
 }
 
+.color-footer {
+  background-color: color-mix(in oklab, $footer-background 60%, transparent);
+}
+
 .app-container {
   margin-top: 15px;
   display: flex;
@@ -26,6 +30,11 @@
 
 .main {
   color: black;
+}
+
+.footer {
+  height: $heigth-footer;
+  width: 100%;
 }
 
 .brand-content-center {
