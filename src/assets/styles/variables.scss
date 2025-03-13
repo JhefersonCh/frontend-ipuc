@@ -39,9 +39,12 @@ $heigth-footer: 70px;
 $brand-height-router-outlet-container: calc(100vh - ($heigth-nav-bar));
 
 // Layout
-$header-background: $light-blue-900;
-$footer-background: $light-blue-900;
+$header-background: #1e3a8a; // Reemplazo de $light-blue-900
+$footer-background: #1e3a8a;
 $header-menu-background: $gray-color;
+
+$header-light: mix(white, $header-background, 30%);
+$footer-light: mix(white, $footer-background, 30%);
 
 // UI Components
 $brand-mobile-font-size: 1rem;

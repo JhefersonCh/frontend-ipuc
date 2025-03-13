@@ -13,11 +13,11 @@
 }
 
 .color-nav {
-  background-color: color-mix(in oklab, $header-background 60%, transparent);
+  background: linear-gradient(to right, $header-light, $header-background);
 }
 
 .color-footer {
-  background-color: color-mix(in oklab, $footer-background 60%, transparent);
+  background: linear-gradient(to right, $footer-light, $footer-background);
 }
 
 .app-container {
@@ -38,6 +38,14 @@
 }
 
 .brand-content-center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.brand-navigation-center {
   display: flex;
   justify-content: center;
   align-items: center;
