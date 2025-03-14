@@ -1,12 +1,12 @@
 <article class="flex flex-col h-auto mt-32">
   <section class="flex w-full justify-center mb-16">
     <span
-      class="font-noto-serif text-6xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
+      class="p-2 font-noto-serif text-6xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
       >Dónde encontrarnos</span
     >
   </section>
-  <div class="flex content-between justify-center gap-x-10">
-    <section class="flex w-[45%]">
+  <div class="flex content-between">
+    <section class="flex w-1/2">
       <div class="flex flex-col p-5 w-full h-auto">
         <div class="flex items-center mb-2.5 gap-1">
           <mat-icon class="custom-icon-ubication">location_on</mat-icon>
@@ -14,15 +14,22 @@
             >Ubicación</span
           >
         </div>
+        <span class="text-xl text-gray-600 font-medium"> Av. Colombia </span>
+        <span class="text-xl text-gray-600 font-medium"> Mocoa, Putumayo </span>
         <span class="text-xl text-gray-600 font-medium">
-          Nuestra misión es compartir el amor de Cristo, transformar vidas a
-          través del evangelio y construir una comunidad fuerte donde cada
-          persona pueda crecer espiritualmente y encontrar su propósito en Dios.
+          Codigo postal: 12324
         </span>
+        <a
+          href="https://www.google.com/maps/place/Ipuc+sede+cuarta+Mocoa/@1.15234,-76.6559259,17z/data=!3m1!4b1!4m6!3m5!1s0x8e28b3bc251073cb:0xe0c808a5d52a520d!8m2!3d1.15234!4d-76.651055!16s%2Fg%2F11hds0_hgx?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          class="mt-4 text-blue-500 font-semibold underline hover:text-blue-700"
+        >
+          Ver en Google Maps
+        </a>
       </div>
     </section>
 
-    <section class="flex w-[45%]">
+    <section class="flex w-1/2">
       <div class="flex flex-col p-5 w-full h-auto">
         <div class="flex items-center mb-2.5 gap-1">
           <mat-icon class="custom-icon-ubication">calendar_today</mat-icon>
@@ -30,12 +37,14 @@
             >Horarios de Servicio</span
           >
         </div>
-        <span class="text-xl text-gray-600 font-medium">
-          Ser una iglesia que impacte positivamente a nuestra comunidad,
-          formando discípulos comprometidos con Cristo, siendo un faro de
-          esperanza y restauración para las familias, y expandiendo el Reino de
-          Dios con amor y excelencia.
-        </span>
+        <div *ngFor="let dia of diasSemana" class="flex flex-col">
+          <span class="text-2xl text-black font-noto-serif font-medium">
+            {{ dia.nombre }}
+          </span>
+          <span class="text-lg text-gray-600">
+            {{ dia.evento }}
+          </span>
+        </div>
       </div>
     </section>
   </div>
