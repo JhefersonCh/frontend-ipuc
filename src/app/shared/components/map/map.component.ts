@@ -20,6 +20,13 @@ export class MapComponent implements AfterViewInit {
     input.required<[number, number]>();
   message: InputSignal<string | undefined> = input<string>();
 
+  private customIcon = L.icon({
+    iconUrl: './images/about/map-pin.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30],
+  });
+
   ngAfterViewInit(): void {
     this.initMap();
 
@@ -38,7 +45,7 @@ export class MapComponent implements AfterViewInit {
       attribution: '&copy; OpenStreetMap contributors',
     }).addTo(this.map);
 
-    this.marker = L.marker(initialCoords)
+    this.marker = L.marker(initialCoords, { icon: this.customIcon })
       .addTo(this.map)
       .bindPopup(this.message() || 'Ubicación seleccionada')
       .openPopup();
