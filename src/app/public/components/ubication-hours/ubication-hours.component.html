@@ -14,13 +14,12 @@
             >Ubicación</span
           >
         </div>
-        <span class="text-xl text-gray-600 font-medium"> Av. Colombia </span>
-        <span class="text-xl text-gray-600 font-medium"> Mocoa, Putumayo </span>
-        <span class="text-xl text-gray-600 font-medium">
-          Codigo postal: 12324
-        </span>
+        <app-map
+          [coordinates]="[1.143998976048735, -76.64301335897179]"
+          [message]="'Ipuc sede cuarta Mocoa'"
+        />
         <a
-          href="https://www.google.com/maps/place/Ipuc+sede+cuarta+Mocoa/@1.15234,-76.6559259,17z/data=!3m1!4b1!4m6!3m5!1s0x8e28b3bc251073cb:0xe0c808a5d52a520d!8m2!3d1.15234!4d-76.651055!16s%2Fg%2F11hds0_hgx?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+          href="https://www.google.com/maps/place/1%C2%B008'38.4%22N+76%C2%B038'34.9%22W/@1.1440044,-76.6455883,1134m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d1.143999!4d-76.6430134?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           class="mt-4 text-blue-500 font-semibold underline hover:text-blue-700"
         >
@@ -37,12 +36,12 @@
             >Horarios de Servicio</span
           >
         </div>
-        <div *ngFor="let dia of diasSemana" class="flex flex-col">
+        <div *ngFor="let day of daysWeek" class="flex flex-col">
           <span class="text-2xl text-black font-noto-serif font-medium">
-            {{ dia.nombre }}
+            {{ day.name }}
           </span>
           <span class="text-lg text-gray-600">
-            {{ dia.evento }}
+            {{ day.event }}
           </span>
         </div>
       </div>

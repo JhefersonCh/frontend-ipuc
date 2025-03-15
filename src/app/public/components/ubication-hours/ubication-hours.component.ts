@@ -1,21 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { MapComponent } from '../../../shared/components/map/map.component';
 
 @Component({
   selector: 'app-ubication-hours',
-  imports: [MatIcon, CommonModule],
+  imports: [MatIcon, CommonModule, MapComponent],
   templateUrl: './ubication-hours.component.html',
   styleUrl: './ubication-hours.component.scss',
 })
 export class UbicationHoursComponent {
-  diasSemana: { nombre: string; evento: string }[] = [
-    { nombre: 'Lunes', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Martes', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Miércoles', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Jueves', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Viernes', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Sábado', evento: 'Culto a las 8:00 PM' },
-    { nombre: 'Domingo', evento: 'Culto a las 8:00 PM' },
+  daysWeek: { name: string; event: string }[] = [
+    { name: 'Martes', event: 'Culto a las 6:30 PM' },
+    { name: 'Jueves', event: 'Culto a las 6:30 PM' },
+    { name: 'Viernes', event: 'Culto a las 6:30 PM' },
+    { name: 'Sábado', event: 'Culto a las 6:30 PM' },
+    { name: 'Domingo', event: 'Culto a las 6:30 PM' },
   ];
 }
