@@ -14,6 +14,8 @@
 
 .color-nav {
   background: linear-gradient(to right, $header-light, $header-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .color-footer {

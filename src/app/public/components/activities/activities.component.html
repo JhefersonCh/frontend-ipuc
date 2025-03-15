@@ -1,5 +1,5 @@
 <section class="mt-32 flex justify-center">
-  <div class="w-[70%] text-center">
+  <div class="w-[80%] text-center">
     <h1
       class="font-noto-serif text-6xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text py-2"
     >
@@ -9,17 +9,38 @@
       La iglesia pentecostal unida de Colombia cuenta con un gran número de
       actividades, entre ellas:
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      @for (activity of activities; track $index) {
-      <div class="flex h-full">
-        <app-base-card-without-actions
-          class="flex flex-col flex-grow hover:-translate-y-2 hover:bg-neutral-100 transition-transform duration-300 rounded-t-3xl mt-5"
-          [description]="activity.description"
-          [image]="activity.image"
-          [title]="activity.title"
-        />
+
+    <div class="relative overflow-hidden">
+      <div
+        class="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth"
+        #scrollContainer
+      >
+        @for (activity of activities; track $index) {
+        <div class="flex snap-start">
+          <app-base-card-without-actions
+            class="flex w-[300px] flex-col flex-grow hover:-translate-y-2 hover:bg-neutral-100 transition-transform duration-300 rounded-t-3xl mt-5"
+            [description]="activity.description"
+            [image]="activity.image"
+            [title]="activity.title"
+          />
+        </div>
+        }
       </div>
-      }
+
+      <button
+        type="button"
+        (click)="scrollLeftClick()"
+        class="absolute left-1 size-12 top-1/2 transform -translate-y-1/2 bg-neutral-400/80 transition-colors duration-300 shadow-md rounded-full p-2 cursor-pointer flex justify-center items-center hover:bg-neutral-100/90 active:bg-neutral-100"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button
+        type="button"
+        (click)="scrollRightClick()"
+        class="absolute right-1 size-12 top-1/2 transform -translate-y-1/2 bg-neutral-400/80 transition-colors duration-300 shadow-md rounded-full p-2 cursor-pointer flex justify-center items-center hover:bg-neutral-100/90 active:bg-neutral-100"
+      >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
     </div>
   </div>
 </section>
