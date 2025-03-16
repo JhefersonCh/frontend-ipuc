@@ -4,6 +4,8 @@ import {
   input,
   InputSignal,
   effect,
+  runInInjectionContext,
+  Injector,
 } from '@angular/core';
 import * as L from 'leaflet';
 
@@ -19,7 +21,6 @@ export class MapComponent implements AfterViewInit {
   coordinates: InputSignal<[number, number]> =
     input.required<[number, number]>();
   message: InputSignal<string | undefined> = input<string>();
-
   private customIcon = L.icon({
     iconUrl: './images/about/map-pin.png',
     iconSize: [30, 30],
@@ -27,12 +28,16 @@ export class MapComponent implements AfterViewInit {
     popupAnchor: [0, -30],
   });
 
+  constructor(private injector: Injector) {}
+
   ngAfterViewInit(): void {
     this.initMap();
 
-    effect(() => {
-      const coords = this.coordinates();
-      this.updateMarker(coords);
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const coords = this.coordinates();
+        this.updateMarker(coords);
+      });
     });
   }
 
