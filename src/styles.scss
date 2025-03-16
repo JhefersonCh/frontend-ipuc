@@ -16,12 +16,24 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: "Inter Variable", sans-serif;
 }
+
 html,
 body {
   overflow-x: hidden !important;
   width: 100%;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
