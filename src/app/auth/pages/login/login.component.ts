@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
+import { Component, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
-  FormsModule,
+  FormGroupDirective,
+  NgForm,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Login } from '../../interfaces/login.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,20 +25,18 @@ import { RouterLink } from '@angular/router';
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    FormsModule,
     MatButtonModule,
     RouterLink,
     CommonModule,
-    MatIcon,
+    MatIconModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
+  private readonly _authService: AuthService = inject(AuthService);
   form: FormGroup;
   eyeOpen = faEye;
   eyeClose = faEyeSlash;
@@ -43,11 +44,17 @@ export class LoginComponent {
 
   constructor(private _fb: FormBuilder) {
     this.form = this._fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
   login(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) return this.form.markAllAsTouched();
+
+    const data: Login = this.form.value;
+
+    this._authService.login(data).subscribe((response) => {
+      console.log(response);
+    });
   }
 }

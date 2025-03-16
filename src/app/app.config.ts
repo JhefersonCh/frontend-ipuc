@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
+  ErrorStateMatcher,
   MAT_NATIVE_DATE_FORMATS,
   provideNativeDateAdapter,
 } from '@angular/material/core';
@@ -20,6 +21,7 @@ import { TransformDateService } from './shared/services/transform-date.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { MyErrorStateMatcher } from './shared/matchers/error-state.matcher';
 
 registerLocaleData(localeEs);
 
@@ -40,6 +42,7 @@ export const appConfig: ApplicationConfig = {
       useValue: { maxWidth: '700px', width: '95vw', padding: '40px' },
     },
     { provide: LOCALE_ID, useValue: 'es' },
+    { provide: ErrorStateMatcher, useValue: new MyErrorStateMatcher() },
     provideHttpClient(),
     /* 
     TODO: Habilitar interceptores cuando se creen 

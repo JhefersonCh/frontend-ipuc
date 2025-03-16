@@ -15,7 +15,10 @@ textarea {
 /*
 Personalización de los componentes materiales
 */
-
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-inline: none !important;
+}
 /* Change material no rounded input border color */
 .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(
     .mdc-text-field--invalid

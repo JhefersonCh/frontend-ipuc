@@ -1,6 +1,6 @@
 <article class="brand-content-center py-[10%]">
   <section
-    class="flex flex-col w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
+    class="flex flex-col w-[90%] md:w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
   >
     <div class="flex flex-col">
       <span class="font-extrabold text-2xl">Iniciar Sesión</span
@@ -8,16 +8,16 @@
         >Ingresa tus datos para iniciar sesión</span
       >
     </div>
-    <form [formGroup]="form" class="flex flex-col w-full items-center mt-2.5">
+    <form
+      [formGroup]="form"
+      class="flex flex-col w-full items-center mt-2.5 gap-1.5"
+    >
       <mat-form-field appearance="outline" class="w-[80%]">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput placeholder="Email" formControlName="email" />
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" />
         <mat-icon matPrefix>email</mat-icon>
-        <mat-error *ngIf="form.get('email')?.hasError('required')"
-          >Email requerido</mat-error
-        >
-        <mat-error *ngIf="form.get('email')?.hasError('email')"
-          >Email inválido</mat-error
+        <mat-error *ngIf="form.get('username')?.hasError('required')"
+          >Nombre de usuario requerido</mat-error
         >
       </mat-form-field>
 
@@ -35,33 +35,34 @@
           (click)="showPassword = !showPassword"
           class="mr-1"
         >
-          <fa-icon [icon]="showPassword ? eyeOpen : eyeClose"></fa-icon>
+          <fa-icon [icon]="!showPassword ? eyeOpen : eyeClose"></fa-icon>
         </button>
         <mat-error *ngIf="form.get('password')?.hasError('required')"
           >Contraseña requerida</mat-error
         >
       </mat-form-field>
-      <span
-        >¿Olvidaste tu contraseña?
-        <a
-          routerLink="/auth/recovery-password"
-          class="cursor-pointer text-blue-400 hover:text-blue-800"
-          >Presiona aquí</a
-        ></span
-      >
+
       <div
-        class="flex w-[80%] content-between items-center justify-end gap-1 mt-2.5"
+        class="flex w-[80%] content-between items-center justify-center gap-5 my-2.5"
       >
-        <button mat-fab extended="true">
+        <button mat-fab extended="true" (click)="login()">
           <span class="text-md">Iniciar Sesión</span>
         </button>
-        <button
-          type="button"
-          class="flex flex-row items-center hover-underline-animation gap-1 cursor-pointer px-8"
-        >
-          <span class="text-md" routerLink="/auth/register">Registrarse</span>
-        </button>
       </div>
+
+      <a
+        routerLink="/auth/recovery-password"
+        class="cursor-pointer text-blue-400 hover:text-blue-800 hover-underline-animation"
+        >¿Olvidaste tu contraseña?</a
+      >
+      <span
+        >¿No tienes una cuenta?
+        <a
+          routerLink="/auth/register"
+          class="cursor-pointer text-blue-400 hover:text-blue-800 hover-underline-animation"
+          >Registrarse</a
+        ></span
+      >
     </form>
   </section>
 </article>
