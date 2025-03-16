@@ -1,25 +1,29 @@
-<nav class="nav brand-navigation-center">
+<nav class="nav brand-navigation-center p-0 md:pt-[15px]">
   <article
-    class="color-nav flex content-between w-[70%] h-full rounded-lg px-[2vw] backdrop-blur-md"
+    class="color-nav flex content-between w-full md:w-[70%] h-full rounded-none md:rounded-lg px-[2vw] backdrop-blur-md"
   >
     <section class="flex content-between w-[50%] justify-center items-center">
-      <div class="flex w-[10%] content-between justify-start text-center">
+      <div
+        class="flex w-[20%] md:w-[10%] content-between justify-start text-center"
+      >
         <img
           src="../../../../assets/images/LOGO-IPUC.svg"
           alt="Logo IPUC"
-          class="flex w-[50px] h-[35px] cursor-pointer"
+          class="w-75px h-50px md:w-[50px] md:h-[35px] cursor-pointer"
           routerLink="/"
         />
       </div>
-      <div class="flex w-[90%] justify-start items-center px-2">
-        <span class="text-gray-300 font-medium"
+      <div class="flex w-[80%] md:w-[90%] justify-start items-center px-2">
+        <span class="hidden md:flex text-gray-300 font-medium"
           >Iglesia Pentecostal Unida de Colombia – 4ta
         </span>
+        <span class="flex md:hidden text-gray-300 font-medium">IPUC 4ta </span>
       </div>
     </section>
-    <section class="flex w-[50%] justify-center items-center">
+    <section class="w-[50%] flex justify-end md:justify-center items-center">
+      <!-- Menú de escritorio -->
       <div
-        class="flex w-full content-between justify-end text-center text-gray-300 font-medium gap-2"
+        class="hidden sm:flex w-full content-between justify-end text-center text-gray-300 font-medium gap-2"
       >
         <a
           routerLink="/home"
@@ -36,11 +40,30 @@
           class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10"
           >Iniciar Sesión</a
         >
-        <a
-          routerLink="/auth/register"
-          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10"
-          >Registrarse</a
+      </div>
+
+      <!-- Menú Mobile -->
+      <div class="sm:hidden">
+        <button
+          (click)="menuOpen = !menuOpen"
+          class="text-gray-300 text-xl px-[4vw]"
         >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div
+          *ngIf="menuOpen"
+          class="absolute top-14 right-5 bg-white text-gray-600 p-4 rounded-lg shadow-lg"
+        >
+          <a routerLink="/home" class="block py-2" (click)="menuClose()"
+            >Inicio</a
+          >
+          <a routerLink="/public/about" class="block py-2" (click)="menuClose()"
+            >Sobre Nosotros</a
+          >
+          <a routerLink="/auth/login" class="block py-2" (click)="menuClose()"
+            >Iniciar Sesión</a
+          >
+        </div>
       </div>
     </section>
   </article>

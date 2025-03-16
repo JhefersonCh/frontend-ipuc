@@ -1,8 +1,10 @@
 <footer class="footer brand-navigation-center">
   <article
-    class="color-footer flex content-between w-[70%] h-full rounded-t-lg px-[2vw] backdrop-blur-md"
+    class="color-footer flex content-between w-full md:w-[70%] h-full rounded:none md:rounded-t-lg backdrop-blur-md justify-center px-[2vw]"
   >
-    <section class="flex content-between w-[30%] justify-start items-center">
+    <section
+      class="hidden md:flex content-between w-[30%] justify-start items-center"
+    >
       <div class="flex ontent-between w-[20%] justify-center text-center">
         <img
           src="../../../../assets/images/LOGO-IPUC.svg"
@@ -16,9 +18,12 @@
       <div
         class="flex w-full content-between justify-end text-center text-white"
       >
-        <span class="text-gray-300 font-medium"
+        <span class="hidden md:flex text-gray-300 font-medium"
           >© 2024 Iglesia Pentecostal Unida de Colombia - 4ta. Todos los
           derechos reservados.</span
+        >
+        <span class="flex md:hidden text-gray-300 font-medium"
+          >© 2024 IPUC - 4ta. Todos los derechos reservados.</span
         >
       </div>
     </section>
