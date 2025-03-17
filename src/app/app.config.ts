@@ -16,12 +16,14 @@ import { routes } from './app.routes';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getMaterialPaginatorTranslations } from './shared/utilities/material-paginator-translations';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TransformDateService } from './shared/services/transform-date.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { MyErrorStateMatcher } from './shared/matchers/error-state.matcher';
+import { authInterceptor } from './shared/interceptors/auth.interceptor';
+import { notificationsInterceptorInterceptor } from './shared/interceptors/notifications.interceptor.interceptor';
 
 registerLocaleData(localeEs);
 
@@ -43,11 +45,9 @@ export const appConfig: ApplicationConfig = {
     },
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: ErrorStateMatcher, useValue: new MyErrorStateMatcher() },
-    provideHttpClient(),
-    /* 
-    TODO: Habilitar interceptores cuando se creen 
-    withInterceptors([authInterceptor, notificationsInterceptor])
-    */
+    provideHttpClient(
+      withInterceptors([authInterceptor, notificationsInterceptorInterceptor])
+    ),
     TransformDateService,
   ],
 };

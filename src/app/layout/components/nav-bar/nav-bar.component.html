@@ -11,12 +11,6 @@
           routerLink="/"
         />
       </div>
-      <!-- <div class="flex w-[80%] md:w-[90%] justify-start items-center px-2">
-        <span class="hidden md:flex text-gray-300 font-medium"
-          >Iglesia Pentecostal Unida de Colombia – 4ta
-        </span>
-        <<span class="flex md:hidden text-gray-300 font-medium">IPUC 4ta </span>
-      </div> -->
     </section>
     <section class="w-[50%] flex justify-end md:justify-center items-center">
       <!-- Menú de escritorio -->
@@ -25,43 +19,95 @@
       >
         <a
           routerLink="/home"
-          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10"
+          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10 flex justify-center items-center"
           >Inicio</a
         >
         <a
           routerLink="/public/about"
-          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10"
+          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10 flex justify-center items-center"
           >Sobre Nosotros</a
         >
+        @if(!loading() || currentUser()){ @if(!currentUser()){
         <a
           routerLink="/auth/login"
-          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10"
+          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10 flex justify-center items-center"
           >Iniciar Sesión</a
         >
+        }@else {
+        <button
+          [matMenuTriggerFor]="menu"
+          type="button"
+          (click)="log()"
+          class="py-[15px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-white/10 cursor-pointer"
+        >
+          {{ currentUser()?.username }}
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Perfil</button>
+          <button mat-menu-item (click)="logout.emit()">
+            Cerrar sesión
+          </button> </mat-menu
+        >} }@else {
+        <div class="py-[15px] w-[25%] flex justify-center items-center">
+          <mat-spinner></mat-spinner>
+        </div>
+        }
       </div>
 
       <!-- Menú Mobile -->
       <div class="sm:hidden">
         <button
-          (click)="menuOpen = !menuOpen"
+          [matMenuTriggerFor]="mobileMenu"
           class="text-gray-300 text-xl px-[4vw]"
         >
           <mat-icon>menu</mat-icon>
         </button>
-        <div
-          *ngIf="menuOpen"
-          class="absolute top-14 right-5 bg-white text-gray-600 p-4 rounded-lg shadow-lg"
-        >
-          <a routerLink="/home" class="block py-2" (click)="menuClose()"
+        <mat-menu #mobileMenu="matMenu">
+          <a
+            routerLink="/home"
+            mat-menu-item
+            class="flex justify-center items-center"
+            (click)="menuClose()"
             >Inicio</a
           >
-          <a routerLink="/public/about" class="block py-2" (click)="menuClose()"
+          <a
+            routerLink="/public/about"
+            mat-menu-item
+            class="flex justify-center items-center"
+            (click)="menuClose()"
             >Sobre Nosotros</a
           >
-          <a routerLink="/auth/login" class="block py-2" (click)="menuClose()"
+          @if(!loading()){ @if(!currentUser()){
+          <a
+            routerLink="/auth/login"
+            mat-menu-item
+            class="flex justify-center items-center"
+            (click)="menuClose()"
             >Iniciar Sesión</a
           >
-        </div>
+          }@else {
+          <button
+            [matMenuTriggerFor]="menu"
+            type="button"
+            mat-menu-item
+            (click)="log()"
+            class="flex justify-center items-center"
+          >
+            {{ currentUser()?.username }}
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Perfil</button>
+            <button mat-menu-item (click)="logout.emit()">
+              Cerrar sesión
+            </button> </mat-menu
+          >} }@else {
+          <div mat-menu-item>
+            <mat-spinner></mat-spinner>
+          </div>
+          }
+        </mat-menu>
       </div>
     </section>
   </article>
