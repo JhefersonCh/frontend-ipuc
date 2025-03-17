@@ -26,6 +26,16 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./public/public.routes').then((m) => m.publicRoutes),
       },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./user/user.routes').then((m) => m.userRoutes),
+      },
+      {
+        path: 'social',
+        loadChildren: () =>
+          import('./social/social.routes').then((m) => m.socialRoutes),
+      },
     ],
   },
 

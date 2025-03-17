@@ -1,9 +1,9 @@
-<article class="brand-content-center py-[10%]">
+<article class="py-[10%] flex justify-center">
   <section
     class="flex flex-col w-[90%] md:w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
   >
     <div class="flex flex-col">
-      <span class="font-extrabold text-2xl">Iniciar Sesión</span
+      <span class="font-extrabold text-2xl font-noto-serif">INICIAR SESIÓN</span
       ><span class="font-normal text-base"
         >Ingresa tus datos para iniciar sesión</span
       >
@@ -15,7 +15,7 @@
       <mat-form-field appearance="outline" class="w-[80%]">
         <mat-label>Nombre de usuario</mat-label>
         <input matInput formControlName="username" />
-        <mat-icon matPrefix>email</mat-icon>
+        <mat-icon matPrefix>account_circle</mat-icon>
         <mat-error *ngIf="form.get('username')?.hasError('required')"
           >Nombre de usuario requerido</mat-error
         >

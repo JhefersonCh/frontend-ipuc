@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [NgOptimizedImage, MatButtonModule, MatIconModule, RouterLink],
+  imports: [MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
