@@ -32,10 +32,6 @@ export class NavBarComponent {
   profileMenuOpen: boolean = false;
   @Output() logout = new EventEmitter<void>();
 
-  log() {
-    console.log(this.currentUser());
-  }
-
   menuClose() {
     this.menuOpen = false;
   }
