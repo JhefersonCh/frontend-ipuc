@@ -11,6 +11,20 @@ export const userRoutes: Routes = [
             (m) => m.ProfileComponent
           ),
       },
+      {
+        path: ':id/edit-user',
+        loadComponent: () =>
+          import('./pages/edit-user/edit-user.component').then(
+            (m) => m.EditUserComponent
+          ),
+      },
+      {
+        path: ':id/change-password',
+        loadComponent: () =>
+          import('./pages/change-password/change-password.component').then(
+            (m) => m.ChangePasswordComponent
+          ),
+      },
     ],
   },
 ];

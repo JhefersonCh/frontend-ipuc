@@ -6,6 +6,9 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../../shared/interfaces/user.interface';
 import { UserDataService } from '../../services/user-data.service';
 import { LocalStorageService } from '../../../shared/services/localStorage.service';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +18,9 @@ import { LocalStorageService } from '../../../shared/services/localStorage.servi
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatIcon,
+    MatMenuModule,
+    RouterLink,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
@@ -24,13 +30,14 @@ export class ProfileComponent implements OnInit {
   user?: User;
   form: FormGroup;
 
-  private readonly _localStorageService = inject(LocalStorageService);
-  private readonly _userService = inject(UserDataService);
-  private readonly fb = inject(FormBuilder);
+  private readonly _localStorageService: LocalStorageService =
+    inject(LocalStorageService);
+  private readonly _userService: UserDataService = inject(UserDataService);
+  private readonly _fb: FormBuilder = inject(FormBuilder);
 
   constructor() {
     // Inicializar form antes de que se use
-    this.form = this.fb.group({
+    this.form = this._fb.group({
       email: [''],
       createdAt: [''],
       updatedAt: [''],

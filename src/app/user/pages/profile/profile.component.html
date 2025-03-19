@@ -1,5 +1,5 @@
 <article
-  class="flex flex-col md:flex-row w-[90%] md:w-full mx-auto p-0 md:p-5 bg-white my-5 md:my-10 gap-4"
+  class="flex flex-col md:flex-row w-[90%] md:w-full mx-auto bg-white my-5 md:my-10 gap-4"
 >
   <section
     class="flex flex-col items-center w-[90%] md:w-[50%] p-0 md:p-5 mx-auto"
@@ -14,9 +14,28 @@
 
       <div class="flex flex-col justify-center font-medium text-gray-600">
         <span class="text-2xl font-semibold m-0">
-          {{ user?.firstName && user?.lastName }}</span
+          {{ user?.firstName }} {{ user?.lastName }}</span
         >
         <span class="text-lg mb-1">{{ user?.username }}</span>
+      </div>
+      <div class="flex ml-auto items-start">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="p-3">
+          <mat-icon>more_vert</mat-icon>
+          <!-- Icono de tres puntos -->
+        </button>
+
+        <!-- Menú desplegable -->
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item [routerLink]="['/user', user?.id, 'edit-user']">
+            <mat-icon>edit</mat-icon> Editar usuario
+          </button>
+          <button
+            mat-menu-item
+            [routerLink]="['/user', user?.id, 'change-password']"
+          >
+            <mat-icon>lock</mat-icon> Cambiar contraseña
+          </button>
+        </mat-menu>
       </div>
     </div>
 
