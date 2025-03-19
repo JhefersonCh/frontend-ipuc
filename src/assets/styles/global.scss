@@ -11,9 +11,10 @@
   z-index: 1000;
 }
 
-// Layout
 .color-nav {
-  background: $header-background;
+  background: linear-gradient(to right, $header-light, $header-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .color-footer {
