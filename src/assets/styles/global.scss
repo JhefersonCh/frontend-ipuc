@@ -7,19 +7,17 @@
   top: 0;
   left: 0;
   height: $heigth-nav-bar;
-
   width: 100%;
   z-index: 1000;
 }
 
+// Layout
 .color-nav {
-  background: linear-gradient(to right, $header-light, $header-background);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: $header-background;
 }
 
 .color-footer {
-  background: linear-gradient(to right, $footer-light, $footer-background);
+  background: $footer-background;
 }
 
 .app-container {
