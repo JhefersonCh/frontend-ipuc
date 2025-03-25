@@ -18,8 +18,12 @@
     </button>
   </section>
   <section class="flex flex-col gap-2.5 mt-4">
-    @for (item of items; track $index) {
-    <app-discussion-card [item]="item"></app-discussion-card>
+    @for (post of posts; track $index) {
+    <app-discussion-card
+      [item]="post"
+      (editEvent)="openCreateOrEditDiscussionDialog($event)"
+      (deleteEvent)="openDeleteDialog($event)"
+    ></app-discussion-card>
     }
   </section>
 </div>
