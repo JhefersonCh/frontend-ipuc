@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  inject,
   input,
   InputSignal,
   Output,
@@ -15,6 +16,7 @@ import { CapitalizePipe } from '../../../shared/pipes/capitalize.pipe';
 import { TimePipe } from '../../../shared/pipes/time.pipe';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { MatMenuModule } from '@angular/material/menu';
+import { PostService } from '../../services/post.service';
 @Component({
   selector: 'app-discussion-card',
   imports: [
@@ -32,7 +34,21 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './discussion-card.component.scss',
 })
 export class DiscussionCardComponent {
+  private readonly _postService: PostService = inject(PostService);
   item: InputSignal<Post | undefined> = input<Post>();
   @Output() deleteEvent = new EventEmitter<Post>();
   @Output() editEvent = new EventEmitter<Post>();
+  @Output() likeEvent = new EventEmitter<unknown>();
+
+  addLike() {
+    this._postService.addLike(this.item()?.id || '').subscribe({
+      next: () => this.likeEvent.emit(),
+    });
+  }
+
+  removeLike() {
+    this._postService.removeLike(this.item()?.id || '').subscribe({
+      next: () => this.likeEvent.emit(),
+    });
+  }
 }

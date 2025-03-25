@@ -23,6 +23,7 @@
       [item]="post"
       (editEvent)="openCreateOrEditDiscussionDialog($event)"
       (deleteEvent)="openDeleteDialog($event)"
+      (likeEvent)="reloadPosts()"
     ></app-discussion-card>
     }
   </section>

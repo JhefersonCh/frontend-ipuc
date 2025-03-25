@@ -123,4 +123,8 @@ export class ForumComponent implements OnInit {
       }
     });
   }
+
+  reloadPosts(): void {
+    this.getPosts();
+  }
 }

@@ -40,4 +40,17 @@ export class PostService {
       `${environment.apiUrl}forum/post/${id}`
     );
   }
+
+  addLike(postId: string): Observable<ApiResponseInterface<unknown>> {
+    return this._httpClient.post<ApiResponseInterface<unknown>>(
+      `${environment.apiUrl}like`,
+      { postId }
+    );
+  }
+
+  removeLike(postId: string): Observable<ApiResponseInterface<unknown>> {
+    return this._httpClient.delete<ApiResponseInterface<unknown>>(
+      `${environment.apiUrl}like/${postId}`
+    );
+  }
 }

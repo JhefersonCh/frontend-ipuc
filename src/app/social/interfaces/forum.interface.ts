@@ -4,7 +4,7 @@ export interface Post {
   description: string;
   createdAt?: string;
   updatedAt?: string;
-  commentscount?: number;
-  likescount?: number;
+  commentsCount?: number;
+  likesCount?: number;
   hasLiked?: boolean;
 }

@@ -33,10 +33,14 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="flex gap-2">
-      <button mat-icon-button class="hover:!bg-red-100">
+      <button
+        mat-icon-button
+        class="hover:!bg-red-100"
+        (click)="item()?.hasLiked ? removeLike() : addLike()"
+      >
         <div
           class="flex items-center text-xs"
-          [matBadge]="item()?.likescount || 0"
+          [matBadge]="item()?.likesCount || 0"
           matBadgeColor="warn"
         >
           <mat-icon [color]="item()?.hasLiked ? 'primary' : 'null'">{{
@@ -47,7 +51,7 @@
       <button mat-icon-button class="hover:!bg-blue-100">
         <div
           class="flex items-center text-xs"
-          [matBadge]="item()?.commentscount || 0"
+          [matBadge]="item()?.commentsCount || 0"
         >
           <mat-icon>question_answer</mat-icon>
         </div>
