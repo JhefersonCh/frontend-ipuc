@@ -18,6 +18,7 @@
     </p>
   </div>
 
+  @if (!isLoading) {
   <form [formGroup]="form" class="flex flex-col md:flex-row gap-0 md:gap-5">
     <div class="flex flex-col w-full md:w-[50%]">
       <mat-form-field appearance="outline" class="w-full">
@@ -58,4 +59,9 @@
       Guardar cambios
     </button>
   </div>
+  } @else {
+  <div class="py-[15px] w-full flex justify-center items-center">
+    <app-loader></app-loader>
+  </div>
+  }
 </article>

@@ -9,6 +9,8 @@ import { LocalStorageService } from '../../../shared/services/localStorage.servi
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
+import { finalize } from 'rxjs';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-profile',
@@ -21,11 +23,13 @@ import { RouterLink } from '@angular/router';
     MatIcon,
     MatMenuModule,
     RouterLink,
+    LoaderComponent,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
+  isLoading: boolean = false;
   userId: string = '';
   user?: User;
   form: FormGroup;
@@ -45,6 +49,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.loadUserProfile();
   }
 
@@ -57,20 +62,23 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this._userService.getUserProfile(this.userId).subscribe({
-      next: (response) => {
-        if (response?.data) {
-          this.user = response.data;
-          this.form.patchValue({
-            email: this.user.email,
-            createdAt: this.user.createdAt,
-            updatedAt: this.user.updatedAt,
-          });
-        }
-      },
-      error: (error) => {
-        console.error('Error al cargar el usuario', error);
-      },
-    });
+    this._userService
+      .getUserProfile(this.userId)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response) => {
+          if (response?.data) {
+            this.user = response.data;
+            this.form.patchValue({
+              email: this.user.email,
+              createdAt: this.user.createdAt,
+              updatedAt: this.user.updatedAt,
+            });
+          }
+        },
+        error: (error) => {
+          console.error('Error al cargar el usuario', error);
+        },
+      });
   }
 }

@@ -1,11 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs/operators';
+import { CustomValidationsService } from '../../../shared/services/customValidations.service';
 
 @Component({
   selector: 'app-change-password',
@@ -30,8 +36,15 @@ export class ChangePasswordComponent {
   constructor() {
     // Inicializar form antes de que se use
     this.form = this._fb.group({
-      passwordOld: [''],
-      newPassword: [''],
+      passwordOld: ['', Validators.required],
+      newPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          CustomValidationsService.PasswordRegex(),
+        ],
+      ],
     });
   }
 

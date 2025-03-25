@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input, InputSignal } from '@angular/core';
 import { LocalStorageService } from '../../../shared/services/localStorage.service';
 import { UserDataService } from '../../services/user-data.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,6 +8,8 @@ import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { finalize } from 'rxjs';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -19,11 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatIcon,
     MatInputModule,
     MatButtonModule,
+    LoaderComponent,
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
 })
 export class EditUserComponent {
+  isLoading: boolean = false;
+
   userId: string = '';
   user?: User;
   form: FormGroup;
@@ -49,6 +54,7 @@ export class EditUserComponent {
    * @param ngOnInit - Inicializa las funciones.
    */
   ngOnInit(): void {
+    this.isLoading = true;
     this.userId = this._activatedRoute.snapshot.params?.['id'];
     console.log('User ID obtenido:', this.userId); // Verifica si se obtiene el ID
     if (this.userId) {
@@ -60,16 +66,19 @@ export class EditUserComponent {
    * @param getUserData - Obtiene los datos del usuario.
    */
   getUserData(userId: string): void {
-    this._userService.getUserProfile(userId).subscribe({
-      next: (response) => {
-        this.user = response?.data;
+    this._userService
+      .getUserProfile(userId)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response) => {
+          this.user = response?.data;
 
-        this.updateFormData();
-      },
-      error: (error) => {
-        console.error('Error al encontrar el usuario', error);
-      },
-    });
+          this.updateFormData();
+        },
+        error: (error) => {
+          console.error('Error al encontrar el usuario', error);
+        },
+      });
   }
 
   /**
