@@ -1,0 +1,61 @@
+<article
+  class="flex flex-col w-[90%] md:w-full mx-auto bg-white my-5 md:my-10 gap-5"
+>
+  <div class="flex justify-start">
+    <a
+      role="button"
+      routerLink="/user/profile"
+      class="flex flex-row items-center gap-1 hover-underline-animation text-xl"
+    >
+      <mat-icon class="mt-1">keyboard_backspace</mat-icon>
+      <span>Volver</span>
+    </a>
+  </div>
+  <div>
+    <p class="text-lg text-gray-600 font-medium">
+      En esta sección, puedes actualizar tu información personal, incluyendo tus
+      nombres, apellidos, correo electrónico y nombre de usuario.
+    </p>
+  </div>
+
+  <form [formGroup]="form" class="flex flex-col md:flex-row gap-0 md:gap-5">
+    <div class="flex flex-col w-full md:w-[50%]">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre(s)</mat-label>
+        <input type="text" matInput formControlName="firstName" />
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Apellido(s)</mat-label>
+        <input type="text" matInput formControlName="lastName" />
+        <mat-icon matPrefix>person</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-col w-full md:w-[50%]">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Correo eléctronico</mat-label>
+        <input type="text" matInput formControlName="email" />
+        <mat-icon matPrefix>email</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Nombre de usuario</mat-label>
+        <input type="text" matInput formControlName="username" />
+        <mat-icon matPrefix>account_circle</mat-icon>
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="flex justify-end">
+    <button
+      mat-fab
+      extended="true"
+      type="button"
+      color="primary"
+      (click)="saveInfo()"
+    >
+      Guardar cambios
+    </button>
+  </div>
+</article>

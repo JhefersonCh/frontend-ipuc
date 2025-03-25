@@ -48,9 +48,11 @@
         </button>
 
         <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="/user/profile">Perfil</button>
+          <button mat-menu-item routerLink="/user/profile">
+            <mat-icon>account_circle</mat-icon>Perfil
+          </button>
           <button mat-menu-item (click)="logout.emit()">
-            Cerrar sesión
+            <mat-icon>logout</mat-icon>Cerrar sesión
           </button> </mat-menu
         >} }@else {
         <div class="py-[15px] w-[25%] flex justify-center items-center">
@@ -73,14 +75,14 @@
             mat-menu-item
             class="flex justify-center items-center"
             (click)="menuClose()"
-            >Inicio</a
+            ><mat-icon>home</mat-icon>Inicio</a
           >
           <a
             routerLink="/public/about"
             mat-menu-item
             class="flex justify-center items-center"
             (click)="menuClose()"
-            >Sobre Nosotros</a
+            ><mat-icon>person_pin</mat-icon>Sobre Nosotros</a
           >
 
           @if(!loading()){ @if(!currentUser()){
@@ -90,7 +92,7 @@
             mat-menu-item
             class="flex justify-center items-center"
             (click)="menuClose()"
-            >Iniciar Sesión</a
+            ><mat-icon>login</mat-icon>Iniciar Sesión</a
           >
           }@else {
           <a
@@ -98,7 +100,7 @@
             mat-menu-item
             class="flex justify-center items-center"
             (click)="menuClose()"
-            >Foro</a
+            ><mat-icon>forum</mat-icon>Foro</a
           >
           <button
             [matMenuTriggerFor]="menu"
@@ -106,13 +108,16 @@
             mat-menu-item
             class="flex justify-center items-center"
           >
-            {{ currentUser()?.username }}
+            <mat-icon>settings</mat-icon>Opciones
+            <!-- {{ currentUser()?.username }} -->
           </button>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/user/profile">Perfil</button>
+            <button mat-menu-item routerLink="/user/profile">
+              <mat-icon>account_circle</mat-icon>Perfil
+            </button>
             <button mat-menu-item (click)="logout.emit()">
-              Cerrar sesión
+              <mat-icon>logout</mat-icon>Cerrar sesión
             </button> </mat-menu
           >} }@else {
           <div mat-menu-item>
