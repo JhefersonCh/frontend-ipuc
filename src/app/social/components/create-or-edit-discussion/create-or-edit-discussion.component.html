@@ -1,4 +1,4 @@
-<app-base-dialog title="Crear discusión" subtitle="Crear una nueva discusión">
+<app-base-dialog [title]="data?.id ? 'Editar discusión' : 'Crear discusión'">
   <ng-content form>
     <form [formGroup]="form" class="w-full flex flex-col gap-2.5">
       <mat-form-field appearance="outline" class="w-full">
@@ -40,7 +40,15 @@
       >
         Cancelar
       </button>
-      <button mat-fab extended="true" class="col-span-1">Guardar</button>
+      <button
+        mat-fab
+        extended="true"
+        class="col-span-1"
+        (click)="save()"
+        [disabled]="form.invalid || loading"
+      >
+        Guardar
+      </button>
     </div>
   </ng-content>
 </app-base-dialog>

@@ -1,5 +1,5 @@
 <mat-card appearance="outlined" class="!shadow-gray-400/50 !shadow-md">
-  <mat-card-header>
+  <mat-card-header class="!relative">
     <mat-card-title>
       <div>
         <h1 class="text-2xl font-medium">
@@ -9,6 +9,23 @@
           {{ item()?.createdAt || "" | time }}
         </div>
       </div>
+      <button
+        mat-icon-button
+        class="!absolute top-2 right-2"
+        [matMenuTriggerFor]="menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="editEvent.emit(item())">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="deleteEvent.emit(item())">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -19,16 +36,18 @@
       <button mat-icon-button class="hover:!bg-red-100">
         <div
           class="flex items-center text-xs"
-          [matBadge]="item()?.likes || null"
+          [matBadge]="item()?.likescount || 0"
           matBadgeColor="warn"
         >
-          <mat-icon>favorite_border</mat-icon>
+          <mat-icon [color]="item()?.hasLiked ? 'primary' : 'null'">{{
+            item()?.hasLiked ? "favorite" : "favorite_border"
+          }}</mat-icon>
         </div>
       </button>
       <button mat-icon-button class="hover:!bg-blue-100">
         <div
           class="flex items-center text-xs"
-          [matBadge]="item()?.replies || null"
+          [matBadge]="item()?.commentscount || 0"
         >
           <mat-icon>question_answer</mat-icon>
         </div>

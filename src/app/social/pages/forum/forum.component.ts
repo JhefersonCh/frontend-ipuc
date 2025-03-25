@@ -1,9 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CreateOrEditDiscussionComponent } from '../../components/create-or-edit-discussion/create-or-edit-discussion.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { Discussion } from '../../interfaces/forum.interface';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Post } from '../../interfaces/forum.interface';
 import { DiscussionCardComponent } from '../../components/discussion-card/discussion-card.component';
+import { PostService } from '../../services/post.service';
+import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
+import { finalize } from 'rxjs';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-forum',
@@ -12,72 +16,111 @@ import { DiscussionCardComponent } from '../../components/discussion-card/discus
   styleUrls: ['./forum.component.scss'],
   standalone: true,
 })
-export class ForumComponent {
-  private readonly dialog = inject(MatDialog);
-  items: Partial<Discussion>[] = [
-    {
-      id: 1,
-      title: 'title 1 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 12,
-      likes: 6,
-    },
-    {
-      id: 2,
-      title: 'title 2 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 4,
-      likes: 2,
-    },
-    {
-      id: 3,
-      title: 'title 1 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 12,
-      likes: 6,
-    },
-    {
-      id: 4,
-      title: 'title 2 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 4,
-      likes: 2,
-    },
-    {
-      id: 5,
-      title: 'title 1 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 12,
-      likes: 6,
-    },
-    {
-      id: 6,
-      title: 'title 2 ',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida dolor vitae placerat aliquet. Phasellus congue bibendum bibendum. Sed ullamcorper vehicula arcu id consectetur. Donec at egestas elit. Quisque tempor libero eget dictum gravida. Suspendisse non metus ac ligula faucibus pretium. Ut ac fringilla nibh, et pulvinar leo. Maecenas sit amet risus tristique lorem varius consequat a a dolor. Aliquam tristique, augue consequat convallis pellentesque, purus neque malesuada nunc, ac convallis nulla risus quis eros. Mauris laoreet consectetur diam, a tempor ex ultricies vitae. Donec quis magna nunc. Nam lobortis urna sed nisi vulputate euismod. Duis viverra condimentum turpis, sit amet semper est pulvinar non. Nulla in odio ac lacus scelerisque mattis nec sit amet lectus.',
-      createdAt: '2025-03-18T16:13:43.000Z',
-      updatedAt: '2025-03-18T16:13:43.000Z',
-      replies: 4,
-      likes: 2,
-    },
-  ];
+export class ForumComponent implements OnInit {
+  private readonly dialog: MatDialog = inject(MatDialog);
+  private readonly _postService: PostService = inject(PostService);
+  private readonly _authService: AuthService = inject(AuthService);
+  posts: Post[] = [];
 
-  openCreateOrEditDiscussionDialog() {
-    const dialogRef = this.dialog.open(CreateOrEditDiscussionComponent);
+  ngOnInit(): void {
+    this.getPosts();
+  }
+
+  private getPosts(): void {
+    this._postService.getPosts().subscribe({
+      next: (res) => {
+        this.posts = res.data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  private createPost(
+    { id, ...post }: Post,
+    dialogRef: MatDialogRef<CreateOrEditDiscussionComponent, any>
+  ): void {
+    this._postService
+      .createPost(post)
+      .pipe(finalize(() => dialogRef.componentInstance.setLoading(false)))
+      .subscribe({
+        next: () => {
+          dialogRef.close();
+          this.getPosts();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  private updatePost(
+    post: Post,
+    dialogRef: MatDialogRef<CreateOrEditDiscussionComponent, any>
+  ): void {
+    this._postService
+      .updatePost(post)
+      .pipe(finalize(() => dialogRef.componentInstance.setLoading(false)))
+      .subscribe({
+        next: () => {
+          dialogRef.close();
+          this.getPosts();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  private deletePost(
+    id: string,
+    dialogRef: MatDialogRef<YesNoDialohComponent, any>
+  ): void {
+    this._postService
+      .deletePost(id)
+      .pipe(finalize(() => dialogRef.componentInstance.setLoading(false)))
+      .subscribe({
+        next: () => {
+          this.getPosts();
+          dialogRef.close();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+  }
+
+  openCreateOrEditDiscussionDialog(post?: Post): void {
+    const dialogRef: MatDialogRef<CreateOrEditDiscussionComponent, any> =
+      this.dialog.open(CreateOrEditDiscussionComponent, {
+        data: post,
+      });
+
+    dialogRef.componentInstance.saveEvent.subscribe((post) => {
+      if (post && !post.id) {
+        this.createPost(post, dialogRef);
+      } else if (post && post.id) {
+        this.updatePost(post, dialogRef);
+      }
+    });
+  }
+
+  openDeleteDialog(post: Post): void {
+    const dialogRef: MatDialogRef<YesNoDialohComponent, any> = this.dialog.open(
+      YesNoDialohComponent,
+      {
+        data: {
+          title: 'Eliminar discusión',
+          description: '¿Estás seguro de eliminar esta discusión?',
+        },
+      }
+    );
+
+    dialogRef.componentInstance.yesEvent.subscribe(() => {
+      if (post?.id) {
+        this.deletePost(post.id, dialogRef);
+      }
+    });
   }
 }
