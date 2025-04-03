@@ -24,13 +24,15 @@
 .app-container {
   margin-top: 15px;
   display: flex;
-  min-height: calc(100vh - $heigth-nav-bar + 15px);
+  min-height: calc(100vh - $heigth-nav-bar + 10px);
   padding-top: calc($heigth-nav-bar);
+
   color: white;
 }
 
 .main {
   color: black;
+  padding-bottom: calc($heigth-footer);
 }
 
 .footer {

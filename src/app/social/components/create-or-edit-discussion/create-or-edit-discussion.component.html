@@ -1,4 +1,6 @@
-<app-base-dialog [title]="data?.id ? 'Editar discusión' : 'Crear discusión'">
+<app-base-dialog
+  [title]="data.id || null ? 'Editar discusión' : 'Crear discusión'"
+>
   <ng-content form>
     <form [formGroup]="form" class="w-full flex flex-col gap-2.5">
       <mat-form-field appearance="outline" class="w-full">

@@ -1,15 +1,10 @@
 <article
-  class="flex flex-col w-[90%] md:w-full mx-auto bg-white my-5 md:my-10 gap-5"
+  class="flex flex-col w-[90%] h-full md:w-full mx-auto bg-white my-5 md:my-10 gap-5 md:justify-center"
 >
   <div class="flex justify-start">
-    <a
-      role="button"
-      routerLink="/user/profile"
-      class="flex flex-row items-center gap-1 hover-underline-animation text-xl"
-    >
-      <mat-icon class="mt-1">keyboard_backspace</mat-icon>
-      <span>Volver</span>
-    </a>
+    <button mat-stroked-button extended="true" routerLink="/user/profile">
+      Volver
+    </button>
   </div>
   <div>
     <p class="text-lg text-gray-600 font-medium">

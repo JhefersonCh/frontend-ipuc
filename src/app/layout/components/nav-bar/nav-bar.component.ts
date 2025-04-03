@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { User } from '../../../shared/interfaces/user.interface';
@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'app-nav-bar',
   imports: [
     RouterLink,
+    RouterLinkActive,
     CommonModule,
     MatIcon,
     MatMenuModule,
@@ -31,6 +32,12 @@ export class NavBarComponent {
   menuOpen: boolean = false;
   profileMenuOpen: boolean = false;
   @Output() logout = new EventEmitter<void>();
+
+  constructor(private router: Router) {}
+
+  isActive(route: string): boolean {
+    return this.router.url.startsWith(route);
+  }
 
   menuClose() {
     this.menuOpen = false;

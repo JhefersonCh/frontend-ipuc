@@ -20,7 +20,13 @@
         <span class="text-lg mb-1">{{ user?.username }}</span>
       </div>
       <div class="flex ml-auto items-start">
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="p-3">
+        <button
+          mat-icon-button
+          #menuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="menu"
+          class="hover:bg-blue-400 rounded-full px-1.5 pt-1 pb-0"
+          [ngClass]="{ 'bg-blue-400': menuTrigger.menuOpen }"
+        >
           <mat-icon>more_vert</mat-icon>
           <!-- Icono de tres puntos -->
         </button>
