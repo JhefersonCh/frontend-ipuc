@@ -7,4 +7,5 @@ export interface Post {
   commentsCount?: number;
   likesCount?: number;
   hasLiked?: boolean;
+  userId?: string;
 }

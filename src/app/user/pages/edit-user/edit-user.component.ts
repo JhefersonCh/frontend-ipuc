@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { finalize } from 'rxjs';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -22,6 +23,7 @@ import { LoaderComponent } from '../../../shared/components/loader/loader.compon
     MatInputModule,
     MatButtonModule,
     LoaderComponent,
+    BackButtonComponent,
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',

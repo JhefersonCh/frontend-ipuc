@@ -17,6 +17,8 @@ import { TimePipe } from '../../../shared/pipes/time.pipe';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { MatMenuModule } from '@angular/material/menu';
 import { PostService } from '../../services/post.service';
+import { User } from '../../../shared/interfaces/user.interface';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-discussion-card',
   imports: [
@@ -29,6 +31,7 @@ import { PostService } from '../../services/post.service';
     TimePipe,
     TruncatePipe,
     MatMenuModule,
+    RouterLink,
   ],
   templateUrl: './discussion-card.component.html',
   styleUrl: './discussion-card.component.scss',
@@ -36,6 +39,7 @@ import { PostService } from '../../services/post.service';
 export class DiscussionCardComponent {
   private readonly _postService: PostService = inject(PostService);
   item: InputSignal<Post | undefined> = input<Post>();
+  userLogged: InputSignal<User | null | undefined> = input<User | null>();
   @Output() deleteEvent = new EventEmitter<Post>();
   @Output() editEvent = new EventEmitter<Post>();
   @Output() likeEvent = new EventEmitter<unknown>();

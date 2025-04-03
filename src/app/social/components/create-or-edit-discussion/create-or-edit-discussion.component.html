@@ -1,5 +1,5 @@
 <app-base-dialog
-  [title]="data.id || null ? 'Editar discusión' : 'Crear discusión'"
+  [title]="data?.id || null ? 'Editar discusión' : 'Crear discusión'"
 >
   <ng-content form>
     <form [formGroup]="form" class="w-full flex flex-col gap-2.5">

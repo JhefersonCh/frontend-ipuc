@@ -53,4 +53,10 @@ export class PostService {
       `${environment.apiUrl}like/${postId}`
     );
   }
+
+  getPost(id: string): Observable<ApiResponseInterface<Post>> {
+    return this._httpClient.get<ApiResponseInterface<Post>>(
+      `${environment.apiUrl}forum/post/${id}`
+    );
+  }
 }

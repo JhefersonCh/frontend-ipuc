@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs/operators';
 import { CustomValidationsService } from '../../../shared/services/customValidations.service';
+import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
 
 @Component({
   selector: 'app-change-password',
@@ -22,6 +23,7 @@ import { CustomValidationsService } from '../../../shared/services/customValidat
     MatButtonModule,
     MatInputModule,
     RouterLink,
+    BackButtonComponent,
   ],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss',

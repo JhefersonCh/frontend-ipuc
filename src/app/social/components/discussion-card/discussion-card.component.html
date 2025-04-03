@@ -9,6 +9,7 @@
           {{ item()?.createdAt || "" | time }}
         </div>
       </div>
+      @if(userLogged() && userLogged()?.id === item()?.userId) {
       <button
         mat-icon-button
         class="!absolute top-2 right-2"
@@ -26,6 +27,7 @@
           <span>Eliminar</span>
         </button>
       </mat-menu>
+      }
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -48,7 +50,12 @@
           }}</mat-icon>
         </div>
       </button>
-      <button mat-icon-button class="hover:!bg-blue-100">
+      <button
+        mat-icon-button
+        class="hover:!bg-blue-100"
+        title="Ver Comentarios"
+        [routerLink]="['../post', item()?.id]"
+      >
         <div
           class="flex items-center text-xs"
           [matBadge]="item()?.commentsCount || 0"

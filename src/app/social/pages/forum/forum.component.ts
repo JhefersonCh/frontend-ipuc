@@ -8,11 +8,13 @@ import { PostService } from '../../services/post.service';
 import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
+import { User } from '../../../shared/interfaces/user.interface';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  imports: [MatButtonModule, DiscussionCardComponent],
+  imports: [MatButtonModule, DiscussionCardComponent, LoaderComponent],
   styleUrls: ['./forum.component.scss'],
   standalone: true,
 })
@@ -21,20 +23,28 @@ export class ForumComponent implements OnInit {
   private readonly _postService: PostService = inject(PostService);
   private readonly _authService: AuthService = inject(AuthService);
   posts: Post[] = [];
+  currentUser: User | null = null;
+  loading: boolean = true;
 
   ngOnInit(): void {
     this.getPosts();
+    this._authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+    });
   }
 
   private getPosts(): void {
-    this._postService.getPosts().subscribe({
-      next: (res) => {
-        this.posts = res.data;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+    this._postService
+      .getPosts()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (res) => {
+          this.posts = res.data;
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
   }
 
   private createPost(

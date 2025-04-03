@@ -26,7 +26,7 @@
         </a>
         <a
           routerLink="/social/forum"
-          routerLinkActive="bg-blue-500"
+          [ngClass]="{ 'bg-blue-500': isActive('/social') }"
           class="py-[15px] max-[1280px]:py-0 sm:h-[60px] md:h-[45px] lg:h-[45px] xl:h-full px-[6px] w-[25%] rounded-lg transition-colors duration-200 ease-in-out hover:bg-blue-500 flex justify-center items-center"
           >Foro</a
         >

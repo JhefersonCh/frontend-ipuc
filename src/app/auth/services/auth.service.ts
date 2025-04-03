@@ -17,8 +17,10 @@ export class AuthService {
   _isLoggedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
-  private currentUser: unknown = null;
-  constructor() {}
+  private _currentUserSubject: BehaviorSubject<User | null> =
+    new BehaviorSubject<User | null>(null);
+  public currentUser$: Observable<User | null> =
+    this._currentUserSubject.asObservable();
 
   login(data: Login): Observable<ApiResponseInterface<LoginResponse>> {
     return this._httpClient
@@ -30,11 +32,7 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('session', JSON.stringify(response?.data));
           this._isLoggedEmit();
-          this.getLoggedUserData().subscribe({
-            next: () => {
-              this._router.navigate([`/`]);
-            },
-          });
+          this._router.navigate([`/`]);
         })
       );
   }
@@ -58,6 +56,7 @@ export class AuthService {
       .pipe(
         tap((response): void => {
           this._isLoggedEmit();
+          this._currentUserSubject.next(response.data);
         })
       );
   }
@@ -99,7 +98,7 @@ export class AuthService {
   logout(): void {
     this._isLoggedSubject.next(false);
     localStorage.removeItem('session');
-    this.currentUser = null;
+    this._currentUserSubject.next(null);
   }
 
   cleanStorageAndRedirectToLogin(): void {
@@ -124,5 +123,13 @@ export class AuthService {
   isAuthenticatedToGuard() {
     const token = this.isAuthenticated();
     return of(!!token);
+  }
+
+  get getCurrentUser(): User | null {
+    return this._currentUserSubject.value;
+  }
+
+  updateCurrentUser(user: User): void {
+    this._currentUserSubject.next(user);
   }
 }

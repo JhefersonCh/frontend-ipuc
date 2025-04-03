@@ -1,3 +1,4 @@
+import { CapitalizePipe } from './capitalize.pipe';
 import { Pipe, PipeTransform } from '@angular/core';
 import { es } from 'date-fns/locale';
 import { formatDistanceToNow, formatDistance } from 'date-fns';
@@ -14,8 +15,10 @@ export class TimePipe implements PipeTransform {
     const date = new Date(value);
     if (isNaN(date.getTime())) return 'Fecha inválida';
 
-    return formatType === 'fromNow'
-      ? formatDistanceToNow(date, { addSuffix: true, locale: es })
-      : formatDistance(date, new Date(), { addSuffix: true, locale: es });
+    const res =
+      formatType === 'fromNow'
+        ? formatDistanceToNow(date, { addSuffix: true, locale: es })
+        : formatDistance(date, new Date(), { addSuffix: true, locale: es });
+    return new CapitalizePipe().transform(res);
   }
 }
