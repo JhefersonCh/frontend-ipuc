@@ -1,0 +1,34 @@
+<mat-card appearance="outlined" class="!shadow-gray-400/50 !shadow-md">
+  <mat-card-header class="!relative">
+    <mat-card-title
+      ><div>
+        <h1 class="text-2xl font-medium">
+          {{ userLogged()?.firstName }}
+          {{ userLogged()?.lastName }}
+        </h1>
+      </div>
+      @if(userLogged() && userLogged()?.id === itemComment()?.userId) {
+      <button
+        mat-icon-button
+        class="!absolute top-2 right-2"
+        [matMenuTriggerFor]="menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="editEvent.emit(itemComment())">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="deleteEvent.emit(itemComment())">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+      }</mat-card-title
+    ></mat-card-header
+  >
+  <mat-card-content>
+    <p>{{ itemComment()?.content }}</p>
+  </mat-card-content></mat-card
+>

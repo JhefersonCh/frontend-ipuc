@@ -8,7 +8,6 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs/operators';
 import { CustomValidationsService } from '../../../shared/services/customValidations.service';
@@ -22,7 +21,6 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    RouterLink,
     BackButtonComponent,
   ],
   templateUrl: './change-password.component.html',

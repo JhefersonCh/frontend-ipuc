@@ -37,12 +37,14 @@ import { RouterLink } from '@angular/router';
   styleUrl: './discussion-card.component.scss',
 })
 export class DiscussionCardComponent {
-  private readonly _postService: PostService = inject(PostService);
-  item: InputSignal<Post | undefined> = input<Post>();
-  userLogged: InputSignal<User | null | undefined> = input<User | null>();
   @Output() deleteEvent = new EventEmitter<Post>();
   @Output() editEvent = new EventEmitter<Post>();
   @Output() likeEvent = new EventEmitter<unknown>();
+
+  private readonly _postService: PostService = inject(PostService);
+
+  item: InputSignal<Post | undefined> = input<Post>();
+  userLogged: InputSignal<User | null | undefined> = input<User | null>();
 
   addLike() {
     this._postService.addLike(this.item()?.id || '').subscribe({
