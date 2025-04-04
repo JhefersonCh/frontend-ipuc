@@ -1,5 +1,5 @@
 <app-base-dialog
-  [title]="data?.id || null ? 'Editar comentario' : 'Crear comentario'"
+  [title]="data?.comment?.id ? 'Editar comentario' : 'Crear comentario'"
 >
   <ng-content form>
     <form [formGroup]="form" class="w-full flex flex-col gap-2.5">
@@ -7,15 +7,15 @@
         <mat-label>Comentario</mat-label>
         <textarea
           matInput
-          formControlName="comment"
+          formControlName="content"
           [maxlength]="maxLenght"
           rows="4"
         ></textarea>
         <mat-icon matPrefix>description</mat-icon>
         <mat-hint align="end" class="text-xs text-neutral-500 font-medium"
-          >{{ form.get("comment")?.value?.length }}/{{ maxLenght }}</mat-hint
+          >{{ form.get("content")?.value?.length }}/{{ maxLenght }}</mat-hint
         >
-        @if (form.get('comment')?.hasError('required')) {
+        @if (form.get('content')?.hasError('required')) {
         <mat-error>Comentario requerido</mat-error>
         }
       </mat-form-field>

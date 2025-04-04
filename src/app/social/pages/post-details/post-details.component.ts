@@ -43,6 +43,7 @@ export class PostDetailsComponent implements OnInit {
   post?: Post;
   comments?: Comment[] = [];
   loading: boolean = true;
+  commentsLoading: boolean = false;
 
   ngOnInit(): void {
     this.postId = this._route.snapshot.paramMap.get('id') || '';
@@ -73,11 +74,11 @@ export class PostDetailsComponent implements OnInit {
   }
 
   private getComments(): void {
-    this.loading = true;
+    this.commentsLoading = true;
 
     this._commentService
       .getCommentsByPostId(this.postId)
-      .pipe(finalize(() => (this.loading = false)))
+      .pipe(finalize(() => (this.commentsLoading = false)))
       .subscribe({
         next: (res) => {
           this.comments = res.data;
@@ -145,7 +146,7 @@ export class PostDetailsComponent implements OnInit {
   openCreateorEditCommentDialog(comment?: Comment): void {
     const dialogRef: MatDialogRef<CreateOrEditCommentComponent, any> =
       this.dialog.open(CreateOrEditCommentComponent, {
-        data: comment,
+        data: { comment },
       });
 
     dialogRef.componentInstance.saveEvent.subscribe((comment) => {

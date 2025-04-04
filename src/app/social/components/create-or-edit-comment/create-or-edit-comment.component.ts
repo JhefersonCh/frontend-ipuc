@@ -32,7 +32,7 @@ export class CreateOrEditCommentComponent {
   readonly dialogRef: MatDialogRef<any, any> = inject(
     MatDialogRef<CreateOrEditCommentComponent>
   );
-  readonly data = inject<{ id: number; comment: string }>(MAT_DIALOG_DATA);
+  readonly data = inject<{ comment?: Comment }>(MAT_DIALOG_DATA);
   private readonly _fb: FormBuilder = inject(FormBuilder);
 
   form!: FormGroup;
@@ -41,8 +41,8 @@ export class CreateOrEditCommentComponent {
 
   constructor() {
     this.form = this._fb.group({
-      id: [this.data?.id],
-      comment: [this.data?.comment, [Validators.required]],
+      id: [this.data?.comment?.id],
+      content: [this.data?.comment?.content, [Validators.required]],
     });
   }
 

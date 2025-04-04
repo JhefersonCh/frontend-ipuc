@@ -17,13 +17,17 @@
     </p>
   </section>
   <section class="flex flex-col gap-2.5 mt-4">
-    @for (comment of comments; track $index) {
+    @if(!commentsLoading) { @for (comment of comments; track $index) {
     <app-comment-card
       [itemComment]="comment"
       (editEvent)="openCreateorEditCommentDialog($event)"
       (deleteEvent)="openDeleteComment($event)"
       [userLogged]="currentUser"
     ></app-comment-card>
+    } }@else {
+    <div class="flex items-center justify-center h-100">
+      <app-loader></app-loader>
+    </div>
     }
   </section>
   }@else {
