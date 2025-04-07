@@ -1,0 +1,18 @@
+<article class="flex flex-col">
+  <form [formGroup]="form" class="flex">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Responderás a esta pregunta</mat-label>
+      <textarea
+        matInput
+        formControlName="content"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="5"
+      ></textarea>
+      <mat-icon matPrefix>badge</mat-icon>
+      <mat-icon matSuffix (click)="sendComment()" class="cursor-pointer"
+        >send</mat-icon
+      >
+    </mat-form-field>
+  </form>
+</article>

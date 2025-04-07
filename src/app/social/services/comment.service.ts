@@ -5,7 +5,7 @@ import {
   ApiResponseInterface,
 } from '../../shared/interfaces/api-response.interface';
 import { Observable } from 'rxjs';
-import { Comment } from '../interfaces/comment.interface';
+import { Comment, CreateComment } from '../interfaces/comment.interface';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -20,6 +20,15 @@ export class CommentService {
   ): Observable<ApiResponseInterface<Comment[]>> {
     return this._httpClient.get<ApiResponseInterface<Comment[]>>(
       `${environment.apiUrl}comment/${postId}`
+    );
+  }
+
+  sendCreateComment(
+    comment: CreateComment
+  ): Observable<ApiResponseCreateInterface> {
+    return this._httpClient.post<ApiResponseCreateInterface>(
+      `${environment.apiUrl}comment`,
+      comment
     );
   }
 

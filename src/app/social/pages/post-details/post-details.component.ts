@@ -14,9 +14,9 @@ import { Comment } from '../../interfaces/comment.interface';
 import { User } from '../../../shared/interfaces/user.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-
 import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
 import { CreateOrEditCommentComponent } from '../../components/create-or-edit-comment/create-or-edit-comment.component';
+import { CreateCommentComponent } from '../../components/create-comment/create-comment.component';
 
 @Component({
   selector: 'app-post-details',
@@ -27,6 +27,7 @@ import { CreateOrEditCommentComponent } from '../../components/create-or-edit-co
     BackButtonComponent,
     LoaderComponent,
     CommentCardComponent,
+    CreateCommentComponent,
   ],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss',
@@ -73,7 +74,7 @@ export class PostDetailsComponent implements OnInit {
       });
   }
 
-  private getComments(): void {
+  getComments(): void {
     this.commentsLoading = true;
 
     this._commentService

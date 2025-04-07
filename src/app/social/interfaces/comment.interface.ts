@@ -8,6 +8,12 @@ export interface Comment {
   updatedAt: string;
 }
 
+export interface CreateComment {
+  content: string;
+  postId: string;
+  parentId?: string | null;
+}
+
 export interface Reply {
   id: string;
   userId: string;

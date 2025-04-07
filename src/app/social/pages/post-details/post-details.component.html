@@ -17,10 +17,13 @@
     </p>
   </section>
   <section class="flex flex-col gap-2.5 mt-4">
+    <app-create-comment
+      [postId]="postId"
+      (commentCreated)="getComments()"
+    ></app-create-comment>
     @if(!commentsLoading) { @for (comment of comments; track $index) {
     <app-comment-card
       [itemComment]="comment"
-      (editEvent)="openCreateorEditCommentDialog($event)"
       (deleteEvent)="openDeleteComment($event)"
       [userLogged]="currentUser"
     ></app-comment-card>
