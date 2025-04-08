@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout/default-layout.component';
+import { adminGuard } from './shared/guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,13 @@ export const routes: Routes = [
         path: 'social',
         loadChildren: () =>
           import('./social/social.routes').then((m) => m.socialRoutes),
+      },
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+
+        loadChildren: () =>
+          import('./admin/admin.routes').then((m) => m.adminRoutes),
       },
     ],
   },
