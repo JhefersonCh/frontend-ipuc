@@ -1,18 +1,42 @@
 <article class="flex flex-col">
-  <form [formGroup]="form" class="flex">
+  <form [formGroup]="form" class="flex w-full">
     <mat-form-field appearance="outline" class="w-full">
-      <mat-label>Responderás a esta pregunta</mat-label>
+      <mat-label
+        [ngClass]="{
+          'text-red-600 font-semibold': !userLogged()
+        }"
+      >
+        {{
+          userLogged()
+            ? "Responderás como " +
+              (userLogged()?.firstName || "") +
+              " " +
+              (userLogged()?.lastName || "")
+            : "Para comentar debes iniciar sesión"
+        }}
+      </mat-label>
+
       <textarea
         matInput
         formControlName="content"
         cdkTextareaAutosize
         cdkAutosizeMinRows="2"
         cdkAutosizeMaxRows="5"
+        [readonly]="!userLogged()"
+        (focus)="handleFocus($event)"
       ></textarea>
+
       <mat-icon matPrefix>badge</mat-icon>
-      <mat-icon matSuffix (click)="sendComment()" class="cursor-pointer"
-        >send</mat-icon
+
+      <mat-icon
+        matSuffix
+        class="cursor-pointer"
+        (click)="userLogged() && sendComment()"
+        [class.opacity-50]="!userLogged()"
+        [style.pointer-events]="!userLogged() ? 'none' : 'auto'"
       >
+        send
+      </mat-icon>
     </mat-form-field>
   </form>
 </article>

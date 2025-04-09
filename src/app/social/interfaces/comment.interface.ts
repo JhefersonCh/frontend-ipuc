@@ -1,3 +1,5 @@
+import { User } from '../../shared/interfaces/user.interface';
+
 export interface Comment {
   id?: string;
   userId: string;
@@ -6,6 +8,7 @@ export interface Comment {
   parentId: string | null;
   createdAt: string;
   updatedAt: string;
+  user: User;
 }
 
 export interface CreateComment {

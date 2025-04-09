@@ -1,34 +1,41 @@
-<mat-card appearance="outlined" class="!shadow-gray-400/50 !shadow-md">
-  <mat-card-header class="!relative">
-    <mat-card-title
-      ><div>
-        <h1 class="text-2xl font-medium">
-          {{ userLogged()?.firstName }}
-          {{ userLogged()?.lastName }}
+<mat-card appearance="outlined" class="!shadow-gray-400/50 !shadow-md my-2">
+  <mat-card-header class="w-full">
+    <section class="flex justify-between items-start w-full">
+      <!-- Nombre del usuario -->
+      <div class="flex w-[50%] h-full items-center">
+        <h1 class="text-xl font-medium">
+          {{ itemComment()?.user?.firstName }}
+          {{ itemComment()?.user?.lastName }}
         </h1>
       </div>
+
+      <!-- Botón de menú (solo si el usuario es el dueño del comentario) -->
       @if(userLogged() && userLogged()?.id === itemComment()?.userId) {
-      <button
-        mat-icon-button
-        class="!absolute top-2 right-2"
-        [matMenuTriggerFor]="menu"
-      >
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="editEvent.emit(itemComment())">
-          <mat-icon>edit</mat-icon>
-          <span>Editar</span>
+      <div class="flex w-[50%] justify-end">
+        <button
+          mat-icon-button
+          #menuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item (click)="deleteEvent.emit(itemComment())">
-          <mat-icon>delete</mat-icon>
-          <span>Eliminar</span>
-        </button>
-      </mat-menu>
-      }</mat-card-title
-    ></mat-card-header
-  >
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="editEvent.emit(itemComment())">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteEvent.emit(itemComment())">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      }
+    </section>
+  </mat-card-header>
+
   <mat-card-content>
     <p>{{ itemComment()?.content }}</p>
-  </mat-card-content></mat-card
->
+  </mat-card-content>
+</mat-card>

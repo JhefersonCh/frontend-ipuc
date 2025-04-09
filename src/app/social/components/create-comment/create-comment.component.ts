@@ -1,5 +1,3 @@
-import { Comment } from '../../interfaces/comment.interface';
-
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -15,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CommentService } from '../../services/comment.service';
-import { v4 as uuid } from 'uuid';
+import { User } from '../../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-create-comment',
@@ -32,30 +30,29 @@ import { v4 as uuid } from 'uuid';
   styleUrl: './create-comment.component.scss',
 })
 export class CreateCommentComponent {
-  postId: InputSignal<string | undefined> = input<string>();
   @Output() commentCreated = new EventEmitter<void>();
+
+  postId: InputSignal<string | undefined> = input<string>();
+  userLogged: InputSignal<User | null | undefined> = input<User | null>();
 
   private readonly _fb: FormBuilder = inject(FormBuilder);
   private readonly _commentService: CommentService = inject(CommentService);
 
-  form!: FormGroup;
-
-  constructor() {
-    this.form = this._fb.group({
-      id: [uuid()],
-      content: [''],
-    });
-  }
+  form: FormGroup = this._fb.group({
+    content: [''],
+  });
 
   sendComment(): void {
-    const Comment = {
+    if (this.form.invalid || !this.userLogged()) return;
+
+    const comment = {
       content: this.form.value.content,
       postId: this.postId()!,
       parentId: null,
     };
 
-    this._commentService.sendCreateComment(Comment).subscribe({
-      next: (res) => {
+    this._commentService.sendCreateComment(comment).subscribe({
+      next: () => {
         this.form.reset();
         this.commentCreated.emit();
       },
@@ -63,5 +60,11 @@ export class CreateCommentComponent {
         console.error('Error al crear comentario:', err);
       },
     });
+  }
+
+  handleFocus(event: FocusEvent): void {
+    if (!this.userLogged()) {
+      (event.target as HTMLTextAreaElement).blur();
+    }
   }
 }

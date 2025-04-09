@@ -7,18 +7,14 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
+import { MatCard, MatCardContent, MatCardHeader } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { Comment, Reply } from '../../interfaces/comment.interface';
 import { User } from '../../../shared/interfaces/user.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-comment-card',
@@ -32,8 +28,8 @@ import { User } from '../../../shared/interfaces/user.interface';
     FormsModule,
     MatCard,
     MatCardHeader,
-    MatCardTitle,
     MatCardContent,
+    CommonModule,
   ],
   templateUrl: './comment-card.component.html',
   styleUrl: './comment-card.component.scss',

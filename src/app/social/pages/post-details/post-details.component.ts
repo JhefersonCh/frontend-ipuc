@@ -33,6 +33,8 @@ import { CreateCommentComponent } from '../../components/create-comment/create-c
   styleUrl: './post-details.component.scss',
 })
 export class PostDetailsComponent implements OnInit {
+  userLogged: InputSignal<User | null | undefined> = input<User | null>();
+
   private readonly _postService: PostService = inject(PostService);
   private readonly _commentService: CommentService = inject(CommentService);
   private readonly _route: ActivatedRoute = inject(ActivatedRoute);
