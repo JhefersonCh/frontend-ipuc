@@ -24,15 +24,15 @@
         [itemComment]="comment"
         (deleteEvent)="openDeleteComment($event)"
         [userLogged]="currentUser"
+        (commentCreated)="getComments(false)"
       ></app-comment-card>
       }
     </div>
-
     <!-- Este queda fuera del scroll y siempre visible -->
     <app-create-comment
       [postId]="postId"
       [userLogged]="currentUser"
-      (commentCreated)="getComments()"
+      (commentCreated)="getComments(false)"
     ></app-create-comment>
     } @else {
     <div class="flex items-center justify-center h-100">

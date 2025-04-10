@@ -37,5 +37,57 @@
 
   <mat-card-content>
     <p>{{ itemComment()?.content }}</p>
+
+    <a
+      role="button"
+      (click)="toggleReply()"
+      class="inline-flex items-center gap-1 text-gray-600 font-medium hover-underline-animation pr-2 cursor-pointer mx-1"
+    >
+      Responder
+    </a>
+
+    <a
+      role="button"
+      (click)="toggleReplies()"
+      class="inline-flex items-center gap-1 text-gray-600 font-medium hover-underline-animation pr-2 cursor-pointer mx-1"
+    >
+      {{ showReplies ? "Ocultar respuestas" : "Ver respuestas" }}
+    </a>
+
+    <!-- Lista de respuestas -->
+    <div *ngIf="showReplies" class="mt-4 pl-4 border-l border-gray-300">
+      <p *ngIf="replies.length === 0">No hay respuestas aún.</p>
+      <div *ngFor="let reply of replies" class="mb-2">
+        <strong>{{ reply.user.firstName }} {{ reply.user.lastName }}</strong
+        >: {{ reply.content }}
+      </div>
+    </div>
+
+    <!-- Input para responder -->
+    <div *ngIf="showReply" class="mt-2">
+      <form [formGroup]="form">
+        <mat-form-field class="w-full" appearance="outline">
+          <textarea
+            matInput
+            formControlName="content"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="5"
+            [readonly]="!userLogged()"
+            (focus)="handleFocus($event)"
+          ></textarea>
+          <mat-icon matPrefix>badge</mat-icon>
+          <mat-icon
+            matSuffix
+            class="cursor-pointer"
+            (click)="sendReply(itemComment()?.id || '')"
+            [class.opacity-50]="!userLogged()"
+            [style.pointer-events]="!userLogged() ? 'none' : 'auto'"
+          >
+            send
+          </mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
   </mat-card-content>
 </mat-card>

@@ -76,12 +76,14 @@ export class PostDetailsComponent implements OnInit {
       });
   }
 
-  getComments(): void {
-    this.commentsLoading = true;
+  getComments(isLoadeable: boolean = true): void {
+    if (isLoadeable) {
+      this.commentsLoading = true;
+    }
 
     this._commentService
       .getCommentsByPostId(this.postId)
-      .pipe(finalize(() => (this.commentsLoading = false)))
+      .pipe(finalize(() => ( this.commentsLoading = false)))
       .subscribe({
         next: (res) => {
           this.comments = res.data;
