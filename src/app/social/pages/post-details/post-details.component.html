@@ -22,8 +22,8 @@
       @for (comment of comments; track $index) {
       <app-comment-card
         [itemComment]="comment"
-        (deleteEvent)="openDeleteComment($event)"
         [userLogged]="currentUser"
+        (deleteEvent)="openDeleteComment($event)"
         (commentCreated)="getComments(false)"
       ></app-comment-card>
       }

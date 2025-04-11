@@ -15,7 +15,6 @@ import { User } from '../../../shared/interfaces/user.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
-import { CreateOrEditCommentComponent } from '../../components/create-or-edit-comment/create-or-edit-comment.component';
 import { CreateCommentComponent } from '../../components/create-comment/create-comment.component';
 
 @Component({
@@ -83,49 +82,13 @@ export class PostDetailsComponent implements OnInit {
 
     this._commentService
       .getCommentsByPostId(this.postId)
-      .pipe(finalize(() => ( this.commentsLoading = false)))
+      .pipe(finalize(() => (this.commentsLoading = false)))
       .subscribe({
         next: (res) => {
           this.comments = res.data;
         },
         error: (err) => {
           console.error('Error al obtener comentarios', err);
-        },
-      });
-  }
-
-  private createComment(
-    { id, ...comment }: Comment,
-    dialogRef: MatDialogRef<CreateOrEditCommentComponent, any>
-  ): void {
-    this._commentService
-      .createComment(comment)
-      .pipe(finalize(() => dialogRef.componentInstance.setLoading(false)))
-      .subscribe({
-        next: () => {
-          dialogRef.close();
-          this.getComments();
-        },
-        error: (err) => {
-          console.error(err);
-        },
-      });
-  }
-
-  private updateComment(
-    comment: Comment,
-    dialogRef: MatDialogRef<CreateOrEditCommentComponent, any>
-  ): void {
-    this._commentService
-      .updateComment(comment)
-      .pipe(finalize(() => dialogRef.componentInstance.setLoading(false)))
-      .subscribe({
-        next: () => {
-          dialogRef.close();
-          this.getComments();
-        },
-        error: (err) => {
-          console.error(err);
         },
       });
   }
@@ -146,21 +109,6 @@ export class PostDetailsComponent implements OnInit {
           console.error(err);
         },
       });
-  }
-
-  openCreateorEditCommentDialog(comment?: Comment): void {
-    const dialogRef: MatDialogRef<CreateOrEditCommentComponent, any> =
-      this.dialog.open(CreateOrEditCommentComponent, {
-        data: { comment },
-      });
-
-    dialogRef.componentInstance.saveEvent.subscribe((comment) => {
-      if (comment && !comment.id) {
-        this.createComment(comment, dialogRef);
-      } else if (comment && comment.id) {
-        this.updateComment(comment, dialogRef);
-      }
-    });
   }
 
   openDeleteComment(comment: Comment): void {

@@ -23,16 +23,9 @@ export class CommentService {
     );
   }
 
-  sendCreateComment(
+  createComment(
     comment: CreateComment
   ): Observable<ApiResponseCreateInterface> {
-    return this._httpClient.post<ApiResponseCreateInterface>(
-      `${environment.apiUrl}comment`,
-      comment
-    );
-  }
-
-  createComment(comment: Comment): Observable<ApiResponseCreateInterface> {
     return this._httpClient.post<ApiResponseCreateInterface>(
       `${environment.apiUrl}comment`,
       comment

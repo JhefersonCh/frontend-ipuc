@@ -20,7 +20,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item (click)="editEvent.emit(itemComment())">
+          <button mat-menu-item (click)="editComment()">
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
@@ -30,14 +30,40 @@
           </button>
         </mat-menu>
       </div>
-
       }
     </section>
   </mat-card-header>
 
   <mat-card-content>
-    <p>{{ itemComment()?.content }}</p>
+    <!-- Mostrar contenido o textarea para editar -->
+    <div *ngIf="!isEditing; else editMode">
+      <p>{{ itemComment()?.content }}</p>
+    </div>
 
+    <ng-template #editMode>
+      <mat-form-field class="w-full" appearance="outline">
+        <textarea
+          matInput
+          [(ngModel)]="editedContent"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+          cdkAutosizeMaxRows="5"
+        ></textarea>
+      </mat-form-field>
+
+      <div
+        class="flex w-full content-between items-center justify-end gap-5 my-2.5"
+      >
+        <button mat-fab extended="true" (click)="saveEdit()">
+          <span class="text-md">Guardar</span>
+        </button>
+        <button mat-fab extended="true" color="warn" (click)="cancelEdit()">
+          <span class="text-md">Salir</span>
+        </button>
+      </div>
+    </ng-template>
+
+    <!-- Botones de responder/ver respuestas -->
     <a
       role="button"
       (click)="toggleReply()"

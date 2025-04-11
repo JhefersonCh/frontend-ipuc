@@ -29,17 +29,17 @@ import { CommentService } from '../../services/comment.service';
   selector: 'app-comment-card',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
+    MatCardContent,
+    MatInputModule,
     MatMenuModule,
     MatIconModule,
+    MatCardHeader,
+    CommonModule,
     FormsModule,
     MatCard,
-    MatCardHeader,
-    MatCardContent,
-    CommonModule,
-    ReactiveFormsModule,
     MatIcon,
   ],
   templateUrl: './comment-card.component.html',
@@ -47,8 +47,8 @@ import { CommentService } from '../../services/comment.service';
 })
 export class CommentCardComponent implements OnChanges {
   @Output() deleteEvent = new EventEmitter<Comment>();
-  @Output() editEvent = new EventEmitter<Comment>();
   @Output() commentCreated = new EventEmitter<void>();
+  @Output() updateComment = new EventEmitter<{ id: string; content: string }>();
 
   private readonly _commentService: CommentService = inject(CommentService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
@@ -59,13 +59,21 @@ export class CommentCardComponent implements OnChanges {
 
   showReply = false;
   replyContent = '';
-
+  isEditing = false;
+  editedContent = '';
   showReplies = false;
   replies: Comment[] = [];
+  isExpanded = false;
+  shouldShowToggle = false;
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.['itemComment']) {
       this.replies = this.itemComment()?.replies || [];
     }
+  }
+
+  toggleContent() {
+    this.isExpanded = !this.isExpanded;
   }
 
   toggleReply() {
@@ -85,7 +93,7 @@ export class CommentCardComponent implements OnChanges {
       parentId: parentId,
     };
 
-    this._commentService.sendCreateComment(comment).subscribe({
+    this._commentService.createComment(comment).subscribe({
       next: () => {
         this.form.reset();
         this.commentCreated.emit();
@@ -106,5 +114,38 @@ export class CommentCardComponent implements OnChanges {
     if (!this.userLogged()) {
       (event.target as HTMLTextAreaElement).blur();
     }
+  }
+
+  editComment() {
+    this.isEditing = true;
+    this.editedContent = this.itemComment()?.content || '';
+  }
+
+  cancelEdit() {
+    this.isEditing = false;
+  }
+
+  saveEdit() {
+    const id = this.itemComment()?.id;
+    const content = this.editedContent;
+
+    if (!id || !content) return;
+
+    const commentToUpdate: Comment = {
+      id,
+      content,
+    } as Comment;
+
+    this._commentService.updateComment(commentToUpdate).subscribe({
+      next: () => {
+        if (this.itemComment()) {
+          this.itemComment()!.content = content;
+        }
+        this.isEditing = false;
+      },
+      error: (err) => {
+        console.error('Error al actualizar comentario:', err);
+      },
+    });
   }
 }

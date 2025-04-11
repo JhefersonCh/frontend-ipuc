@@ -51,7 +51,7 @@ export class CreateCommentComponent {
       parentId: null,
     };
 
-    this._commentService.sendCreateComment(comment).subscribe({
+    this._commentService.createComment(comment).subscribe({
       next: () => {
         this.form.reset();
         this.commentCreated.emit();

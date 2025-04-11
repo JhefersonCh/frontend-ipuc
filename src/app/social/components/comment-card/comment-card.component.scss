@@ -1,3 +1,15 @@
-.mat-menu-trigger.mat-menu-open {
-  background-color: #d1d5db !important; /* Color de hover */
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+/* comment-card.component.scss */
+.comment-content {
+  max-height: 6.6em; // Aproximadamente 3 párrafos (puedes ajustar)
+  overflow: hidden;
+  position: relative;
+  line-height: 1.1em; // ajusta según tu estilo
+}
+
+.comment-content.expanded {
+  max-height: none;
 }
