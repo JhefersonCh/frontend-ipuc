@@ -93,6 +93,20 @@
     <div *ngIf="showReply" class="mt-2">
       <form [formGroup]="form">
         <mat-form-field class="w-full" appearance="outline">
+          <mat-label
+            [ngClass]="{
+              'text-red-600 font-semibold': !userLogged()
+            }"
+          >
+            {{
+              userLogged()
+                ? "Responderás a este comentario como " +
+                  (userLogged()?.firstName || "") +
+                  " " +
+                  (userLogged()?.lastName || "")
+                : "Para responder a este comentario debes iniciar sesión"
+            }}
+          </mat-label>
           <textarea
             matInput
             formControlName="content"
