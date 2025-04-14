@@ -12,16 +12,23 @@ export const userRoutes: Routes = [
           ),
       },
       {
+        path: ':id/see-profile',
+        loadComponent: () =>
+          import('./components/see-profile/see-profile.component').then(
+            (m) => m.SeeProfileComponent
+          ),
+      },
+      {
         path: ':id/edit-user',
         loadComponent: () =>
-          import('./pages/edit-user/edit-user.component').then(
+          import('./components/edit-user/edit-user.component').then(
             (m) => m.EditUserComponent
           ),
       },
       {
         path: ':id/change-password',
         loadComponent: () =>
-          import('./pages/change-password/change-password.component').then(
+          import('./components/change-password/change-password.component').then(
             (m) => m.ChangePasswordComponent
           ),
       },
