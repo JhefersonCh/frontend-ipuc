@@ -1,11 +1,44 @@
-<article class="flex content-between h-full w-[90%]">
-  <section class="flex flex-col h-full w-[25%]">
-    <button (click)="setTab('see-profile')">Tu perfil</button>
-    <button (click)="setTab('edit')">Editas perfil</button>
-    <button (click)="setTab('password')">Cambiar contraseña</button>
+<article class="flex content-between h-[95%] w-full gap-5">
+  <section
+    class="flex flex-col h-full w-[25%] gap-2 p-5 border-[0.5px] border-gray-400 rounded-2xl"
+  >
+    <button
+      (click)="setTab('see-profile')"
+      [ngClass]="{
+        'bg-blue-500 text-white font-semibold': selectedTab === 'see-profile',
+        'hover:bg-blue-100': selectedTab !== 'see-profile'
+      }"
+      class="rounded px-4 py-2 text-left"
+    >
+      Tu perfil
+    </button>
+
+    <button
+      (click)="setTab('edit')"
+      [ngClass]="{
+        'bg-blue-500 text-white font-semibold': selectedTab === 'edit',
+        'hover:bg-blue-100': selectedTab !== 'edit'
+      }"
+      class="rounded px-4 py-2 text-left"
+    >
+      Editar perfil
+    </button>
+
+    <button
+      (click)="setTab('password')"
+      [ngClass]="{
+        'bg-blue-500 text-white font-semibold': selectedTab === 'password',
+        'hover:bg-blue-100': selectedTab !== 'password'
+      }"
+      class="rounded px-4 py-2 text-left"
+    >
+      Cambiar contraseña
+    </button>
   </section>
 
-  <section class="h-full w-[75%]">
+  <section
+    class="flex flex-col h-full w-[75%] p-5 border-[0.5px] border-gray-400 rounded-2xl justify-start"
+  >
     <app-see-profile *ngIf="selectedTab === 'see-profile'"></app-see-profile>
     <app-edit-user *ngIf="selectedTab === 'edit'"></app-edit-user>
     <app-change-password
