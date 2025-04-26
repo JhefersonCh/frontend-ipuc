@@ -29,6 +29,8 @@ import { SeeProfileComponent } from '../../components/see-profile/see-profile.co
 export class ProfileComponent {
   selectedTab: string = 'see-profile';
 
+  userId: string = '';
+
   setTab(tab: string) {
     this.selectedTab = tab;
   }

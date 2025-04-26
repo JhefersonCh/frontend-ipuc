@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { LocalStorageService } from '../../../shared/services/localStorage.service';
 import { UserDataService } from '../../services/user-data.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
 @Component({
   selector: 'app-edit-user',
   standalone: true,
+
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -27,9 +28,10 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
 })
-export class EditUserComponent {
-  isLoading: boolean = false;
+export class EditUserComponent implements OnInit {
+  @Output() userUpdated = new EventEmitter<void>();
 
+  isLoading: boolean = false;
   userId: string = '';
   user?: User;
   form: FormGroup;
@@ -38,8 +40,8 @@ export class EditUserComponent {
     inject(LocalStorageService);
   private readonly _userService: UserDataService = inject(UserDataService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
-  private readonly _router: Router = inject(Router);
   private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  private readonly _route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor() {
     // Inicializar form antes de que se use
@@ -56,7 +58,11 @@ export class EditUserComponent {
    */
   ngOnInit(): void {
     this.isLoading = true;
-    this.userId = this._activatedRoute.snapshot.params?.['id'];
+    const sessionData = this._localStorageService.getAllSessionData();
+
+    this.userId =
+      sessionData?.user?.id || this._route.snapshot.params['id'] || '';
+
     console.log('User ID obtenido:', this.userId); // Verifica si se obtiene el ID
     if (this.userId) {
       this.getUserData(this.userId);
@@ -108,7 +114,7 @@ export class EditUserComponent {
     if (this.form.invalid) return;
     this._userService.updateUserProfile(this.userId, userUpdate).subscribe({
       next: () => {
-        this._router.navigate(['/user/profile']);
+        this.userUpdated.emit();
       },
       error: (error) => {
         console.error('Error al actualizar el usuario', error);

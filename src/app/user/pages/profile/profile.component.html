@@ -40,7 +40,10 @@
     class="flex flex-col h-full w-[75%] p-5 border-[0.5px] border-gray-400 rounded-2xl justify-start"
   >
     <app-see-profile *ngIf="selectedTab === 'see-profile'"></app-see-profile>
-    <app-edit-user *ngIf="selectedTab === 'edit'"></app-edit-user>
+    <app-edit-user
+      *ngIf="selectedTab === 'edit'"
+      (userUpdated)="setTab('see-profile')"
+    ></app-edit-user>
     <app-change-password
       *ngIf="selectedTab === 'password'"
     ></app-change-password>
