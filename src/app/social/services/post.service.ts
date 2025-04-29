@@ -7,17 +7,22 @@ import {
 } from '../../shared/interfaces/api-response.interface';
 import { Post } from '../interfaces/forum.interface';
 import { environment } from '../../../environments/environment';
+import { HttpUtilitiesService } from '../../shared/utilities/http-utilities.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
   private readonly _httpClient: HttpClient = inject(HttpClient);
+  private readonly _httpUtilities: HttpUtilitiesService =
+    inject(HttpUtilitiesService);
   constructor() {}
 
-  getPosts(): Observable<ApiResponseInterface<Post[]>> {
+  getPosts(userId: string): Observable<ApiResponseInterface<Post[]>> {
+    const params = this._httpUtilities.httpParamsFromObject({ userId });
     return this._httpClient.get<ApiResponseInterface<Post[]>>(
-      `${environment.apiUrl}forum/posts`
+      `${environment.apiUrl}forum/posts`,
+      { params }
     );
   }
 

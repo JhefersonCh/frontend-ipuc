@@ -38,6 +38,7 @@
       <button
         mat-icon-button
         class="hover:!bg-red-100"
+        [disabled]="!userLogged()"
         (click)="item()?.hasLiked ? removeLike() : addLike()"
       >
         <div

@@ -27,15 +27,15 @@ export class ForumComponent implements OnInit {
   loading: boolean = true;
 
   ngOnInit(): void {
-    this.getPosts();
-    this._authService.currentUser$.subscribe((user) => {
+    this._authService.currentUser$.pipe().subscribe((user) => {
       this.currentUser = user;
+      this.getPosts();
     });
   }
 
   private getPosts(): void {
     this._postService
-      .getPosts()
+      .getPosts(this.currentUser?.id || '')
       .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (res) => {

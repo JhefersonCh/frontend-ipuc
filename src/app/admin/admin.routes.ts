@@ -5,11 +5,11 @@ export const adminRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/admin/panel',
+        redirectTo: '/admin/configuration',
         pathMatch: 'full',
       },
       {
-        path: 'panel',
+        path: 'configuration',
         loadComponent: () =>
           import('./pages/panel/panel.component').then((m) => m.PanelComponent),
       },

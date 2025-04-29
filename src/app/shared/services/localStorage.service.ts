@@ -19,7 +19,7 @@ export class LocalStorageService {
   }
 
   getUserData() {
-    const allData = localStorage.getItem('_sessionData');
+    const allData = localStorage.getItem('session');
     if (allData) {
       try {
         const parsedData = JSON.parse(allData);
