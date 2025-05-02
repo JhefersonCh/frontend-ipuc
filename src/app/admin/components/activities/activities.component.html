@@ -1,0 +1,56 @@
+<div class="py-3">
+  <p>
+    Aquí puedes agregar, editar y eliminar las actividades que se muestran en la
+    página de inicio.
+  </p>
+  <div class="flex justify-center md:justify-end">
+    <button
+      class="my-4"
+      mat-fab
+      extended="true"
+      color="primary"
+      matTooltip="Agregar actividad"
+      (click)="openCreateOrUpdateDialog()"
+    >
+      Agregar actividad
+    </button>
+  </div>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+  >
+    @for (activity of activities; track $index) {
+    <app-base-card title="{{ activity.title }}" [withMenu]="true">
+      <div class="h-full" content>
+        <div class="h-full flex flex-col pb-2">
+          <img [src]="activity?.imageUrl" alt="" />
+          <p class="mt-5">{{ activity?.description }}</p>
+        </div>
+      </div>
+      <ng-container menu>
+        @if(activity.id) {
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            matTooltip="Editar actividad"
+            (click)="openCreateOrUpdateDialog(activity)"
+          >
+            Editar actividad
+          </button>
+          <button
+            mat-menu-item
+            matTooltip="Eliminar actividad"
+            (click)="openDeleteDialog(activity.id)"
+          >
+            Eliminar actividad
+          </button>
+        </mat-menu>
+        }
+      </ng-container>
+    </app-base-card>
+    }
+  </div>
+</div>

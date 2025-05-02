@@ -3,6 +3,8 @@ import {
   Component,
   ContentChildren,
   HostListener,
+  input,
+  InputSignal,
   OnInit,
   QueryList,
 } from '@angular/core';
@@ -18,6 +20,8 @@ import { TabComponent } from '../tab/tab.component';
 export class HorizontalVerticalTabsComponent implements OnInit {
   @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
   isMobile: boolean = false;
+  isHorizontalPredetermined: InputSignal<boolean> = input<boolean>(false);
+
   constructor() {
     this.checkScreenSize();
   }

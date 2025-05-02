@@ -1,4 +1,8 @@
-<div [ngClass]="{ 'is-mobile': isMobile }">
+<div
+  [ngClass]="{
+    'is-not-mobile': isHorizontalPredetermined() ? !isMobile : false
+  }"
+>
   <mat-tab-group>
     @for (tab of tabs; track $index) {
     <mat-tab [label]="tab.label()">

@@ -1,0 +1,54 @@
+<app-base-dialog
+  [title]="data?.activity?.id ? 'Editar actividad' : 'Agregar actividad'"
+  description="Crea o edita una actividad, asegurate de llenar todos los campos."
+>
+  <div form>
+    <form [formGroup]="form" class="flex flex-col gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          maxlength="255"
+        ></textarea>
+        <mat-hint align="end"
+          >{{ form.get("description")?.value?.length || 0 }} / 255</mat-hint
+        >
+      </mat-form-field>
+      <app-upload-file
+        [folder]="'activities'"
+        [fileName]="form.get('title')?.value"
+        (onFileUploaded)="onFileUploaded($event)"
+        #uploadFileComponent
+        [fileUrl]="form.get('imageUrl')?.value"
+        [filePublicId]="form.get('publicId')?.value"
+      />
+    </form>
+  </div>
+  <ng-content actions>
+    <div class="grid grid-cols-2 gap-2 w-full md:w-1/2">
+      <button
+        mat-fab
+        extended="true"
+        color="warn"
+        (click)="close()"
+        class="col-span-1"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-fab
+        extended="true"
+        (click)="onSave()"
+        class="col-span-1"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </ng-content>
+</app-base-dialog>
