@@ -5,7 +5,7 @@
     <section class="flex content-start w-[50%] justify-start items-center">
       <div class="flex content-start justify-start text-start">
         <img
-          src="../../../../assets/images/LOGO-IPUC.svg"
+          [src]="logo() || '../../../../assets/images/LOGO-IPUC.svg'"
           alt="Logo IPUC"
           class="w-[75px] h-[50px] cursor-pointer hover:scale-110 transition-transform duration-300"
           routerLink="/"

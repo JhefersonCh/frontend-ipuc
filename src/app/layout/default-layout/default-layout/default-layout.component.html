@@ -1,5 +1,6 @@
 <app-nav-bar
   [currentUser]="currentUser"
+  [logo]="appInfo?.logoUrl || ''"
   (logout)="logout()"
   [loading]="loading"
 ></app-nav-bar>
@@ -8,4 +9,4 @@
     <router-outlet></router-outlet>
   </main>
 </div>
-<app-footer></app-footer>
+<app-footer [logo]="appInfo?.logoUrl || ''"></app-footer>

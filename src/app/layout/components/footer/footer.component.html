@@ -7,7 +7,7 @@
     >
       <div class="flex ontent-between w-[20%] justify-center text-center">
         <img
-          src="../../../../assets/images/LOGO-IPUC.svg"
+          [src]="logo() || '../../../../assets/images/LOGO-IPUC.svg'"
           alt="Logo IPUC"
           class="flex w-[50px] h-[35px] cursor-pointer"
           routerLink="/"

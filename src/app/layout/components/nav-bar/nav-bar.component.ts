@@ -29,6 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class NavBarComponent {
   currentUser: InputSignal<User | undefined> = input<User>();
   loading: InputSignal<boolean> = input.required<boolean>();
+  logo: InputSignal<string> = input.required<string>();
   menuOpen: boolean = false;
   profileMenuOpen: boolean = false;
   @Output() logout = new EventEmitter<void>();
