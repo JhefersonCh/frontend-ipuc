@@ -7,7 +7,11 @@
     [name]="data?.name || ''"
     [description]="data?.description || ''"
   />
-  <app-ipuc-info />
+  <app-ipuc-info
+    [additionalTitle]="data?.additionalTitle || ''"
+    [additionalDescription]="data?.additionalDescription || ''"
+    [enableRedirectToIpuc]="data?.enableRedirectToIpuc || false"
+  />
   <app-activities />
 </div>
 } @else {
