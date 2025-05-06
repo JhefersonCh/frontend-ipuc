@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Login } from '../../interfaces/login.interface';
 import { AuthService } from '../../services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -35,19 +36,24 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly _authService: AuthService = inject(AuthService);
   form: FormGroup;
   eyeOpen = faEye;
   eyeClose = faEyeSlash;
   showPassword: boolean = false;
 
-  constructor(private _fb: FormBuilder) {
+  constructor(private _fb: FormBuilder, private title: Title) {
     this.form = this._fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
+
+  ngOnInit(): void {
+    this.title.setTitle('Iniciar Sesión - IPUC sede cuarta, Mocoa, Putumayo');
+  }
+
   login(): void {
     if (this.form.invalid) return this.form.markAllAsTouched();
 

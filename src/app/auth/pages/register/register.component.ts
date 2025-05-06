@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,6 +16,7 @@ import { v4 as uuid } from 'uuid';
 import { CustomValidationsService } from '../../../shared/services/customValidations.service';
 import { RegisterUser } from '../../interfaces/register.interface';
 import { RegisterService } from '../../services/regsiter.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +33,7 @@ import { RegisterService } from '../../services/regsiter.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   private readonly _registerService: RegisterService = inject(RegisterService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
   private readonly _router: Router = inject(Router);
@@ -42,7 +43,7 @@ export class RegisterComponent {
   eyeClose = faEyeSlash;
   form: FormGroup;
 
-  constructor() {
+  constructor(private title: Title) {
     this.form = this._fb.group(
       {
         id: [uuid()],
@@ -67,6 +68,10 @@ export class RegisterComponent {
         ),
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.title.setTitle('Registro - IPUC sede cuarta, Mocoa, Putumayo');
   }
 
   register(): void {

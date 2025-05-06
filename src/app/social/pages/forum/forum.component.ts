@@ -10,6 +10,7 @@ import { finalize } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forum',
@@ -26,7 +27,10 @@ export class ForumComponent implements OnInit {
   currentUser: User | null = null;
   loading: boolean = true;
 
+  constructor(private title: Title) {}
+
   ngOnInit(): void {
+    this.title.setTitle('Foro - IPUC sede cuarta, Mocoa, Putumayo');
     this._authService.currentUser$.pipe().subscribe((user) => {
       this.currentUser = user;
       this.getPosts();

@@ -9,4 +9,7 @@
     <router-outlet></router-outlet>
   </main>
 </div>
-<app-footer [logo]="appInfo?.logoUrl || ''"></app-footer>
+<app-footer
+  [logo]="appInfo?.logoUrl || ''"
+  [appName]="appInfo?.appName || ''"
+></app-footer>

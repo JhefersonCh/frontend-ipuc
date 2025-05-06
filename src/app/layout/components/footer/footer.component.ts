@@ -8,5 +8,6 @@ import { Component, input, InputSignal } from '@angular/core';
 })
 export class FooterComponent {
   logo: InputSignal<string> = input<string>('');
+  appName: InputSignal<string> = input<string>('');
   currentYear: number = new Date().getFullYear();
 }

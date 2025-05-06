@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-recovery-password',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
   templateUrl: './recovery-password.component.html',
   styleUrl: './recovery-password.component.scss',
 })
-export class RecoveryPasswordComponent {}
+export class RecoveryPasswordComponent implements OnInit {
+  constructor(private title: Title) {}
+
+  ngOnInit(): void {
+    this.title.setTitle(
+      'Recuperar contraseña - IPUC sede cuarta, Mocoa, Putumayo'
+    );
+  }
+}

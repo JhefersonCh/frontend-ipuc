@@ -6,6 +6,7 @@ import { PanelService } from '../../../admin/services/panel.service';
 import { HomeForm } from '../../../admin/interfaces/home.interface';
 import { finalize } from 'rxjs';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
 
   data?: HomeForm;
 
+  constructor(private title: Title) {}
+
   ngOnInit(): void {
     this.loading = true;
     this._panelService
@@ -33,5 +36,6 @@ export class HomeComponent implements OnInit {
       .subscribe((res) => {
         this.data = res.data;
       });
+    this.title.setTitle('Inicio - IPUC sede cuarta, Mocoa, Putumayo');
   }
 }

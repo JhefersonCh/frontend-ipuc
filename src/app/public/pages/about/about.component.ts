@@ -8,6 +8,7 @@ import { AboutForm } from '../../../admin/interfaces/about.interface';
 import { HomeForm } from '../../../admin/interfaces/home.interface';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { finalize } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about',
@@ -28,8 +29,11 @@ export class AboutComponent implements OnInit {
   homeData?: HomeForm;
   loading: boolean = true;
 
+  constructor(private title: Title) {}
+
   ngOnInit(): void {
     this.initData();
+    this.title.setTitle('Sobre nosotros - IPUC sede cuarta, Mocoa, Putumayo');
   }
 
   initData() {

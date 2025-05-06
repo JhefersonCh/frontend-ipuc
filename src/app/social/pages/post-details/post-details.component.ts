@@ -16,6 +16,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
 import { CreateCommentComponent } from '../../components/create-comment/create-comment.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-post-details',
@@ -47,7 +48,12 @@ export class PostDetailsComponent implements OnInit {
   loading: boolean = true;
   commentsLoading: boolean = false;
 
+  constructor(private title: Title) {}
+
   ngOnInit(): void {
+    this.title.setTitle(
+      'Detalles del post - IPUC sede cuarta, Mocoa, Putumayo'
+    );
     this.postId = this._route.snapshot.paramMap.get('id') || '';
     this.getComments();
     this.getPost();

@@ -6,23 +6,21 @@
       class="hidden md:flex content-between w-[30%] justify-start items-center"
     >
       <div class="flex ontent-between w-[20%] justify-center text-center">
-        <img
-          [src]="logo() || '../../../../assets/images/LOGO-IPUC.svg'"
-          alt="Logo IPUC"
-          class="flex w-[50px] h-[35px] cursor-pointer"
-          routerLink="/"
-        />
+        <a routerLink="/">
+          <img
+            [src]="logo() || '../../../../assets/images/LOGO-IPUC.svg'"
+            alt="Logo IPUC"
+            class="flex w-[50px] h-[35px] cursor-pointer"
+          />
+        </a>
       </div>
     </section>
     <section
       class="flex w-[70%] justify-center items-center text-sm font-medium text-gray-100"
     >
       <div class="flex w-full content-between justify-end text-center">
-        <span class="hidden md:flex"
-          >© {{ currentYear }} Iglesia Pentecostal Unida de Colombia - Sede
-          Cuarta.</span
-        >
-        <span class="flex md:hidden">© {{ currentYear }} IPUC - 4ta.</span>
+        <span class="hidden md:flex">© {{ currentYear }} {{ appName() }}</span>
+        <span class="flex md:hidden">© {{ currentYear }} IPUC sede 4ta.</span>
       </div>
     </section>
   </article>
