@@ -13,6 +13,8 @@ import {
 } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/yes-no-dialoh.component';
+import { finalize } from 'rxjs';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-activities',
@@ -23,7 +25,7 @@ import { YesNoDialohComponent } from '../../../shared/components/yes-no-dialoh/y
     BaseCardComponent,
     MatDialogModule,
     MatMenuModule,
-    YesNoDialohComponent,
+    LoaderComponent,
   ],
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.scss',
@@ -32,15 +34,20 @@ export class ActivitiesComponent implements OnInit {
   private readonly _panelService: PanelService = inject(PanelService);
   private readonly _dialog: MatDialog = inject(MatDialog);
   activities: Activity[] = [];
+  loading: boolean = false;
 
   ngOnInit(): void {
     this._getActivities();
   }
 
   private _getActivities() {
-    this._panelService.getActivities().subscribe((activities) => {
-      this.activities = activities.data;
-    });
+    this.loading = true;
+    this._panelService
+      .getActivities()
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((activities) => {
+        this.activities = activities.data;
+      });
   }
 
   private _addActivity(

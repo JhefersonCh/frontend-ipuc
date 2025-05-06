@@ -23,16 +23,18 @@
           >
         </div>
         <app-map
-          [coordinates]="[1.143998976048735, -76.64301335897179]"
+          [coordinates]="transformCoordinates()"
           [message]="'Ipuc sede cuarta Mocoa'"
         />
+        @if(enableRedirectToGoogleMaps()){
         <a
-          href="https://www.google.com/maps/place/1%C2%B008'38.4%22N+76%C2%B038'34.9%22W/@1.1440044,-76.6455883,1134m/data=!3m2!1e3!4b1!4m4!3m3!8m2!3d1.143999!4d-76.6430134?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D"
+          [href]="ubicationUrl()"
           target="_blank"
           class="mt-4 text-blue-500 font-semibold underline hover:text-blue-700"
         >
           Ver en Google Maps
         </a>
+        }
       </div>
     </section>
     <!-- <div

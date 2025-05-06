@@ -1,0 +1,71 @@
+@if(!isLoading){
+<div class="py-6">
+  <form [formGroup]="form" class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Misión</mat-label>
+        <textarea
+          matInput
+          formControlName="mission"
+          [cdkTextareaAutosize]="true"
+          [cdkAutosizeMinRows]="2"
+          [cdkAutosizeMaxRows]="5"
+        ></textarea>
+        @if(form.get('mission')?.hasError('required')){
+        <mat-error>Misión requerida</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Visión</mat-label>
+        <textarea
+          matInput
+          formControlName="vision"
+          [cdkTextareaAutosize]="true"
+          [cdkAutosizeMinRows]="2"
+          [cdkAutosizeMaxRows]="5"
+        ></textarea>
+        @if(form.get('vision')?.hasError('required')){
+        <mat-error>Visión requerida</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Ubicación (Link de google maps)</mat-label>
+        <input matInput formControlName="ubicationUrl" />
+        @if(form.get('ubicationUrl')?.hasError('required')){
+        <mat-error>Ubicación requerida</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Coordenadas</mat-label>
+        <input matInput formControlName="ubicationCoordinates" />
+        @if(form.get('ubicationCoordinates')?.hasError('required')){
+        <mat-error>Coordenadas requeridas</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="flex items-center">
+      <mat-slide-toggle formControlName="enableRedirectToGoogleMaps">
+        <mat-label>Activar link al sitio oficial de la IPUC</mat-label>
+      </mat-slide-toggle>
+    </div>
+
+    <div class="flex justify-end">
+      <button
+        mat-fab
+        extended="true"
+        color="primary"
+        (click)="onSave()"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
+} @else{
+<div class="flex justify-center items-center h-[calc(100vh-40rem)]">
+  <app-loader />
+</div>
+}

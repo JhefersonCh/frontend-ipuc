@@ -1,0 +1,36 @@
+@if(!isLoading){
+<div class="py-6">
+  <form [formGroup]="form" class="flex flex-col gap-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre de la Aplicación</mat-label>
+      <input matInput formControlName="appName" />
+      @if(form.get('appName')?.hasError('required')){
+      <mat-error>Nombre de la Aplicación requerido</mat-error>
+      }
+    </mat-form-field>
+    <app-upload-file
+      [folder]="'app'"
+      [fileName]="'logo'"
+      (onFileUploaded)="onFileUploaded($event)"
+      #uploadFileComponent
+      [fileUrl]="form.get('logoUrl')?.value"
+      [filePublicId]="form.get('logoPublicId')?.value"
+    />
+    <div class="flex justify-end mt-6">
+      <button
+        mat-fab
+        extended="true"
+        color="primary"
+        (click)="onSave()"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
+} @else{
+<div class="flex justify-center items-center h-[calc(100vh-40rem)]">
+  <app-loader />
+</div>
+}

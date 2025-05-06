@@ -1,9 +1,5 @@
-<div
-  [ngClass]="{
-    'is-not-mobile': isHorizontalPredetermined() ? !isMobile : false
-  }"
->
-  <mat-tab-group>
+<div [id]="instanceId">
+  <mat-tab-group #tabGroup (selectedTabChange)="onTabChange($event)">
     @for (tab of tabs; track $index) {
     <mat-tab [label]="tab.label()">
       <ng-container [ngTemplateOutlet]="tab.template"></ng-container>

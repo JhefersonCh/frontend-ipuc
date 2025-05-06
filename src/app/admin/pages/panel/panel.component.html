@@ -1,20 +1,29 @@
 <div class="py-5 px-5 md:px-0">
-  <header class="mb-4">
-    <h1 class="text-2xl font-bold brand-text-headline-color font-noto-serif">
+  <section class="mb-6">
+    <h1
+      class="text-5xl font-bold brand-text-headline-color font-noto-serif pb-2"
+    >
       Panel de configuración
     </h1>
     <p class="text-gray-600 font-medium">
       En esta sección se pueden configurar los parámetros del sistema, tantos
       las imagenes, las actividades, eventos y general.
     </p>
-  </header>
+  </section>
   <article>
-    <app-horizontal-vertical-tabs [isHorizontalPredetermined]="true">
+    <app-horizontal-vertical-tabs
+      [isHorizontalPredetermined]="true"
+      [enableQueryParams]="true"
+      [queryParamId]="'panel'"
+      [defaultTabIndex]="0"
+    >
       <tab label="Actividades">
         <app-activities />
       </tab>
       <tab label="Eventos">Eventos</tab>
-      <tab label="General">General</tab>
+      <tab label="General">
+        <app-general />
+      </tab>
     </app-horizontal-vertical-tabs>
   </article>
 </div>

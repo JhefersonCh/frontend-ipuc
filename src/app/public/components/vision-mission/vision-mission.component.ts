@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -8,4 +8,7 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './vision-mission.component.html',
   styleUrl: './vision-mission.component.scss',
 })
-export class VisionMissionComponent {}
+export class VisionMissionComponent {
+  mission: InputSignal<string> = input<string>('');
+  vision: InputSignal<string> = input<string>('');
+}

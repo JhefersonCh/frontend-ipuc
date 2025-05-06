@@ -1,0 +1,31 @@
+<div class="py-3">
+  <section class="mb-6">
+    <h1 class="text-3xl font-bold brand-text-headline-color font-noto-serif">
+      Configuración general
+    </h1>
+    <p>
+      Aquí puedes agregar, editar y eliminar la información general del sistema
+      (Fotos, descripciones y otra información).
+    </p>
+  </section>
+
+  <app-horizontal-vertical-tabs
+    [isHorizontalPredetermined]="false"
+    [enableQueryParams]="true"
+    [queryParamId]="'general'"
+    [defaultTabIndex]="0"
+  >
+    <tab label="Inicio">
+      <app-home-form #homeForm (saveFormEvent)="onSaveHomeForm($event)" />
+    </tab>
+    <tab label="Sobre Nosotros">
+      <app-about-form #aboutForm (saveFormEvent)="onSaveAboutForm($event)" />
+    </tab>
+    <tab label="General">
+      <app-general-form
+        #generalForm
+        (saveFormEvent)="onSaveGeneralForm($event)"
+      />
+    </tab>
+  </app-horizontal-vertical-tabs>
+</div>

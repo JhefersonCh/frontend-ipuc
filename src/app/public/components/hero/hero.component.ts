@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -10,4 +10,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
 })
-export class HeroComponent {}
+export class HeroComponent {
+  heroUrl: InputSignal<string> = input<string>('');
+  heroPublicId: InputSignal<string> = input<string>('');
+  title: InputSignal<string> = input<string>('');
+  name: InputSignal<string> = input<string>('');
+  description: InputSignal<string> = input<string>('');
+}

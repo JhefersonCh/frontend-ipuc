@@ -1,5 +1,17 @@
+@if(!loading){
 <div class="my-24">
-  <app-hero />
+  <app-hero
+    [heroUrl]="data?.heroUrl || ''"
+    [heroPublicId]="data?.heroPublicId || ''"
+    [title]="data?.title || ''"
+    [name]="data?.name || ''"
+    [description]="data?.description || ''"
+  />
   <app-ipuc-info />
   <app-activities />
 </div>
+} @else {
+<div class="flex items-center justify-center h-screen">
+  <app-loader />
+</div>
+}

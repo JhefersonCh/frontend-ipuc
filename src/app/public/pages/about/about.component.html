@@ -1,4 +1,25 @@
+@if(!loading){
 <div class="my-24">
-  <app-ipuc-info></app-ipuc-info> <app-vision-mission />
-  <app-values /><app-ubication-hours />
+  <app-ipuc-info
+    [additionalTitle]="homeData?.additionalTitle || ''"
+    [additionalDescription]="homeData?.additionalDescription || ''"
+    [enableRedirectToIpuc]="homeData?.enableRedirectToIpuc || false"
+  />
+  <app-vision-mission
+    [mission]="aboutData?.mission || ''"
+    [vision]="aboutData?.vision || ''"
+  />
+  <app-values />
+  <app-ubication-hours
+    [ubicationUrl]="aboutData?.ubicationUrl || ''"
+    [ubicationCoordinates]="aboutData?.ubicationCoordinates || ''"
+    [enableRedirectToGoogleMaps]="
+      aboutData?.enableRedirectToGoogleMaps || false
+    "
+  />
 </div>
+} @else{
+<div class="flex items-center justify-center h-screen">
+  <app-loader />
+</div>
+}

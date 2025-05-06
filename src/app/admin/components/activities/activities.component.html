@@ -1,4 +1,7 @@
 <div class="py-3">
+  <h1 class="text-2xl font-bold brand-text-headline-color font-noto-serif">
+    Gestión de Actividades
+  </h1>
   <p>
     Aquí puedes agregar, editar y eliminar las actividades que se muestran en la
     página de inicio.
@@ -16,6 +19,7 @@
     </button>
   </div>
 
+  @if(!loading){
   <div
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
   >
@@ -53,4 +57,9 @@
     </app-base-card>
     }
   </div>
+  } @if(loading){
+  <div class="flex justify-center items-center h-[calc(100vh-25rem)]">
+    <app-loader />
+  </div>
+  }
 </div>

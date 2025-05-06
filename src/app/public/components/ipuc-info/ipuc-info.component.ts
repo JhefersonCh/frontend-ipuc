@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -8,4 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './ipuc-info.component.html',
   styleUrl: './ipuc-info.component.scss',
 })
-export class IpucInfoComponent {}
+export class IpucInfoComponent {
+  additionalTitle: InputSignal<string> = input<string>('');
+  additionalDescription: InputSignal<string> = input<string>('');
+  enableRedirectToIpuc: InputSignal<boolean> = input<boolean>(false);
+}

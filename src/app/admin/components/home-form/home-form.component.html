@@ -1,0 +1,75 @@
+@if(!isLoading){
+<div class="py-6">
+  <form [formGroup]="form" class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Título principal</mat-label>
+        <input matInput formControlName="title" />
+        @if(form.get('title')?.hasError('required')){
+        <mat-error>Título principal requerido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre de la sede</mat-label>
+        <input matInput formControlName="name" />
+        @if(form.get('name')?.hasError('required')){
+        <mat-error>Nombre de la sede requerido</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      @if(form.get('description')?.hasError('required')){
+      <mat-error>Descripción requerida</mat-error>
+      }
+    </mat-form-field>
+    <div class="mb-5">
+      <app-upload-file
+        [folder]="'home'"
+        [fileName]="'hero'"
+        (onFileUploaded)="onFileUploaded($event)"
+        #uploadFileComponent
+        [fileUrl]="form.get('heroUrl')?.value"
+        [filePublicId]="form.get('heroPublicId')?.value"
+      />
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Título de la información adicional</mat-label>
+        <input matInput formControlName="additionalTitle" />
+        @if(form.get('additionalTitle')?.hasError('required')){
+        <mat-error>Título de la información requerido</mat-error>
+        }
+      </mat-form-field>
+      <div class="flex items-center">
+        <mat-slide-toggle formControlName="enableRedirectToIpuc">
+          <mat-label>Activar link al sitio oficial de la IPUC</mat-label>
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción de la información adicional</mat-label>
+      <textarea matInput formControlName="additionalDescription"></textarea>
+      @if(form.get('additionalDescription')?.hasError('required')){
+      <mat-error>Descripción de la información requerida</mat-error>
+      }
+    </mat-form-field>
+    <div class="flex justify-end">
+      <button
+        mat-fab
+        extended="true"
+        color="primary"
+        (click)="onSave()"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>
+} @else{
+<div class="flex justify-center items-center h-[calc(100vh-25rem)]">
+  <app-loader />
+</div>
+}
