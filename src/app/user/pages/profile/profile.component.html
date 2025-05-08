@@ -1,51 +1,12 @@
-<article class="flex content-between h-[95%] w-full gap-5">
-  <section
-    class="flex flex-col h-full w-[25%] gap-2 p-5 border-[0.5px] border-gray-400 rounded-2xl"
-  >
-    <button
-      (click)="setTab('see-profile')"
-      [ngClass]="{
-        'bg-blue-500 text-white font-semibold': selectedTab === 'see-profile',
-        'hover:bg-blue-100': selectedTab !== 'see-profile'
-      }"
-      class="rounded px-4 py-2 text-left"
-    >
-      Tu perfil
-    </button>
-
-    <button
-      (click)="setTab('edit')"
-      [ngClass]="{
-        'bg-blue-500 text-white font-semibold': selectedTab === 'edit',
-        'hover:bg-blue-100': selectedTab !== 'edit'
-      }"
-      class="rounded px-4 py-2 text-left"
-    >
-      Editar perfil
-    </button>
-
-    <button
-      (click)="setTab('password')"
-      [ngClass]="{
-        'bg-blue-500 text-white font-semibold': selectedTab === 'password',
-        'hover:bg-blue-100': selectedTab !== 'password'
-      }"
-      class="rounded px-4 py-2 text-left"
-    >
-      Cambiar contraseña
-    </button>
-  </section>
-
-  <section
-    class="flex flex-col h-full w-[75%] p-5 border-[0.5px] border-gray-400 rounded-2xl justify-start"
-  >
-    <app-see-profile *ngIf="selectedTab === 'see-profile'"></app-see-profile>
-    <app-edit-user
-      *ngIf="selectedTab === 'edit'"
-      (userUpdated)="setTab('see-profile')"
-    ></app-edit-user>
-    <app-change-password
-      *ngIf="selectedTab === 'password'"
-    ></app-change-password>
-  </section>
-</article>
+<app-horizontal-vertical-tabs
+  [isHorizontalPredetermined]="true"
+  [enableQueryParams]="true"
+  [queryParamId]="'panel'"
+  [defaultTabIndex]="0"
+>
+  <tab label="Tu perfil"><app-see-profile></app-see-profile> </tab>
+  <tab label="Editar perfil"><app-edit-user></app-edit-user> </tab>
+  <tab label="Cambiar contraseña"
+    ><app-change-password></app-change-password>
+  </tab>
+</app-horizontal-vertical-tabs>

@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { finalize } from 'rxjs';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
+import { routes } from '../../../app.routes';
 
 @Component({
   selector: 'app-edit-user',
@@ -23,7 +24,6 @@ import { BackButtonComponent } from '../../../shared/components/back-button/back
     MatInputModule,
     MatButtonModule,
     LoaderComponent,
-    BackButtonComponent,
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
@@ -40,8 +40,8 @@ export class EditUserComponent implements OnInit {
     inject(LocalStorageService);
   private readonly _userService: UserDataService = inject(UserDataService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
-  private readonly _activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   private readonly _route: ActivatedRoute = inject(ActivatedRoute);
+  private readonly _router: Router = inject(Router);
 
   constructor() {
     // Inicializar form antes de que se use
@@ -114,7 +114,10 @@ export class EditUserComponent implements OnInit {
     if (this.form.invalid) return;
     this._userService.updateUserProfile(this.userId, userUpdate).subscribe({
       next: () => {
-        this.userUpdated.emit();
+        this._router.navigate([], {
+          queryParams: { 'tab-panel': 0 },
+          queryParamsHandling: 'merge',
+        });
       },
       error: (error) => {
         console.error('Error al actualizar el usuario', error);

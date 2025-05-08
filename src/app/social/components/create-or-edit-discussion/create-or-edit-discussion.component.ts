@@ -30,7 +30,7 @@ export class CreateOrEditDiscussionComponent {
   readonly dialogRef: MatDialogRef<any, any> = inject(
     MatDialogRef<CreateOrEditDiscussionComponent>
   );
-  readonly data = inject<{ id: number; title: string; description: string }>(
+  readonly data? = inject<{ id: number; title: string; description: string }>(
     MAT_DIALOG_DATA
   );
   private readonly _fb: FormBuilder = inject(FormBuilder);

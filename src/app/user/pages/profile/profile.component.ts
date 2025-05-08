@@ -8,7 +8,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { EditUserComponent } from '../../components/edit-user/edit-user.component';
 import { ChangePasswordComponent } from '../../components/change-password/change-password.component';
 import { SeeProfileComponent } from '../../components/see-profile/see-profile.component';
-import { Title } from '@angular/platform-browser';
+import { HorizontalVerticalTabsComponent } from '../../../shared/components/horizontal-vertical-tabs/horizontal-vertical-tabs.component';
+import { TabComponent } from '../../../shared/components/tab/tab.component';
 
 @Component({
   selector: 'app-profile',
@@ -23,22 +24,10 @@ import { Title } from '@angular/platform-browser';
     EditUserComponent,
     ChangePasswordComponent,
     SeeProfileComponent,
+    HorizontalVerticalTabsComponent,
+    TabComponent,
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class ProfileComponent implements OnInit {
-  selectedTab: string = 'see-profile';
-
-  userId: string = '';
-
-  constructor(private title: Title) {}
-
-  setTab(tab: string) {
-    this.selectedTab = tab;
-  }
-
-  ngOnInit(): void {
-    this.title.setTitle('Perfil - IPUC sede cuarta, Mocoa, Putumayo');
-  }
-}
+export class ProfileComponent {}

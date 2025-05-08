@@ -31,7 +31,7 @@ export class CreateOrUpdateActivityComponent {
   private readonly _dialogRef: MatDialogRef<CreateOrUpdateActivityComponent> =
     inject(MatDialogRef<CreateOrUpdateActivityComponent>);
   private readonly _fb: FormBuilder = inject(FormBuilder);
-  readonly data = inject<{ activity: Activity }>(MAT_DIALOG_DATA);
+  readonly data? = inject<{ activity: Activity }>(MAT_DIALOG_DATA);
   form!: FormGroup;
   saveForm = new EventEmitter<Activity>();
 

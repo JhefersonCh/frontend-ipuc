@@ -1,82 +1,80 @@
-@if (!isLoading) {
-<article
-  class="flex flex-col md:flex-row w-full md:w-full mx-auto bg-white gap-4"
->
-  <section
-    class="flex flex-col items-center w-[90%] md:w-[50%] p-0 md:p-5 mx-auto"
+<article class="brand-content-center">
+  @if (!isLoading) {
+  <article
+    class="flex flex-col md:flex-row w-[90%] md:w-full h-full gap-5 p-5 md:p-10"
   >
-    <div class="flex content-between w-full justify-start mb-5">
-      <!-- Avatar con iniciales -->
-      <div
-        class="w-20 h-20 rounded-full bg-gradient-to-r from-blue-300 to-[#024d99] text-gray-300 flex items-center justify-center text-2xl font-bold mr-5 border-[0.5px] border-black"
+    <section class="flex flex-col items-center w-full md:w-[50%]">
+      <div class="flex content-between w-full justify-start mb-5">
+        <!-- Avatar con iniciales -->
+        <div
+          class="w-20 h-20 rounded-full bg-gradient-to-r from-blue-300 to-[#024d99] text-gray-300 flex items-center justify-center text-2xl font-bold mr-5 border-[0.5px] border-black"
+        >
+          {{ user?.firstName?.charAt(0) }} {{ user?.lastName?.charAt(0) }}
+        </div>
+
+        <div class="flex flex-col justify-center font-medium text-gray-600">
+          <span class="text-2xl font-semibold m-0">
+            {{ user?.firstName }} {{ user?.lastName }}</span
+          >
+          <span class="text-lg mb-1">{{ user?.username }}</span>
+        </div>
+        <div class="flex ml-auto items-start"></div>
+      </div>
+
+      <form
+        [formGroup]="form"
+        class="flex flex-col w-full gap-5 text-gray-600 font-medium"
       >
-        {{ user?.firstName?.charAt(0) }} {{ user?.lastName?.charAt(0) }}
-      </div>
+        <!-- Correo electrónico -->
+        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
+          <label for="email" class="text-xs text-gray-600 block mb-1"
+            >Correo electrónico</label
+          >
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            readonly
+            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <div class="flex flex-col justify-center font-medium text-gray-600">
-        <span class="text-2xl font-semibold m-0">
-          {{ user?.firstName }} {{ user?.lastName }}</span
-        >
-        <span class="text-lg mb-1">{{ user?.username }}</span>
-      </div>
-      <div class="flex ml-auto items-start"></div>
-    </div>
+        <!-- Fecha de creación -->
+        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
+          <label for="createdAt" class="text-xs text-gray-600 block mb-1"
+            >Creado el</label
+          >
+          <input
+            type="text"
+            id="createdAt"
+            formControlName="createdAt"
+            readonly
+            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-    <form
-      [formGroup]="form"
-      class="flex flex-col w-full gap-5 text-gray-600 font-medium"
-    >
-      <!-- Correo electrónico -->
-      <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-        <label for="email" class="text-xs text-gray-600 block mb-1"
-          >Correo electrónico</label
-        >
-        <input
-          type="text"
-          id="email"
-          formControlName="email"
-          readonly
-          class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Fecha de creación -->
-      <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-        <label for="createdAt" class="text-xs text-gray-600 block mb-1"
-          >Creado el</label
-        >
-        <input
-          type="text"
-          id="createdAt"
-          formControlName="createdAt"
-          readonly
-          class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-
-      <!-- Fecha de actualización -->
-      <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-        <label for="updatedAt" class="text-xs text-gray-600 block mb-1"
-          >Actualizado el</label
-        >
-        <input
-          type="text"
-          id="updatedAt"
-          formControlName="updatedAt"
-          readonly
-          class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-    </form>
-  </section>
-  <section
-    class="flex flex-col items-center w-[90%] md:w-[50%] p-0 md:p-5 mx-auto"
-  >
-    Mas informationnn
-  </section>
+        <!-- Fecha de actualización -->
+        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
+          <label for="updatedAt" class="text-xs text-gray-600 block mb-1"
+            >Actualizado el</label
+          >
+          <input
+            type="text"
+            id="updatedAt"
+            formControlName="updatedAt"
+            readonly
+            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </form>
+    </section>
+    <section class="flex flex-col items-center w-full md:w-[50%]">
+      Mas informationnn
+    </section>
+  </article>
+  } @else {
+  <div class="py-[15px] w-full h-full flex justify-center items-center">
+    <app-loader></app-loader>
+  </div>
+  }
 </article>
-} @else {
-<div class="py-[15px] w-full h-full flex justify-center items-center">
-  <app-loader></app-loader>
-</div>
-}

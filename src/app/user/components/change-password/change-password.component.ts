@@ -6,22 +6,24 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs/operators';
 import { CustomValidationsService } from '../../../shared/services/customValidations.service';
-import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
   imports: [
-    MatIcon,
+    MatIconModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
-    BackButtonComponent,
+    CommonModule,
+    MatFormFieldModule,
   ],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss',
