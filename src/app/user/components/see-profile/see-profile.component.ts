@@ -5,30 +5,29 @@ import { LocalStorageService } from '../../../shared/services/localStorage.servi
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
-import { MatMenu } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { StatisticsInterface } from '../../interface/profile.interface';
 
 @Component({
   selector: 'app-see-profile',
   standalone: true,
-  imports: [LoaderComponent, ReactiveFormsModule],
+  imports: [LoaderComponent, ReactiveFormsModule, MatIconModule],
   templateUrl: './see-profile.component.html',
   styleUrl: './see-profile.component.scss',
 })
 export class SeeProfileComponent implements OnInit {
-  isLoading: boolean = false;
-  userId: string = '';
-  user?: User;
-  form: FormGroup;
-
   private readonly _localStorageService: LocalStorageService =
     inject(LocalStorageService);
   private readonly _userService: UserDataService = inject(UserDataService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
 
+  isLoading: boolean = false;
+  userId: string = '';
+  user?: User;
+  form: FormGroup;
+  statistics?: StatisticsInterface;
+
   constructor() {
-    // Inicializar form antes de que se use
     this.form = this._fb.group({
       email: [''],
       createdAt: [''],
@@ -39,6 +38,7 @@ export class SeeProfileComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.loadUserProfile();
+    this.getStatistics();
   }
 
   private loadUserProfile(): void {
@@ -68,5 +68,19 @@ export class SeeProfileComponent implements OnInit {
           console.error('Error al cargar el usuario', error);
         },
       });
+  }
+
+  /**
+   * @param _getStatistics - Carga las estadísticas del usuario.
+   */
+  private getStatistics(): void {
+    this._userService.getStatistics().subscribe({
+      next: (response) => {
+        this.statistics = response.data;
+      },
+      error: (error) => {
+        console.error('Error al obtener las estadísticas', error);
+      },
+    });
   }
 }

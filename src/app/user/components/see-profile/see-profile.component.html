@@ -1,75 +1,129 @@
 <article class="brand-content-center">
   @if (!isLoading) {
-  <article
-    class="flex flex-col md:flex-row w-[90%] md:w-full h-full gap-5 p-5 md:p-10"
-  >
-    <section class="flex flex-col items-center w-full md:w-[50%]">
-      <div class="flex content-between w-full justify-start mb-5">
-        <!-- Avatar con iniciales -->
+  <article class="flex flex-col w-[90%] md:w-full h-full gap-5 p-5 md:p-10">
+    <section class="flex flex-col items-center w-full">
+      <div class="w-full overflow-hidden shadow-md bg-white mb-[20px]">
+        <!-- Header con fondo degradado -->
         <div
-          class="w-20 h-20 rounded-full bg-gradient-to-r from-blue-300 to-[#024d99] text-gray-300 flex items-center justify-center text-2xl font-bold mr-5 border-[0.5px] border-black"
+          class="h-17 md:h-38 bg-gradient-to-r from-blue-400 to-indigo-500 relative"
         >
-          {{ user?.firstName?.charAt(0) }} {{ user?.lastName?.charAt(0) }}
+          <!-- Foto de perfil -->
+          <div
+            class="absolute left-1/5 md:left-1/3 transform -translate-x-1/2 md:-translate-x-full translate-y-1/2"
+          >
+            <img
+              class="w-22 md:w-48 h-22 md:h-48 rounded-full border-4 border-white"
+              src="https://randomuser.me/api/portraits/men/32.jpg"
+              alt="Profile"
+            />
+            <!-- Badge del username -->
+            <div
+              class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-blue-600 text-white px-2 py-0.5 text-sm rounded-full"
+            >
+              {{ "@" + user?.username }}
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-col justify-center font-medium text-gray-600">
-          <span class="text-2xl font-semibold m-0">
-            {{ user?.firstName }} {{ user?.lastName }}</span
+        <!-- Info del usuario -->
+        <div class="mt-13 md:mt-26 text-center px-4 pb-6 gap-3">
+          <h2 class="text-xl font-bold">{{ user?.firstName }}</h2>
+          <div
+            class="flex items-center justify-center mt-2 text-gray-600 gap-2"
           >
-          <span class="text-lg mb-1">{{ user?.username }}</span>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M16 12a4 4 0 01-8 0V8a4 4 0 018 0v4z" />
+              <path
+                d="M12 14v2m0 4h.01M20.84 14.61a8.94 8.94 0 01-1.82 2.23m1.82-2.23A8.94 8.94 0 0012 3a8.94 8.94 0 00-8.84 11.61"
+              />
+            </svg>
+            <span> {{ "@" + (user?.email || "") }}</span>
+          </div>
+          <div
+            class="flex items-center justify-center mt-1 text-gray-600 gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 7V3m8 4V3M5 11h14M5 19h14M5 15h14M5 7h14" />
+            </svg>
+            <span>Joined May 15, 2023</span>
+          </div>
         </div>
-        <div class="flex ml-auto items-start"></div>
       </div>
 
-      <form
-        [formGroup]="form"
-        class="flex flex-col w-full gap-5 text-gray-600 font-medium"
-      >
-        <!-- Correo electrónico -->
-        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-          <label for="email" class="text-xs text-gray-600 block mb-1"
-            >Correo electrónico</label
-          >
-          <input
-            type="text"
-            id="email"
-            formControlName="email"
-            readonly
-            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+      <div
+        class="w-full h-[2.3px] bg-gradient-to-r from-blue-300 to-[#024d99] my-5"
+      ></div>
+      <div class="flex flex-col w-full h-[full] gap-5">
+        <h2
+          class="font-noto-serif text-xl md:text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
+        >
+          Tu participación
+        </h2>
+        <section
+          class="flex flex-col md:flex-row justify-center items-center w-full h-full text-center"
+        >
+          <div class="flex content-between w-full h-full gap-1.5 md:gap-3">
+            <div
+              class="p-[1px] rounded-[8px] bg-gradient-to-r from-blue-300 to-[#024d99] w-[33%]"
+            >
+              <div
+                class="flex flex-col justify-center items-center bg-white rounded-[8px] p-2 md:p-4 w-full"
+              >
+                <mat-icon>forum</mat-icon
+                ><span class="text-[22px] md:text-[40px] font-semibold">{{
+                  statistics?.comments?.total
+                }}</span
+                ><span class="font-medium text-xs md:text-xl text-gray-600"
+                  >Comentarios</span
+                >
+              </div>
+            </div>
 
-        <!-- Fecha de creación -->
-        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-          <label for="createdAt" class="text-xs text-gray-600 block mb-1"
-            >Creado el</label
-          >
-          <input
-            type="text"
-            id="createdAt"
-            formControlName="createdAt"
-            readonly
-            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <!-- Fecha de actualización -->
-        <div class="p-3 bg-gray-100 rounded shadow-md border border-gray-300">
-          <label for="updatedAt" class="text-xs text-gray-600 block mb-1"
-            >Actualizado el</label
-          >
-          <input
-            type="text"
-            id="updatedAt"
-            formControlName="updatedAt"
-            readonly
-            class="bg-white text-gray-700 rounded-lg px-4 py-2 w-full focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-      </form>
-    </section>
-    <section class="flex flex-col items-center w-full md:w-[50%]">
-      Mas informationnn
+            <div
+              class="p-[1px] rounded-[8px] bg-gradient-to-r from-blue-300 to-[#024d99] w-[33%]"
+            >
+              <div
+                class="flex flex-col justify-center items-center bg-white rounded-[8px] p-2 md:p-4 w-full"
+              >
+                <mat-icon>thumb_up</mat-icon
+                ><span class="text-[22px] md:text-[40px] font-semibold">{{
+                  statistics?.likes?.total
+                }}</span
+                ><span class="font-medium text-xs md:text-xl text-gray-600"
+                  >Me gusta</span
+                >
+              </div>
+            </div>
+            <div
+              class="p-[1px] rounded-[8px] bg-gradient-to-r from-blue-300 to-[#024d99] w-[33%]"
+            >
+              <div
+                class="flex flex-col justify-center items-center bg-white rounded-[8px] p-2 md:p-4 w-full"
+              >
+                <mat-icon>comment</mat-icon
+                ><span class="text-[22px] md:text-[40px] font-semibold">{{
+                  statistics?.posts?.total
+                }}</span
+                ><span class="font-medium text-xs md:text-xl text-gray-600"
+                  >Discusiones</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </section>
   </article>
   } @else {
