@@ -1,8 +1,8 @@
 <mat-paginator
   class="mt-3"
-  [length]="paginationParams()?.total"
-  [pageSize]="paginationParams()?.perPage"
+  [length]="paginationParams() ? paginationParams().total : 0"
+  [pageSize]="paginationParams() ? paginationParams().perPage : 10"
   [pageSizeOptions]="[5, 10, 20]"
-  [pageIndex]="(paginationParams()?.page || 0) - 1"
+  [pageIndex]="(paginationParams() ? paginationParams().page : 0 || 0) - 1"
   (page)="onPageChangeHandler($event)"
 ></mat-paginator>
