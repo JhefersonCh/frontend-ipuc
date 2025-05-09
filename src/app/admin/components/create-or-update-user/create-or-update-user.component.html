@@ -1,0 +1,85 @@
+<app-base-dialog
+  [title]="data?.user?.id ? 'Editar usuario' : 'Agregar usuario'"
+  description="Crea o edita un usuario, asegurate de llenar todos los campos."
+>
+  <form form [formGroup]="form" class="flex flex-col gap-4 mt-8">
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="firstName" />
+        @if (form.get('firstName')?.hasError('required')) {
+        <mat-error>Nombre requerido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" />
+        @if (form.get('lastName')?.hasError('required')) {
+        <mat-error>Apellido requerido</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" />
+        @if (form.get('username')?.hasError('required')) {
+        <mat-error>Usuario requerido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="email" />
+        @if (form.get('email')?.hasError('required')) {
+        <mat-error>Correo requerido</mat-error>
+        } @if (form.get('email')?.hasError('email')) {
+        <mat-error>Correo invalido</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role">
+          @for (role of roles; track $index) {
+          <mat-option [value]="role.value">
+            {{ role.label }}
+          </mat-option>
+          }
+        </mat-select>
+        @if (form.get('role')?.hasError('required')) {
+        <mat-error>Rol requerido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" />
+        @if (form.get('password')?.hasError('required')) {
+        <mat-error>Contraseña requerida</mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </form>
+  <ng-content actions>
+    <div class="grid grid-cols-2 gap-2 w-full md:w-1/2">
+      <button
+        mat-fab
+        extended="true"
+        color="warn"
+        (click)="close()"
+        class="col-span-1"
+      >
+        Cancelar
+      </button>
+      <button
+        mat-fab
+        extended="true"
+        (click)="onSave()"
+        class="col-span-1"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </ng-content>
+</app-base-dialog>

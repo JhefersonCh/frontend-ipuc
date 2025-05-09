@@ -4,6 +4,7 @@ import { TabComponent } from '../../../shared/components/tab/tab.component';
 import { ActivitiesComponent } from '../../components/activities/activities.component';
 import { GeneralComponent } from '../../components/general/general.component';
 import { Title } from '@angular/platform-browser';
+import { ManageUsersComponent } from '../../components/manage-users/manage-users.component';
 
 @Component({
   selector: 'app-panel',
@@ -12,6 +13,7 @@ import { Title } from '@angular/platform-browser';
     TabComponent,
     ActivitiesComponent,
     GeneralComponent,
+    ManageUsersComponent,
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',
