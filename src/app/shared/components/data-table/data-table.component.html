@@ -1,0 +1,58 @@
+@if(withSearchFields()) {
+<app-search-fields
+  [searchFields]="searchFields()"
+  [form]="form"
+  (searchSubmit)="onSearchSubmitHandler($event)"
+  (searchChange)="onSearchChangeHandler($event)"
+></app-search-fields>
+}
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+      <tr>
+        @for (column of columns(); track $index) {
+        <th scope="col" class="px-6 py-3">{{ column.label }}</th>
+        } @if(withActions()) {
+        <th scope="col" class="px-6 py-3">Acciones</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of results(); track $index) {
+      <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+        @for (column of columns(); track $index) { @if ($index === 1) {
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+        >
+          {{ formatCell(row[column.key], column.key) }}
+        </th>
+        } @else {
+        <td class="px-6 py-4">
+          {{ formatCell(row[column.key], column.key) }}
+        </td>
+        } } @if(withActions()) {
+        <td class="px-6 py-4">
+          @for (action of actions(); track $index) {
+          <button
+            mat-icon-button
+            [color]="action?.color || 'primary'"
+            (click)="action?.action(row)"
+          >
+            <mat-icon>{{ action?.icon }}</mat-icon>
+          </button>
+          }
+        </td>
+        }
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if(withPagination()) {
+<app-paginator
+  [paginationParams]="paginationParams()"
+  (onPageChange)="onPageChangeHandler($event)"
+></app-paginator>
+}

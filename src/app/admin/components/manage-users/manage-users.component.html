@@ -1,0 +1,32 @@
+<div class="py-3">
+  <h1 class="text-2xl font-bold brand-text-headline-color font-noto-serif">
+    Gestión de Usuarios
+  </h1>
+  <p>Aquí puedes agregar, editar y eliminar los usuarios de la plataforma.</p>
+  <div class="flex justify-center md:justify-end">
+    <button
+      class="my-4"
+      mat-fab
+      extended="true"
+      color="primary"
+      matTooltip="Agregar actividad"
+      (click)="openCreateOrUpdateUserDialog()"
+    >
+      Agregar usuario
+    </button>
+  </div>
+  <app-data-table
+    [columns]="columns"
+    [actions]="actions"
+    [searchFields]="searchFields"
+    [withSearchFields]="true"
+    [form]="form"
+    [withPagination]="true"
+    [withActions]="true"
+    [paginationParams]="paginationResults"
+    [results]="results"
+    (onPageChange)="onChangePagination($event)"
+    (onSearchSubmit)="onSearchSubmit($event)"
+    (onSearchChange)="onSearchChange($event)"
+  ></app-data-table>
+</div>
