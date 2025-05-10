@@ -8,6 +8,7 @@
     Aquí puedes realizar preguntas sobre temas que no entiendas o reponser a las
     preguntas de las personas que tengan dudas.
   </p>
+  @if(currentUser){
   <section class="flex justify-end">
     <button
       mat-fab
@@ -17,7 +18,12 @@
       Crear discusión
     </button>
   </section>
-  @if(!loading) {
+  } @if(!loading) {
+  <app-search-fields
+    [searchFields]="searchFields"
+    [form]="form"
+    (searchChange)="onSearchChange($event)"
+  ></app-search-fields>
   <section class="flex flex-col gap-2.5 mt-4">
     @for (post of posts; track $index) {
     <app-discussion-card
@@ -28,6 +34,10 @@
       [userLogged]="currentUser"
     ></app-discussion-card>
     }
+    <app-paginator
+      [paginationParams]="paginationResults"
+      (onPageChange)="onChangePagination($event)"
+    ></app-paginator>
   </section>
   }@else {
   <div class="flex items-center justify-center h-100">

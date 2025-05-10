@@ -9,10 +9,10 @@
       mat-fab
       extended="true"
       color="primary"
-      matTooltip="Crear usuario"
-      (click)="openCreateOrUpdateUserDialog()"
+      matTooltip="Crear discusión"
+      (click)="openCreateOrUpdatePostDialog()"
     >
-      Crear usuario
+      Crear discusión
     </button>
   </div>
   <app-data-table
@@ -27,6 +27,6 @@
     [results]="results"
     (onPageChange)="onChangePagination($event)"
     (onSearchSubmit)="onSearchSubmit($event)"
-    (onSearchChange)="onSearchChange($event)"
+    [withSubmitButton]="true"
   ></app-data-table>
 </div>

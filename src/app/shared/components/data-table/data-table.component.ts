@@ -26,6 +26,7 @@ export class DataTableComponent {
   withActions = input<boolean>(false);
   withPagination = input<boolean>(false);
   withSearchFields = input<boolean>(false);
+  withSubmitButton = input<boolean>(false);
   searchFields = input<SearchField[]>([]);
   @Input() form!: FormGroup;
   actions = input<ActionInterface[]>([]);

@@ -38,7 +38,11 @@
       >
         @for (option of field.autocompleteOptions; track $index) {
         <mat-option [value]="option">
-          {{ option.fullName || option.title }}
+          {{
+            option.fullName ||
+              option.title ||
+              option.firstName + " " + option.lastName
+          }}
         </mat-option>
         }
       </mat-autocomplete>
@@ -74,6 +78,12 @@
       <mat-datepicker-toggle matSuffix [for]="picker"> </mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-    } }
+    } } @if(withSubmitButton()){
+    <div class="col-span-2">
+      <button mat-fab extended="true" color="primary" (click)="submitSearch()">
+        Buscar
+      </button>
+    </div>
+    }
   </div>
 </form>

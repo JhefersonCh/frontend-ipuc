@@ -2,6 +2,7 @@
 <app-search-fields
   [searchFields]="searchFields()"
   [form]="form"
+  [withSubmitButton]="withSubmitButton()"
   (searchSubmit)="onSearchSubmitHandler($event)"
   (searchChange)="onSearchChangeHandler($event)"
 ></app-search-fields>

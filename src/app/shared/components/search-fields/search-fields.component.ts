@@ -43,6 +43,7 @@ export class SearchFieldsComponent implements OnInit {
   searchFields: InputSignal<SearchField[]> = input<SearchField[]>([]);
   @Input() form!: FormGroup;
   debounceTime: InputSignal<number> = input<number>(300);
+  withSubmitButton: InputSignal<boolean> = input<boolean>(false);
 
   searchChange = output<any>();
   searchSubmit = output<any>();

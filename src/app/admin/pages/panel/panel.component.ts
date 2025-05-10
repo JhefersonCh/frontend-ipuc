@@ -5,6 +5,7 @@ import { ActivitiesComponent } from '../../components/activities/activities.comp
 import { GeneralComponent } from '../../components/general/general.component';
 import { Title } from '@angular/platform-browser';
 import { ManageUsersComponent } from '../../components/manage-users/manage-users.component';
+import { ManageForumComponent } from '../../components/manage-forum/manage-forum.component';
 
 @Component({
   selector: 'app-panel',
@@ -14,6 +15,7 @@ import { ManageUsersComponent } from '../../components/manage-users/manage-users
     ActivitiesComponent,
     GeneralComponent,
     ManageUsersComponent,
+    ManageForumComponent,
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',

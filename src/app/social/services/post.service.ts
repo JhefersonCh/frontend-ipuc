@@ -8,6 +8,7 @@ import {
 import { Post } from '../interfaces/forum.interface';
 import { environment } from '../../../environments/environment';
 import { HttpUtilitiesService } from '../../shared/utilities/http-utilities.service';
+import { PaginationInterface } from '../../shared/interfaces/pagination.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,21 @@ export class PostService {
       `${environment.apiUrl}forum/posts`,
       { params }
     );
+  }
+
+  getPaginatedPosts(
+    userId: string,
+    query: object
+  ): Observable<
+    ApiResponseInterface<{ pagination: PaginationInterface; data: Post[] }>
+  > {
+    const params = this._httpUtilities.httpParamsFromObject({
+      userId,
+      ...query,
+    });
+    return this._httpClient.get<
+      ApiResponseInterface<{ pagination: PaginationInterface; data: Post[] }>
+    >(`${environment.apiUrl}forum/posts/paginated-list`, { params });
   }
 
   createPost(post: Post): Observable<ApiResponseCreateInterface> {
