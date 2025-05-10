@@ -51,13 +51,14 @@
         <mat-error>Rol requerido</mat-error>
         }
       </mat-form-field>
+      @if(!data?.user?.id){
       <mat-form-field appearance="outline" class="col-span-2 md:col-span-1">
         <mat-label>Contraseña</mat-label>
         <input matInput formControlName="password" />
         @if (form.get('password')?.hasError('required')) {
         <mat-error>Contraseña requerida</mat-error>
-        }
-      </mat-form-field>
+        } </mat-form-field
+      >}
     </div>
   </form>
   <ng-content actions>

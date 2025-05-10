@@ -30,7 +30,7 @@ export class CreateOrUpdateUserComponent {
   private readonly _dialogRef: MatDialogRef<CreateOrUpdateUserComponent> =
     inject(MatDialogRef<CreateOrUpdateUserComponent>);
   private readonly _fb: FormBuilder = inject(FormBuilder);
-  readonly data = inject<{ user: User }>(MAT_DIALOG_DATA);
+  readonly data? = inject<{ user: User }>(MAT_DIALOG_DATA);
   form!: FormGroup;
   saveForm = new EventEmitter<User>();
   roles = [
@@ -70,6 +70,9 @@ export class CreateOrUpdateUserComponent {
 
   onSave() {
     if (this.form.valid) {
+      if (this.data?.user?.id) {
+        delete this.form?.value?.password;
+      }
       this.saveForm.emit(this.form.value);
     }
   }
