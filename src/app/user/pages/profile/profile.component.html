@@ -4,8 +4,15 @@
   [queryParamId]="'panel'"
   [defaultTabIndex]="0"
 >
-  <tab label="Tu perfil"><app-see-profile></app-see-profile> </tab>
-  <tab label="Editar perfil"><app-edit-user></app-edit-user> </tab>
+  <tab label="Tu perfil"
+    ><app-see-profile [user]="user" *ngIf="user"></app-see-profile>
+  </tab>
+  <tab label="Editar perfil"
+    ><app-edit-user
+      [user]="user"
+      (userUpdated)="onUserUpdated()"
+    ></app-edit-user>
+  </tab>
   <tab label="Cambiar contraseña"
     ><app-change-password></app-change-password>
   </tab>

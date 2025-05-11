@@ -22,12 +22,7 @@ import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-manage-forum',
-  imports: [
-    DataTableComponent,
-    MatButtonModule,
-    YesNoDialohComponent,
-    CreateOrEditDiscussionComponent,
-  ],
+  imports: [DataTableComponent, MatButtonModule],
   templateUrl: './manage-forum.component.html',
   styleUrl: './manage-forum.component.scss',
 })

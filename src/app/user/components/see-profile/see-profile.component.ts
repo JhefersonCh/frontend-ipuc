@@ -1,12 +1,19 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../../shared/interfaces/user.interface';
-import { LocalStorageService } from '../../../shared/services/localStorage.service';
 import { UserDataService } from '../../services/user-data.service';
 import { finalize } from 'rxjs';
 import { LoaderComponent } from '../../../shared/components/loader/loader.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StatisticsInterface } from '../../interface/profile.interface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-see-profile',
@@ -14,73 +21,59 @@ import { StatisticsInterface } from '../../interface/profile.interface';
   imports: [LoaderComponent, ReactiveFormsModule, MatIconModule],
   templateUrl: './see-profile.component.html',
   styleUrl: './see-profile.component.scss',
+  providers: [DatePipe],
 })
-export class SeeProfileComponent implements OnInit {
-  private readonly _localStorageService: LocalStorageService =
-    inject(LocalStorageService);
-  private readonly _userService: UserDataService = inject(UserDataService);
+export class SeeProfileComponent implements OnChanges {
+  @Input() user?: User;
+
   private readonly _fb: FormBuilder = inject(FormBuilder);
+  private readonly _userService: UserDataService = inject(UserDataService);
+  private readonly cdRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+  constructor(private datePipe: DatePipe) {}
 
   isLoading: boolean = false;
-  userId: string = '';
-  user?: User;
-  form: FormGroup;
+  formattedDate: string | null = null;
   statistics?: StatisticsInterface;
 
-  constructor() {
-    this.form = this._fb.group({
-      email: [''],
-      createdAt: [''],
-      updatedAt: [''],
-    });
-  }
-
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.loadUserProfile();
-    this.getStatistics();
-  }
-
-  private loadUserProfile(): void {
-    const sessionData = this._localStorageService.getAllSessionData();
-    this.userId = sessionData?.user?.id || '';
-
-    if (!this.userId) {
-      console.error('No se encontró el ID del usuario en LocalStorage');
-      return;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['user']?.currentValue !== changes['user']?.previousValue &&
+      this.user
+    ) {
+      this.getStatistics();
+      this.cdRef.detectChanges();
+      this.formatDate();
     }
+  }
 
-    this._userService
-      .getUserProfile(this.userId)
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe({
-        next: (response) => {
-          if (response?.data) {
-            this.user = response.data;
-            this.form.patchValue({
-              email: this.user.email,
-              createdAt: this.user.createdAt,
-              updatedAt: this.user.updatedAt,
-            });
-          }
-        },
-        error: (error) => {
-          console.error('Error al cargar el usuario', error);
-        },
-      });
+  private formatDate(): void {
+    const date = this.user?.createdAt;
+    if (date) {
+      const formatted = this.datePipe.transform(
+        date,
+        "d 'de' MMMM 'de' y",
+        'es-ES'
+      );
+      this.formattedDate = `Te uniste el ${formatted}`;
+    }
   }
 
   /**
-   * @param _getStatistics - Carga las estadísticas del usuario.
+   * @param getStatistics - Carga las estadísticas del usuario.
    */
   private getStatistics(): void {
-    this._userService.getStatistics().subscribe({
-      next: (response) => {
-        this.statistics = response.data;
-      },
-      error: (error) => {
-        console.error('Error al obtener las estadísticas', error);
-      },
-    });
+    this.isLoading = true;
+
+    this._userService
+      .getStatistics()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: (response) => {
+          this.statistics = response.data;
+        },
+        error: (error) => {
+          console.error('Error al obtener las estadísticas', error);
+        },
+      });
   }
 }
