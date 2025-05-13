@@ -1,59 +1,39 @@
-# FrontendIpuc
+# ⛪ Página Web - IPUC Sede Cuarta Mocoa Putumayo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+Bienvenido al repositorio oficial de la página web de la **Iglesia Pentecostal Unida de Colombia - Sede Cuarta de Mocoa, Putumayo**. Este proyecto fue desarrollado con el propósito de fortalecer la comunicación, interacción y organización dentro de nuestra congregación.
 
-## Development server
+## ✨ Funcionalidades principales
 
-To start a local development server, run:
+- 🔐 **Autenticación de usuarios** (registro, login, recuperación)
+- 🏠 **Página de inicio** con información destacada
+- ℹ️ **Sección "Sobre nosotros"** con detalles de la iglesia y su historia local
+- 👤 **Perfil de usuario** con información personal y actividad
+- 🛠️ **Panel de administración** para gestionar contenido, usuarios y configuraciones
+- 💬 **Foro de preguntas** donde los miembros pueden publicar inquietudes o temas de discusión
+- 🗨️ **Sistema de comentarios** para interacción en publicaciones o temas del foro
 
-```bash
-ng serve
-```
+## 🧰 Tecnologías utilizadas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Frontend:** [Angular](https://angular.io/), [Tailwind CSS](https://tailwindcss.com/)
+- **Backend:** [NestJS](https://nestjs.com/), JWT para autenticación
+- **Base de datos:** PostgreSQL
+- **Otras:** TypeORM, NestMailer (para correos de confirmación y notificación)
 
-## Code scaffolding
+## 🌐 Sitio en línea
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Puedes visitar la página web en: [Ir a la página](https://ipuc-cuarta-test.netlify.app/)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## ⚙️ Instalación local
 
 ```bash
-ng build
-```
+# Clona el repositorio
+git clone https://github.com/tu-usuario/ipuc-sede-cuarta.git
+cd ipuc-sede-cuarta
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+# Instala las dependencias (frontend y backend)
+npm install
 
-## Running unit tests
+# Configura las variables de entorno necesarias (.env)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# Ejecuta el servidor de desarrollo
+npm run start
