@@ -1,23 +1,21 @@
-# ⛪ Página Web - IPUC Sede Cuarta Mocoa Putumayo
+# ⛪ IPUC Sede Cuarta - Mocoa Putumayo (Frontend)
 
-Bienvenido al repositorio oficial de la página web de la **Iglesia Pentecostal Unida de Colombia - Sede Cuarta de Mocoa, Putumayo**. Este proyecto fue desarrollado con el propósito de fortalecer la comunicación, interacción y organización dentro de nuestra congregación.
+Este es el repositorio del frontend de la página web de la **Iglesia Pentecostal Unida de Colombia - Sede Cuarta de Mocoa, Putumayo**. Está diseñado para facilitar la comunicación, el acceso a información y la participación activa de los miembros de la congregación.
+
+## 🧱 Tecnologías utilizadas
+
+- ⚙️ **[Angular](https://angular.io/)**: Framework de desarrollo web robusto y modular que permite construir aplicaciones SPA (Single Page Application) altamente escalables, mantenibles y rápidas.
+- 🎨 **[Tailwind CSS](https://tailwindcss.com/)**: Framework de utilidades CSS que permite diseñar interfaces modernas y responsivas con una sintaxis limpia y eficiente.
 
 ## ✨ Funcionalidades principales
 
-- 🔐 **Autenticación de usuarios** (registro, login, recuperación)
-- 🏠 **Página de inicio** con información destacada
-- ℹ️ **Sección "Sobre nosotros"** con detalles de la iglesia y su historia local
-- 👤 **Perfil de usuario** con información personal y actividad
-- 🛠️ **Panel de administración** para gestionar contenido, usuarios y configuraciones
-- 💬 **Foro de preguntas** donde los miembros pueden publicar inquietudes o temas de discusión
-- 🗨️ **Sistema de comentarios** para interacción en publicaciones o temas del foro
-
-## 🧰 Tecnologías utilizadas
-
-- **Frontend:** [Angular](https://angular.io/), [Tailwind CSS](https://tailwindcss.com/)
-- **Backend:** [NestJS](https://nestjs.com/), JWT para autenticación
-- **Base de datos:** PostgreSQL
-- **Otras:** TypeORM, NestMailer (para correos de confirmación y notificación)
+- 🔐 Autenticación de usuarios (registro, inicio de sesión, recuperación)
+- 🏠 Página de inicio con información relevante
+- ℹ️ Sección “Sobre nosotros”
+- 👤 Perfil de usuario personalizado
+- 🛠️ Panel administrativo (visible solo para roles autorizados)
+- 💬 Foro de preguntas con sistema de interacción
+- 🗨️ Comentarios en publicaciones y discusiones
 
 ## 🌐 Sitio en línea
 
@@ -30,10 +28,9 @@ Puedes visitar la página web en: [Ir a la página](https://ipuc-cuarta-test.net
 git clone https://github.com/JhefersonCh/frontend-ipuc.git
 cd ipuc-sede-cuarta
 
-# Instala las dependencias (frontend y backend)
+# Instala las dependencias (frontend)
 npm install
 
-# Configura las variables de entorno necesarias (.env)
 
 # Ejecuta el servidor de desarrollo
-npm run start
+ng serve
