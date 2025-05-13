@@ -27,7 +27,7 @@ Puedes visitar la página web en: [Ir a la página](https://ipuc-cuarta-test.net
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/tu-usuario/ipuc-sede-cuarta.git
+git clone https://github.com/JhefersonCh/frontend-ipuc.git
 cd ipuc-sede-cuarta
 
 # Instala las dependencias (frontend y backend)
