@@ -1,4 +1,4 @@
-# ⛪ IPUC Sede Cuarta - Mocoa Putumayo (Frontend)
+# ⛪ IPUC Sede Cuarta - Mocoa Putumayo (Frontend) (En desarrollo)
 
 Este es el repositorio del frontend de la página web de la **Iglesia Pentecostal Unida de Colombia - Sede Cuarta de Mocoa, Putumayo**. Está diseñado para facilitar la comunicación, el acceso a información y la participación activa de los miembros de la congregación.
 
