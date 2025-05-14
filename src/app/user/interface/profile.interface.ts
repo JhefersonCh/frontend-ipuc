@@ -15,3 +15,11 @@ export interface Likes {
 export interface Posts {
   total: number;
 }
+
+export interface ChangePassword {
+  oldPassword?: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  userId?: string;
+  resetToken?: string;
+}

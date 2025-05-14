@@ -5,7 +5,10 @@ import { ApiResponseInterface } from '../../shared/interfaces/api-response.inter
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { PasswordInterface } from '../../auth/interfaces/passwords';
-import { StatisticsInterface } from '../interface/profile.interface';
+import {
+  ChangePassword,
+  StatisticsInterface,
+} from '../interface/profile.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -27,10 +30,12 @@ export class UserDataService {
     );
   }
 
-  changePasswordUser(body: unknown): Observable<PasswordInterface> {
-    return this._httpClient.patch<PasswordInterface>(
-      `${environment.apiUrl}user/change-password`, // Nueva ruta
-      body
+  updateUserPassword(
+    changePasswordPayload: ChangePassword
+  ): Observable<ApiResponseInterface<ChangePassword>> {
+    return this._httpClient.post<ApiResponseInterface<ChangePassword>>(
+      `${environment.apiUrl}user/change-password`,
+      changePasswordPayload
     );
   }
 
