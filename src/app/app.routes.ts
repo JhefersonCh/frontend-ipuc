@@ -47,7 +47,13 @@ export const routes: Routes = [
       },
     ],
   },
-
+  {
+    path: 'auth/:userId/change-password',
+    loadComponent: () =>
+      import('./auth/pages/change-password/change-password.component').then(
+        (m) => m.ChangePasswordComponent
+      ),
+  },
   {
     path: '**',
     redirectTo: '/home',
