@@ -9,6 +9,7 @@ import {
   ApiResponseCreateInterface,
   ApiResponseInterface,
 } from '../../shared/interfaces/api-response.interface';
+import { ChangePassword } from '../../user/interface/profile.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +33,15 @@ export class UserService {
   userById(id: string): Observable<ApiResponseInterface<User>> {
     return this._httpClient.get<ApiResponseInterface<User>>(
       `${environment.apiUrl}manage-users/${id}`
+    );
+  }
+
+  recoveryPasswordByUserId(
+    changePasswordPayload: ChangePassword
+  ): Observable<ApiResponseInterface<ChangePassword>> {
+    return this._httpClient.patch<ApiResponseInterface<ChangePassword>>(
+      `${environment.apiUrl}user/recovery-password`,
+      changePasswordPayload
     );
   }
 
