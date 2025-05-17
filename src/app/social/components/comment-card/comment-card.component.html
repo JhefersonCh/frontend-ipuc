@@ -36,7 +36,7 @@
 
   <mat-card-content>
     <!-- Mostrar contenido o textarea para editar -->
-    <div *ngIf="!isEditing; else editMode">
+    <div *ngIf="!isEditing; else editMode" class="mb-1.5">
       <p>{{ itemComment()?.content }}</p>
     </div>
 
@@ -81,51 +81,60 @@
     </a>
 
     <!-- Lista de respuestas -->
-    <div
-      *ngFor="let reply of replies"
-      class="mb-2 border p-3 rounded-lg bg-gray-50"
-    >
-      <div class="flex justify-between items-start">
-        <div>
-          <strong>{{ reply.user.firstName }} {{ reply.user.lastName }}</strong>
+    <div *ngIf="showReplies">
+      <div
+        *ngFor="let reply of replies"
+        class="my-2 border p-3 rounded-lg bg-gray-50"
+      >
+        <div class="flex justify-between items-start w-full">
+          <div>
+            <strong
+              >{{ reply.user.firstName }} {{ reply.user.lastName }}</strong
+            >
+          </div>
+          <!-- Mostrar texto o campo de edición -->
+
+          <!-- Si el usuario es el autor de la respuesta -->
+          @if(userLogged() && userLogged()?.id === reply.userId) {
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="replyMenu"
+            [matMenuTriggerData]="{ reply }"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          }
         </div>
 
-        <!-- Si el usuario es el autor de la respuesta -->
-        @if(userLogged() && userLogged()?.id === reply.userId) {
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="replyMenu"
-          [matMenuTriggerData]="{ reply }"
-        >
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        }
-      </div>
-
-      <!-- Mostrar texto o campo de edición -->
-      <div *ngIf="editingReplyId !== reply.id; else editReply">
-        <p>{{ reply.content }}</p>
-      </div>
-
-      <ng-template #editReply>
-        <mat-form-field appearance="outline" class="w-full">
-          <textarea
-            matInput
-            [(ngModel)]="editedReplyContent"
-            cdkTextareaAutosize
-            cdkAutosizeMinRows="2"
-            cdkAutosizeMaxRows="4"
-          ></textarea>
-        </mat-form-field>
-        <div class="flex justify-end gap-3 mt-2">
-          <button mat-button color="primary" (click)="saveReplyEdit(reply)">
-            Guardar
-          </button>
-          <button mat-button color="warn" (click)="cancelReplyEdit()">
-            Cancelar
-          </button>
+        <div *ngIf="editingReplyId !== reply.id; else editReply">
+          <p>{{ reply.content }}</p>
         </div>
-      </ng-template>
+
+        <ng-template #editReply>
+          <mat-form-field appearance="outline" class="w-full">
+            <textarea
+              matInput
+              [(ngModel)]="editedReplyContent"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="4"
+            ></textarea>
+          </mat-form-field>
+          <div class="flex justify-end gap-3 mt-2">
+            <button mat-fab extended="true" (click)="saveReplyEdit(reply)">
+              Guardar
+            </button>
+            <button
+              mat-fab
+              extended="true"
+              color="warn"
+              (click)="cancelReplyEdit()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </ng-template>
+      </div>
     </div>
 
     <mat-menu #replyMenu="matMenu">
@@ -134,10 +143,11 @@
           <mat-icon>edit</mat-icon>
           <span>Editar</span>
         </button>
-        <!-- <button mat-menu-item (click)="deleteReply(reply)">
+
+        <button mat-menu-item (click)="deleteEvent.emit(reply)">
           <mat-icon>delete</mat-icon>
           <span>Eliminar</span>
-        </button> -->
+        </button>
       </ng-template>
     </mat-menu>
 
