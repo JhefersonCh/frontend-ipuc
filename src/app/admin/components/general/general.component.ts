@@ -26,6 +26,8 @@ export class GeneralComponent {
   @ViewChild('aboutForm') aboutForm?: AboutFormComponent;
   @ViewChild('generalForm') generalForm?: GeneralFormComponent;
 
+  tabIndex: number = 0;
+
   onSaveHomeForm(homeForm: HomeForm) {
     this._panelService.updateHome(homeForm).subscribe({
       next: () => {
@@ -57,5 +59,9 @@ export class GeneralComponent {
         console.log(err);
       },
     });
+  }
+
+  onTabChange(tabIndex: number) {
+    this.tabIndex = tabIndex;
   }
 }

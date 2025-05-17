@@ -16,19 +16,28 @@
       [enableQueryParams]="true"
       [queryParamId]="'panel'"
       [defaultTabIndex]="0"
+      (changeTab)="onTabChange($event)"
     >
       <tab label="Actividades">
+        @if(selectedTabIdx === 0){
         <app-activities />
+        }
       </tab>
-      <tab label="Eventos">Eventos</tab>
+      <tab label="Eventos"> @if(selectedTabIdx === 1){ Eventos } </tab>
       <tab label="General">
+        @if(selectedTabIdx === 2){
         <app-general />
+        }
       </tab>
       <tab label="Usuarios">
+        @if(selectedTabIdx === 3){
         <app-manage-users />
+        }
       </tab>
       <tab label="Foro">
+        @if(selectedTabIdx === 4){
         <app-manage-forum />
+        }
       </tab>
     </app-horizontal-vertical-tabs>
   </article>

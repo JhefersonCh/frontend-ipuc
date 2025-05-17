@@ -21,11 +21,17 @@ import { ManageForumComponent } from '../../components/manage-forum/manage-forum
   styleUrl: './panel.component.scss',
 })
 export class PanelComponent implements OnInit {
+  selectedTabIdx: number = 0;
+
   constructor(private title: Title) {}
 
   ngOnInit(): void {
     this.title.setTitle(
       'Panel de configuración - IPUC sede cuarta, Mocoa, Putumayo'
     );
+  }
+
+  onTabChange(event: { index: number; label: string }): void {
+    this.selectedTabIdx = event.index;
   }
 }

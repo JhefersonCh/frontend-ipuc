@@ -53,18 +53,18 @@ export class ManageForumComponent implements OnInit {
       type: 'text',
       placeholder: 'Buscar por nombre o usuario',
     },
-    {
-      name: 'userId',
-      label: 'Usuario',
-      type: 'autocomplete',
-      placeholder: 'Buscar por usuario',
-      autocompleteOptions: [],
-      displayWith: (value: any) =>
-        value && value.firstName + ' ' + value.lastName,
-      onAutocompleteChange: (value: any) => {
-        this._getUsers(value.id ? value.email : value);
-      },
-    },
+    // {
+    //   name: 'userId',
+    //   label: 'Usuario',
+    //   type: 'autocomplete',
+    //   placeholder: 'Buscar por usuario',
+    //   autocompleteOptions: [],
+    //   displayWith: (value: any) =>
+    //     value && value.firstName + ' ' + value.lastName,
+    //   onAutocompleteChange: (value: any) => {
+    //     this._getUsers(value.id ? value.email : value);
+    //   },
+    //},
   ];
   columns = [
     { key: 'id', label: 'ID' },
@@ -112,24 +112,24 @@ export class ManageForumComponent implements OnInit {
     if (!this.userId) {
       this._authService.cleanStorageAndRedirectToLogin();
     } else {
-      this._getUsers();
+      //this._getUsers();
       this._getPosts();
     }
   }
 
-  private _getUsers(search?: string): void {
-    this._userService
-      .usersPaginatedList({ search })
-      .pipe(finalize(() => (this.loading = false)))
-      .subscribe({
-        next: (res) => {
-          const userField = this.searchFields.find((f) => f.name === 'userId');
-          if (userField) {
-            userField.autocompleteOptions = res.data;
-          }
-        },
-      });
-  }
+  // private _getUsers(search?: string): void {
+  //   this._userService
+  //     .usersPaginatedList({ search })
+  //     .pipe(finalize(() => (this.loading = false)))
+  //     .subscribe({
+  //       next: (res) => {
+  //         const userField = this.searchFields.find((f) => f.name === 'userId');
+  //         if (userField) {
+  //           userField.autocompleteOptions = res.data;
+  //         }
+  //       },
+  //     });
+  // }
 
   private _getPosts(): void {
     this._postService
