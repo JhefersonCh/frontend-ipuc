@@ -1,8 +1,8 @@
-<article class="py-[10%] flex justify-center">
+<article class="brand-content-center">
   <section
-    class="flex flex-col w-[90%] md:w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
+    class="flex flex-col w-[90%] md:w-[60%] h-auto px-5 py-8 justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1]"
   >
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-1.5">
       <span class="font-extrabold text-2xl font-noto-serif">INICIAR SESIÓN</span
       ><span class="font-normal text-base"
         >Ingresa tus datos para iniciar sesión</span
@@ -10,9 +10,9 @@
     </div>
     <form
       [formGroup]="form"
-      class="flex flex-col w-full items-center mt-2.5 gap-1.5"
+      class="flex flex-col w-full items-center mt-5 gap-1.5"
     >
-      <mat-form-field appearance="outline" class="w-[80%]">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Nombre de usuario</mat-label>
         <input matInput formControlName="username" />
         <mat-icon matPrefix>account_circle</mat-icon>
@@ -21,7 +21,7 @@
         >
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-[80%]">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Contraseña</mat-label>
         <input
           [type]="!showPassword ? 'password' : 'text'"
@@ -33,7 +33,6 @@
           matSuffix
           mat-icon-button
           (click)="showPassword = !showPassword"
-          class="mr-1"
         >
           <fa-icon [icon]="!showPassword ? eyeOpen : eyeClose"></fa-icon>
         </button>
@@ -41,15 +40,12 @@
           >Contraseña requerida</mat-error
         >
       </mat-form-field>
+    </form>
 
-      <div
-        class="flex w-[80%] content-between items-center justify-center gap-5 my-2.5"
-      >
-        <button mat-fab extended="true" (click)="login()">
-          <span class="text-md">Iniciar Sesión</span>
-        </button>
-      </div>
-
+    <div class="flex flex-col w-full items-center justify-center gap-1.5">
+      <button mat-fab extended="true" (click)="login()">
+        <span class="text-md">Iniciar Sesión</span>
+      </button>
       <a
         routerLink="/auth/recovery-password"
         class="cursor-pointer text-blue-400 hover:text-blue-800 hover-underline-animation"
@@ -63,6 +59,6 @@
           >Registrarse</a
         ></span
       >
-    </form>
+    </div>
   </section>
 </article>

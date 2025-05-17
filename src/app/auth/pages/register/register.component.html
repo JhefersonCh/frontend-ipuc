@@ -1,8 +1,8 @@
 <article class="py-[10%] md:py-[5%] flex justify-center">
   <section
-    class="flex flex-col w-[90%] md:w-[45%] h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1] py-[5%]"
+    class="flex flex-col w-[90%] md:w-[60%] p-5 h-auto justify-center items-center rounded-lg text-center border-[0.5px] border-black shadow shadow-[#0d47a1]"
   >
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-1.5">
       <span class="font-extrabold text-2xl font-noto-serif">REGISTRO</span
       ><span class="font-normal text-base"
         >Ingresa tus datos para registrarte</span
@@ -14,7 +14,7 @@
       class="flex flex-col w-full items-center mt-2.5 gap-1.5"
     >
       <div
-        class="flex w-[80%] flex-col md:flex-row content-between items-center justify-center gap-x-5"
+        class="flex w-full flex-col md:flex-row content-between items-center justify-center gap-x-5"
       >
         <mat-form-field
           appearance="outline"
@@ -38,7 +38,7 @@
         </mat-form-field>
       </div>
 
-      <mat-form-field appearance="outline" class="w-[80%]">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Correo electrónico</mat-label>
         <input matInput formControlName="email" />
         <mat-icon matPrefix>email</mat-icon>
@@ -47,7 +47,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-[80%]">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Nombre de usuario</mat-label>
         <input matInput formControlName="username" />
         <mat-icon matPrefix>account_circle</mat-icon>
@@ -56,7 +56,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-[80%]">
+      <mat-form-field appearance="outline" class="w-full">
         <mat-label>Contraseña</mat-label>
         <input
           [type]="!showPassword ? 'password' : 'text'"
@@ -92,7 +92,7 @@
         >
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-[80%] mt-18 md:mt-6">
+      <mat-form-field appearance="outline" class="w-full mt-18 md:mt-6">
         <mat-label>Confirmar Contraseña</mat-label>
         <input
           [type]="!showConfirmPassword ? 'password' : 'text'"
@@ -118,15 +118,13 @@
         <mat-error>Las contraseñas no coinciden</mat-error>
         }
       </mat-form-field>
-
-      <div
-        class="flex w-[80%] content-between items-center justify-center gap-5 mt-8 md:mt-0 my-2.5"
-      >
-        <button mat-fab extended="true" (click)="register()">
-          <span class="text-md">Completar Registro</span>
-        </button>
-      </div>
-
+    </form>
+    <div
+      class="flex flex-col w-full items-center justify-center gap-1.5 mt-8 md:mt-0 my-2.5"
+    >
+      <button mat-fab extended="true" (click)="register()">
+        <span class="text-md">Completar Registro</span>
+      </button>
       <span
         >¿Ya tienes una cuenta?
         <a
@@ -135,6 +133,6 @@
           >Inicia Sesión</a
         ></span
       >
-    </form>
+    </div>
   </section>
 </article>

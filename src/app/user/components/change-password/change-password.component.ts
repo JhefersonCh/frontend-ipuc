@@ -8,11 +8,10 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { UserService } from '../../../admin/services/user.service';
 import { CustomValidationsService } from '../../../shared/services/customValidations.service';
 import { UserDataService } from '../../services/user-data.service';
 
@@ -24,7 +23,7 @@ import { UserDataService } from '../../services/user-data.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatIcon,
+    MatIconModule,
     CommonModule,
   ],
   templateUrl: './change-password.component.html',

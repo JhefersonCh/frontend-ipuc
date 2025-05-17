@@ -81,13 +81,65 @@
     </a>
 
     <!-- Lista de respuestas -->
-    <div *ngIf="showReplies" class="mt-4 pl-4 border-l border-gray-300">
-      <p *ngIf="replies.length === 0">No hay respuestas aún.</p>
-      <div *ngFor="let reply of replies" class="mb-2">
-        <strong>{{ reply.user.firstName }} {{ reply.user.lastName }}</strong
-        >: {{ reply.content }}
+    <div
+      *ngFor="let reply of replies"
+      class="mb-2 border p-3 rounded-lg bg-gray-50"
+    >
+      <div class="flex justify-between items-start">
+        <div>
+          <strong>{{ reply.user.firstName }} {{ reply.user.lastName }}</strong>
+        </div>
+
+        <!-- Si el usuario es el autor de la respuesta -->
+        @if(userLogged() && userLogged()?.id === reply.userId) {
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="replyMenu"
+          [matMenuTriggerData]="{ reply }"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        }
       </div>
+
+      <!-- Mostrar texto o campo de edición -->
+      <div *ngIf="editingReplyId !== reply.id; else editReply">
+        <p>{{ reply.content }}</p>
+      </div>
+
+      <ng-template #editReply>
+        <mat-form-field appearance="outline" class="w-full">
+          <textarea
+            matInput
+            [(ngModel)]="editedReplyContent"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="2"
+            cdkAutosizeMaxRows="4"
+          ></textarea>
+        </mat-form-field>
+        <div class="flex justify-end gap-3 mt-2">
+          <button mat-button color="primary" (click)="saveReplyEdit(reply)">
+            Guardar
+          </button>
+          <button mat-button color="warn" (click)="cancelReplyEdit()">
+            Cancelar
+          </button>
+        </div>
+      </ng-template>
     </div>
+
+    <mat-menu #replyMenu="matMenu">
+      <ng-template matMenuContent let-reply="reply">
+        <button mat-menu-item (click)="startReplyEdit(reply)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <!-- <button mat-menu-item (click)="deleteReply(reply)">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button> -->
+      </ng-template>
+    </mat-menu>
 
     <!-- Input para responder -->
     <div *ngIf="showReply" class="mt-2">

@@ -53,6 +53,9 @@ export class CommentCardComponent implements OnChanges {
   private readonly _commentService: CommentService = inject(CommentService);
   private readonly _fb: FormBuilder = inject(FormBuilder);
 
+  editingReplyId: string | null = null;
+  editedReplyContent: string = '';
+
   postId: InputSignal<string | undefined> = input<string>();
   userLogged: InputSignal<User | null | undefined> = input<User | null>();
   itemComment: InputSignal<Comment | undefined> = input<Comment>();
@@ -147,5 +150,39 @@ export class CommentCardComponent implements OnChanges {
         console.error('Error al actualizar comentario:', err);
       },
     });
+  }
+
+  saveReplyEdit(reply: Comment) {
+    const content = this.editedReplyContent?.trim();
+    if (!reply?.id || !content) return;
+
+    const updatedReply: Comment = {
+      id: reply.id,
+      content,
+    } as Comment;
+
+    this._commentService.updateComment(updatedReply).subscribe({
+      next: () => {
+        const targetReply = this.replies.find((r) => r.id === reply.id);
+        if (targetReply) {
+          targetReply.content = content;
+        }
+        this.editingReplyId = null;
+        this.editedReplyContent = '';
+      },
+      error: (err) => {
+        console.error('Error al actualizar reply:', err);
+      },
+    });
+  }
+
+  cancelReplyEdit() {
+    this.editingReplyId = null;
+    this.editedReplyContent = '';
+  }
+
+  startReplyEdit(reply: Comment) {
+    this.editingReplyId = reply?.id || '';
+    this.editedReplyContent = reply.content;
   }
 }
