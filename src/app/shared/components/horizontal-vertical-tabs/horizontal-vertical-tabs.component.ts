@@ -15,6 +15,8 @@ import {
   ViewChild,
   inject,
   OnDestroy,
+  output,
+  OutputEmitterRef,
 } from '@angular/core';
 import {
   MatTabChangeEvent,
@@ -48,6 +50,11 @@ export class HorizontalVerticalTabsComponent
   enableQueryParams: InputSignal<boolean> = input<boolean>(false);
   queryParamId: InputSignal<string> = input<string>('default');
   defaultTabIndex: InputSignal<number> = input<number>(0);
+
+  changeTab: OutputEmitterRef<{ index: number; label: string }> = output<{
+    index: number;
+    label: string;
+  }>();
 
   instanceId: string = `tab-group-${Math.random()
     .toString(36)
@@ -224,6 +231,11 @@ export class HorizontalVerticalTabsComponent
         queryParamsHandling: 'merge',
       });
     }
+
+    this.changeTab.emit({
+      index: event.index,
+      label: event.tab.textLabel,
+    });
 
     this.cdr.detectChanges();
   }

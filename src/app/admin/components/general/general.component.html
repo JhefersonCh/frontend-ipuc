@@ -14,18 +14,25 @@
     [enableQueryParams]="true"
     [queryParamId]="'general'"
     [defaultTabIndex]="0"
+    (changeTab)="onTabChange($event.index)"
   >
     <tab label="Inicio">
+      @if(tabIndex === 0){
       <app-home-form #homeForm (saveFormEvent)="onSaveHomeForm($event)" />
+      }
     </tab>
     <tab label="Sobre Nosotros">
+      @if(tabIndex === 1){
       <app-about-form #aboutForm (saveFormEvent)="onSaveAboutForm($event)" />
+      }
     </tab>
     <tab label="Aplicación">
+      @if(tabIndex === 2){
       <app-general-form
         #generalForm
         (saveFormEvent)="onSaveGeneralForm($event)"
       />
+      }
     </tab>
   </app-horizontal-vertical-tabs>
 </div>
