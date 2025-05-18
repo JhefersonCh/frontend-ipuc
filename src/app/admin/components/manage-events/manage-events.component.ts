@@ -184,6 +184,7 @@ export class ManageEventsComponent {
     });
     dialogRef.componentInstance.yesEvent.subscribe(() => {
       this._deleteEvent(event);
+      dialogRef.close();
     });
   }
 
