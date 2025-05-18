@@ -14,6 +14,13 @@ export const publicRoutes: Routes = [
         loadComponent: () =>
           import('./pages/about/about.component').then((m) => m.AboutComponent),
       },
+      {
+        path: 'events',
+        loadComponent: () =>
+          import('./pages/events/events.component').then(
+            (m) => m.EventsComponent
+          ),
+      },
     ],
   },
 ];

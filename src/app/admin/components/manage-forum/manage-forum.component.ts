@@ -226,11 +226,10 @@ export class ManageForumComponent implements OnInit {
     this._getPosts();
   }
 
-  onSearchSubmit(values: any): void {
-    if (values.userId) {
-      values.userId = values.userId.id;
+  onSearchChange(values: any): void {
+    if (values.value.search) {
+      this.params = { ...this.params, search: values.value.search };
+      this._getPosts();
     }
-    this.params = values;
-    this._getPosts();
   }
 }

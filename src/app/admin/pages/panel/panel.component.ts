@@ -6,6 +6,7 @@ import { GeneralComponent } from '../../components/general/general.component';
 import { Title } from '@angular/platform-browser';
 import { ManageUsersComponent } from '../../components/manage-users/manage-users.component';
 import { ManageForumComponent } from '../../components/manage-forum/manage-forum.component';
+import { ManageEventsComponent } from '../../components/manage-events/manage-events.component';
 
 @Component({
   selector: 'app-panel',
@@ -16,6 +17,7 @@ import { ManageForumComponent } from '../../components/manage-forum/manage-forum
     GeneralComponent,
     ManageUsersComponent,
     ManageForumComponent,
+    ManageEventsComponent,
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',

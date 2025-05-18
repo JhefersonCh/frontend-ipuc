@@ -29,7 +29,6 @@
     [paginationParams]="paginationResults"
     [results]="results"
     (onPageChange)="onChangePagination($event)"
-    (onSearchSubmit)="onSearchSubmit($event)"
-    [withSubmitButton]="true"
+    (onSearchChange)="onSearchChange($event)"
   ></app-data-table>
 </div>

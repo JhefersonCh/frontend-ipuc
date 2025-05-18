@@ -9,6 +9,8 @@
 
   <div class="base-dialog-content mt-2.5">
     {{ description() }}
+
+    <ng-content select="[content]"></ng-content>
     <div class="mt-2.5">
       <ng-content select="[form]"></ng-content>
     </div>

@@ -151,3 +151,23 @@
 .brand-text-headline-color {
   @apply text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text;
 }
+
+.brand-only-phone {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .brand-only-phone {
+    display: flex;
+  }
+}
+
+.brand-only-desktop {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .brand-only-desktop {
+    display: flex;
+  }
+}

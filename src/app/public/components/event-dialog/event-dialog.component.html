@@ -1,0 +1,14 @@
+<app-base-dialog [title]="data?.event?.title || 'Evento'">
+  <div content>
+    <p>
+      <strong>Fecha:</strong>
+      {{ data?.event?.date | date : "dd 'de' MMMM 'del' yyyy" }}
+    </p>
+    <p>{{ data?.event?.description }}</p>
+  </div>
+  <div actions>
+    <button mat-fab extended="true" color="warn" (click)="close()">
+      Cerrar
+    </button>
+  </div>
+</app-base-dialog>

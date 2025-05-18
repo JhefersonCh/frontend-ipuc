@@ -10,7 +10,7 @@ import {
   MAT_NATIVE_DATE_FORMATS,
   provideNativeDateAdapter,
 } from '@angular/material/core';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { ToastrModule } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -24,6 +24,7 @@ import localeEs from '@angular/common/locales/es';
 import { MyErrorStateMatcher } from './shared/matchers/error-state.matcher';
 import { authInterceptor } from './shared/interceptors/auth.interceptor';
 import { notificationsInterceptorInterceptor } from './shared/interceptors/notifications.interceptor.interceptor';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 registerLocaleData(localeEs);
 
@@ -36,6 +37,10 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       ToastrModule.forRoot({
         preventDuplicates: true,
+      }),
+      CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory,
       })
     ),
     { provide: MatPaginatorIntl, useValue: getMaterialPaginatorTranslations() },

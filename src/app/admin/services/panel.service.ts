@@ -2,16 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Activity } from '../interfaces/activity.interface';
+import { Activity, EventInterface } from '../interfaces/activity.interface';
 import { ApiResponseInterface } from '../../shared/interfaces/api-response.interface';
 import { HomeForm } from '../interfaces/home.interface';
 import { AboutForm, GeneralForm } from '../interfaces/about.interface';
+import { HttpUtilitiesService } from '../../shared/utilities/http-utilities.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PanelService {
   private readonly _httpClient: HttpClient = inject(HttpClient);
+  private readonly _httpUtilities: HttpUtilitiesService =
+    inject(HttpUtilitiesService);
 
   getActivities(): Observable<ApiResponseInterface<Activity[]>> {
     return this._httpClient.get<ApiResponseInterface<Activity[]>>(
@@ -75,6 +78,42 @@ export class PanelService {
   getGeneral() {
     return this._httpClient.get<ApiResponseInterface<GeneralForm>>(
       `${environment.apiUrl}panel/general-info`
+    );
+  }
+
+  getEventsPaginatedList(
+    query: object
+  ): Observable<ApiResponseInterface<EventInterface[]>> {
+    const params = this._httpUtilities.httpParamsFromObject(query);
+    return this._httpClient.get<ApiResponseInterface<EventInterface[]>>(
+      `${environment.apiUrl}panel/events/paginated-list`,
+      { params }
+    );
+  }
+
+  addEvent(body: EventInterface) {
+    return this._httpClient.post(
+      `${environment.apiUrl}panel/event/create`,
+      body
+    );
+  }
+
+  updateEvent(body: EventInterface) {
+    return this._httpClient.patch(
+      `${environment.apiUrl}panel/event/update`,
+      body
+    );
+  }
+
+  deleteEvent(id: string) {
+    return this._httpClient.delete(
+      `${environment.apiUrl}panel/event/delete/${id}`
+    );
+  }
+
+  getEvent(id: string) {
+    return this._httpClient.get<ApiResponseInterface<EventInterface>>(
+      `${environment.apiUrl}panel/event/${id}`
     );
   }
 }

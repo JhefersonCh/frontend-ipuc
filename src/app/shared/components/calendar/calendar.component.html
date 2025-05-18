@@ -1,0 +1,127 @@
+<div class="row text-center mb-5">
+  <div class="col-md-4">
+    <div
+      class="flex flex-col md:flex-row gap-2 md:gap-0 justify-between relative"
+    >
+      <div class="flex justify-center items-center">
+        <h3 class="brand-text-headline-color text-2xl font-bold">
+          {{ viewDate | calendarDate : view + "ViewTitle" : "es" | capitalize }}
+        </h3>
+      </div>
+
+      <div class="flex justify-center items-center gap-2 brand-only-phone">
+        <button
+          mat-icon-button
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+          (click)="reloadEvents()"
+          matTooltip="Anterior"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button
+          mat-fab
+          extended="true"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+          (click)="reloadEvents()"
+        >
+          Hoy
+        </button>
+        <button
+          mat-icon-button
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+          (click)="reloadEvents()"
+          matTooltip="Siguiente"
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+      <div
+        class="absolute left-1/2 transform -translate-x-1/2 flex justify-center items-center gap-2 brand-only-desktop"
+      >
+        <button
+          mat-icon-button
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+          (click)="reloadEvents()"
+          matTooltip="Anterior"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button
+          mat-fab
+          extended="true"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+          (click)="reloadEvents()"
+        >
+          Hoy
+        </button>
+        <button
+          mat-icon-button
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+          (click)="reloadEvents()"
+          matTooltip="Siguiente"
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <mat-button-toggle-group [(value)]="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="month" (click)="setView(CalendarView.Month)"
+            >Mes</mat-button-toggle
+          >
+          <mat-button-toggle value="week" (click)="setView(CalendarView.Week)"
+            >Semana</mat-button-toggle
+          >
+          <mat-button-toggle value="day" (click)="setView(CalendarView.Day)"
+            >Dia</mat-button-toggle
+          >
+        </mat-button-toggle-group>
+      </div>
+    </div>
+  </div>
+  <div [ngSwitch]="view" class="mt-5">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent($event.event)"
+      [locale]="'es'"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent($event.event)"
+      [locale]="'es'"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent($event.event)"
+      [locale]="'es'"
+    >
+    </mwl-calendar-day-view>
+  </div>
+</div>

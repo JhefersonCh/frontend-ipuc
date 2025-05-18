@@ -23,7 +23,11 @@
         <app-activities />
         }
       </tab>
-      <tab label="Eventos"> @if(selectedTabIdx === 1){ Eventos } </tab>
+      <tab label="Eventos">
+        @if(selectedTabIdx === 1){
+        <app-manage-events />
+        }
+      </tab>
       <tab label="General">
         @if(selectedTabIdx === 2){
         <app-general />

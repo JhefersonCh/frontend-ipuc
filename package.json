@@ -26,6 +26,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@tailwindcss/postcss": "^4.0.12",
+    "angular-calendar": "^0.31.1",
     "date-fns": "^4.1.0",
     "leaflet": "^1.9.4",
     "ngx-toastr": "^19.0.0",
