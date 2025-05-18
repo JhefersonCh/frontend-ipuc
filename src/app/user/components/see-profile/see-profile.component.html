@@ -43,7 +43,7 @@
       <div
         class="w-full h-[2.3px] bg-gradient-to-r from-blue-300 to-[#024d99] my-5"
       ></div>
-      <div class="flex flex-col w-full h-[full] gap-5">
+      <div class="flex flex-col w-full h-[full] gap-5 estiliced-icon">
         <h2
           class="font-noto-serif text-xl md:text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
         >
@@ -101,6 +101,15 @@
             </div>
           </div>
         </section>
+      </div>
+      <div class="flex fle-col w-full mt-2.5 gap-2.5">
+        @for (post of statistics?.lastPosts; track $index) {
+        <app-discussion-card
+          class="w-full"
+          [item]="post"
+          [userLogged]="user"
+        ></app-discussion-card
+        >}
       </div>
     </section>
   </article>

@@ -14,11 +14,17 @@ import { LoaderComponent } from '../../../shared/components/loader/loader.compon
 import { MatIconModule } from '@angular/material/icon';
 import { StatisticsInterface } from '../../interface/profile.interface';
 import { DatePipe } from '@angular/common';
+import { DiscussionCardComponent } from '../../../social/components/discussion-card/discussion-card.component';
 
 @Component({
   selector: 'app-see-profile',
   standalone: true,
-  imports: [LoaderComponent, ReactiveFormsModule, MatIconModule],
+  imports: [
+    LoaderComponent,
+    ReactiveFormsModule,
+    MatIconModule,
+    DiscussionCardComponent,
+  ],
   templateUrl: './see-profile.component.html',
   styleUrl: './see-profile.component.scss',
   providers: [DatePipe],

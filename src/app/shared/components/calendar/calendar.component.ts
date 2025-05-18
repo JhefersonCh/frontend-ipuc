@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
-  startOfDay,
-  subDays,
-  addDays,
   endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours,
   differenceInDays,
   startOfMonth,
 } from 'date-fns';
@@ -85,7 +81,7 @@ export class CalendarComponent implements OnInit {
     this.form = this._fb.group({
       initDate: [''],
       endDate: [''],
-      perPage: [1000],
+      perPage: [100],
       page: [1],
     });
   }
