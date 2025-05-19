@@ -119,6 +119,7 @@ export class AuthService {
   logout(): void {
     this._isLoggedSubject.next(false);
     localStorage.removeItem('session');
+    this._router.navigate(['/']);
     this._currentUserSubject.next(null);
   }
 
