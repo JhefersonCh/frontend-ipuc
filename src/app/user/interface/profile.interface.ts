@@ -1,3 +1,6 @@
+import { User } from '../../shared/interfaces/user.interface';
+import { Comment } from '../../social/interfaces/comment.interface';
+
 export interface StatisticsInterface {
   lastPosts: LastPost[];
   lastComments: LastComments;
@@ -7,18 +10,8 @@ export interface StatisticsInterface {
 }
 
 export interface LastComments {
-  replies: Replies[];
-  topLevelComments: Replies[];
-}
-
-export interface Replies {
-  id: string;
-  userId: string;
-  postId: string;
-  content: string;
-  parentId: null | string;
-  createdAt: Date;
-  updatedAt: Date;
+  replies: Comment[];
+  topLevelComments: Comment[];
 }
 
 export interface Comments {

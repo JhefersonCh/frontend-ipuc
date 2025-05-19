@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UserDataService } from '../../services/user-data.service';
+import { UploadFileComponent } from '../../../shared/components/upload-file/upload-file.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,6 +26,7 @@ import { UserDataService } from '../../services/user-data.service';
     MatIcon,
     MatInputModule,
     MatButtonModule,
+    UploadFileComponent,
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
@@ -43,6 +45,7 @@ export class EditUserComponent implements OnChanges {
     email: [''],
     username: [''],
     avatarUrl: [''],
+    publicId: [''],
   });
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -58,6 +61,7 @@ export class EditUserComponent implements OnChanges {
       email: this.user?.email,
       username: this.user?.username,
       avatarUrl: this.user?.avatarUrl,
+      publicId: this.user?.publicId,
     });
   }
 
@@ -77,5 +81,9 @@ export class EditUserComponent implements OnChanges {
         console.error('Error al actualizar el usuario', error);
       },
     });
+  }
+
+  uploadImage(event: { url: string; publicId: string }) {
+    this.form.patchValue({ avatarUrl: event.url, publicId: event.publicId });
   }
 }

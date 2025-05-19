@@ -6,6 +6,7 @@ export interface User {
   email: string;
   username: string;
   avatarUrl?: string;
+  publicId?: string;
   createdAt: Date;
   updatedAt?: Date;
   password?: string;

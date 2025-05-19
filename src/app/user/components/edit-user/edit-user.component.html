@@ -8,8 +8,8 @@
       </p>
     </div>
 
-    <form [formGroup]="form" class="flex flex-col md:flex-row gap-5">
-      <div class="flex flex-col w-full md:w-[50%] gap-y-5">
+    <form [formGroup]="form" class="flex flex-col gap-5">
+      <div class="flex flex-col w-full gap-y-5">
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Nombre(s)</mat-label>
           <input type="text" matInput formControlName="firstName" />
@@ -23,14 +23,6 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Url de imagen</mat-label>
-          <input matInput formControlName="avatarUrl" />
-          <mat-icon matPrefix> insert_link</mat-icon>
-        </mat-form-field>
-      </div>
-
-      <div class="flex flex-col w-full md:w-[50%] gap-y-5">
-        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Correo eléctronico</mat-label>
           <input type="text" matInput formControlName="email" />
           <mat-icon matPrefix>email</mat-icon>
@@ -42,6 +34,14 @@
           <mat-icon matPrefix>account_circle</mat-icon>
         </mat-form-field>
       </div>
+      @if (user) {<app-upload-file
+        [fileName]="user.username"
+        folder="Profile"
+        [filePublicId]="form.get('publicId')?.value"
+        [fileUrl]="form.get('avatarUrl')?.value"
+        (onFileUploaded)="uploadImage($event)"
+      ></app-upload-file
+      >}
     </form>
     <div class="flex justify-end">
       <button
