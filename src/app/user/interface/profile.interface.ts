@@ -6,6 +6,21 @@ export interface StatisticsInterface {
   posts: Posts;
 }
 
+export interface LastComments {
+  replies: Replies[];
+  topLevelComments: Replies[];
+}
+
+export interface Replies {
+  id: string;
+  userId: string;
+  postId: string;
+  content: string;
+  parentId: null | string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Comments {
   total: number;
 }
@@ -16,21 +31,6 @@ export interface Likes {
 
 export interface Posts {
   total: number;
-}
-
-export interface LastComments {
-  replies: Reply[];
-  topLevelComments: Reply[];
-}
-
-export interface Reply {
-  id: string;
-  userId: string;
-  postId: string;
-  content: string;
-  parentId: null | string;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export interface LastPost {

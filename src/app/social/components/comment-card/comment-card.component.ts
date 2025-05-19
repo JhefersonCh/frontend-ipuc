@@ -24,6 +24,7 @@ import { Comment } from '../../interfaces/comment.interface';
 import { User } from '../../../shared/interfaces/user.interface';
 import { CommonModule } from '@angular/common';
 import { CommentService } from '../../services/comment.service';
+import { Replies } from '../../../user/interface/profile.interface';
 
 @Component({
   selector: 'app-comment-card',
@@ -49,6 +50,7 @@ export class CommentCardComponent implements OnChanges {
   @Output() deleteEvent = new EventEmitter<Comment>();
   @Output() commentCreated = new EventEmitter<void>();
   @Output() updateComment = new EventEmitter<{ id: string; content: string }>();
+  item: InputSignal<Replies | undefined> = input<Replies>();
 
   private readonly _commentService: CommentService = inject(CommentService);
   private readonly _fb: FormBuilder = inject(FormBuilder);

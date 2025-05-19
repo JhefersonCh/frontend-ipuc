@@ -102,14 +102,33 @@
           </div>
         </section>
       </div>
-      <div class="flex fle-col w-full mt-2.5 gap-2.5">
+      <div class="flex flex-col w-full mt-2.5 gap-2.5">
+        <span
+          class="font-noto-serif text-xl md:text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
+          >Tus discusiones más recientes</span
+        >
         @for (post of statistics?.lastPosts; track $index) {
         <app-discussion-card
           class="w-full"
           [item]="post"
           [userLogged]="user"
+          (editEvent)="openCreateOrEditDiscussionDialog($event)"
+          (deleteEvent)="openDeleteDialog($event)"
+          (likeEvent)="reloadPosts()"
         ></app-discussion-card
         >}
+        <span
+          class="font-noto-serif text-xl md:text-3xl font-extrabold text-transparent bg-gradient-to-r from-blue-300 to-[#024d99] bg-clip-text"
+          >Tus comentarios más recientes</span
+        >
+        @for (comment of statistics?.lastComments?.topLevelComments; track
+        $index) {
+        <app-comment-card
+          class="w-full"
+          [item]="comment"
+          [userLogged]="user"
+        ></app-comment-card>
+        }
       </div>
     </section>
   </article>
