@@ -3,12 +3,13 @@
     <div>
       <p class="text-lg text-gray-600 font-medium">
         En esta sección, puedes actualizar tu información personal, incluyendo
-        tus nombres, apellidos, correo electrónico y nombre de usuario.
+        tus nombres, apellidos, correo electrónico, url de imagen y nombre de
+        usuario.
       </p>
     </div>
 
-    <form [formGroup]="form" class="flex flex-col md:flex-row gap-0 md:gap-5">
-      <div class="flex flex-col w-full md:w-[50%]">
+    <form [formGroup]="form" class="flex flex-col md:flex-row gap-5">
+      <div class="flex flex-col w-full md:w-[50%] gap-y-5">
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Nombre(s)</mat-label>
           <input type="text" matInput formControlName="firstName" />
@@ -20,9 +21,15 @@
           <input type="text" matInput formControlName="lastName" />
           <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Url de imagen</mat-label>
+          <input matInput formControlName="avatarUrl" />
+          <mat-icon matPrefix> insert_link</mat-icon>
+        </mat-form-field>
       </div>
 
-      <div class="flex flex-col w-full md:w-[50%]">
+      <div class="flex flex-col w-full md:w-[50%] gap-y-5">
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Correo eléctronico</mat-label>
           <input type="text" matInput formControlName="email" />

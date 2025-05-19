@@ -42,6 +42,7 @@ export class EditUserComponent implements OnChanges {
     lastName: [''],
     email: [''],
     username: [''],
+    avatarUrl: [''],
   });
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -56,6 +57,7 @@ export class EditUserComponent implements OnChanges {
       lastName: this.user?.lastName,
       email: this.user?.email,
       username: this.user?.username,
+      avatarUrl: this.user?.avatarUrl,
     });
   }
 
